@@ -142,7 +142,7 @@ a:hover { color: var(--orange); }
 .doodle--inline {
   position: static; display: inline-block;
   vertical-align: middle;
-  margin: 0 0 .16em .38em;
+  margin: 0 0 .16em .1em;
 }
 
 .doodle--deep  { color: var(--green-deep); }
@@ -334,7 +334,7 @@ a:hover { color: var(--orange); }
   letter-spacing: -.035em;
   margin-top: 22px;
 }
-.hero__lede { font-size: 19.5px; line-height: 1.55; color: var(--ink-60); max-width: 460px; margin-top: 24px; }
+.hero__lede { font-size: 18px; line-height: 1.55; color: var(--ink-60); max-width: 460px; margin-top: 24px; }
 
 .hero__actions { position: relative; display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
 

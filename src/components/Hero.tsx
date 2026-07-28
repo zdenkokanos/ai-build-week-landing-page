@@ -58,7 +58,7 @@ export function Hero() {
 
             <Scribble
               className="scribble--deep scribble--margin"
-              style={{ left: '-86px', bottom: '-4px', transform: 'rotate(-9deg)' }}
+              style={{ left: '-100px', bottom: '-4px', transform: 'rotate(-9deg)' }}
             >
               začni tu
             </Scribble>
@@ -67,7 +67,7 @@ export function Hero() {
               width={52}
               height={44}
               className="doodle--deep doodle--margin"
-              style={{ left: '-52px', bottom: '34px' }}
+              style={{ left: '-60px', bottom: '34px' }}
             />
           </div>
 
