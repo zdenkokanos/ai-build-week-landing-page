@@ -9,11 +9,6 @@ export function Hero() {
 
       <div className="shell hero__grid">
         <div className="hero__copy">
-          <p className="pill-note">
-            <span className="pill-note__tag">Novinka</span>
-            Recepty z reálnych kuchárskych webov
-          </p>
-
           <h1 className="hero__title">
             Vyber si recept.
             {/* Rotated to fan back into the headline it points at. */}
