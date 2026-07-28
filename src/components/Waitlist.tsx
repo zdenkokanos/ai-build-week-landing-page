@@ -7,7 +7,6 @@ export function Waitlist() {
         <span className="waitlist__blob waitlist__blob--lime" aria-hidden="true" />
         <span className="waitlist__blob waitlist__blob--white" aria-hidden="true" />
 
-        <Doodle shape="spark" width={32} height={32} className="doodle--lime deco-keep deco-wait-spark" />
         <Doodle
           shape="fork"
           width={34}
