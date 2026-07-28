@@ -1,0 +1,9 @@
+# The site is a Vite app now, not a static folder: without a build step Netlify
+# serves /src/main.tsx as-is and the browser rejects it for its MIME type.
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  # Vite 7 needs Node 20.19+/22.12+; Netlify's default is older on some sites.
+  NODE_VERSION = "22"
