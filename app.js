@@ -15,23 +15,39 @@
   }
 
   /* Runs `fn` on an interval that only ticks while `node` is on screen. */
-  function visibleInterval(node, ms, fn) {
+  function visibleInterval(node, ms, fn, hooks) {
+    hooks = hooks || {};
     var id = null, done = false;
     // `stop()` is final: once the visitor takes over, coming back into view
     // must not hand control back to the autoplay.
-    var start = function () { if (id === null && !done) id = setInterval(fn, ms); };
-    var stop  = function () { done = true; if (id !== null) { clearInterval(id); id = null; } };
-    var pause = function () { if (id !== null) { clearInterval(id); id = null; } };
+    var start = function () {
+      if (id !== null || done) return;
+      id = setInterval(fn, ms);
+      if (hooks.onRun) hooks.onRun();
+    };
+    var pause = function () {
+      if (id === null) return;
+      clearInterval(id); id = null;
+      if (hooks.onIdle) hooks.onIdle();
+    };
+    var stop = function () { done = true; pause(); };
 
-    if (!('IntersectionObserver' in window)) { start(); }
-    else {
+    // Optimistic: the observer corrects this on its first callback. Starting at
+    // false would strand the ticker if that callback never arrived.
+    var inView = true;
+    if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (entries) {
-        entries[0].isIntersecting ? start() : pause();
+        inView = entries[0].isIntersecting;
+        inView ? start() : pause();
       }, { threshold: 0.25 }).observe(node);
+    } else {
+      start();
     }
 
+    // Only resume on tab-focus if the node is actually on screen, otherwise the
+    // ticker runs against content nobody can see and drifts out of sync with it.
     document.addEventListener('visibilitychange', function () {
-      document.hidden ? pause() : start();
+      if (document.hidden) pause(); else if (inView) start();
     });
 
     return { start: start, stop: stop, restart: function () { pause(); start(); } };
@@ -276,6 +292,12 @@
 
     var screens = STEPS.map(function (_, i) { return $('#scr-' + i); });
 
+    // The bar is a CSS animation, so replacing the node is what rewinds it.
+    function armBar() {
+      var fillOld = buttons[current].querySelector('.step__fill');
+      fillOld.parentNode.replaceChild(fillOld.cloneNode(false), fillOld);
+    }
+
     function select(i) {
       current = i;
       buttons.forEach(function (b, n) {
@@ -283,13 +305,8 @@
         b.classList.toggle('is-on', on);
         b.setAttribute('aria-selected', on ? 'true' : 'false');
         b.tabIndex = on ? 0 : -1;
-        if (on) {
-          // restart the progress bar animation
-          var fillOld = b.querySelector('.step__fill');
-          var fillNew = fillOld.cloneNode(false);
-          fillOld.parentNode.replaceChild(fillNew, fillOld);
-        }
       });
+      armBar();
       screens.forEach(function (s, n) { if (s) s.classList.toggle('is-on', n === i); });
     }
 
@@ -305,7 +322,13 @@
     });
 
     select(0);
-    auto = visibleInterval(list, 5000, function () { select((current + 1) % STEPS.length); });
+    // The bar and the ticker have to start and stop together. Left alone the CSS
+    // animation keeps running while the section is off screen, finishes, and then
+    // sits at 100% until the next tick — which reads as a frozen timer.
+    auto = visibleInterval(list, 5000, function () { select((current + 1) % STEPS.length); }, {
+      onRun:  function () { list.classList.remove('is-idle'); armBar(); },
+      onIdle: function () { list.classList.add('is-idle'); }
+    });
     if (!reduceMotion) auto.start();
   }
 

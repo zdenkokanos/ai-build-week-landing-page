@@ -3,14 +3,27 @@
    ═══════════════════════════════════════════════════════════ */
 
 :root {
-  --cream:  #FBF8F1;
+  /* Page sits on neutral grey, so every supporting surface is neutral too —
+     the old warm sand/cream tints read as dirty against it. */
+  --cream:  #F8F8F8;
   --ink:    #0E2617;
-  --green:  #1B8A4F;
+
+  /* Brand green as a 3-step scale of one hue (~123°, grass rather than emerald).
+     Split by job, because a single vivid green cannot do all three:
+       --green       vivid fill on light surfaces — buttons, badges, logo, icons
+       --green-panel large surfaces carrying body copy and lime accents; same hue
+                     held at the old green's lightness so white (4.3:1) and lime
+                     (3.5:1) on it stay as readable as they were
+       --green-deep  green used as text on light surfaces (5:1 on cream) */
+  --green:       #4DB050;
+  --green-panel: #2E8B3A;
+  --green-deep:  #217D27;
+
   --lime:   #D9F27E;
   --orange: #FF6B3D;
-  --mint:   #E7F7EC;
-  --sand:   #F4F0E3;
-  --panel:  #F7F4EC;
+  --mint:   #E9F6EA;
+  --sand:   #EFEFEF;
+  --panel:  #F2F2F2;
 
   --ink-70: #3E5346;
   --ink-60: #4A5A4F;
@@ -18,9 +31,9 @@
   --ink-30: #9AA69D;
   --on-ink: #B9C7BC;
 
-  --line:      #F1EDE4;
-  --line-warm: #E7E2D6;
-  --line-soft: #EFEADF;
+  --line:      #ECECEC;
+  --line-warm: #E0E0E0;
+  --line-soft: #E9E9E9;
 
   --shadow-xs: 0 4px 18px rgba(14, 38, 23, .07);
   --shadow-sm: 0 6px 26px rgba(14, 38, 23, .08);
@@ -53,13 +66,13 @@ ol, ul { padding: 0; list-style: none; }
 img { max-width: 100%; display: block; }
 button { font: inherit; color: inherit; }
 
-a { color: var(--green); text-decoration: none; transition: color .18s ease; }
+a { color: var(--green-deep); text-decoration: none; transition: color .18s ease; }
 a:hover { color: var(--orange); }
 
 ::selection { background: var(--lime); color: var(--ink); }
 
 :focus-visible {
-  outline: 3px solid var(--green);
+  outline: 3px solid var(--green-deep);
   outline-offset: 3px;
   border-radius: 6px;
 }
@@ -84,7 +97,7 @@ a:hover { color: var(--orange); }
 .shell { max-width: var(--shell); margin: 0 auto; padding: 0 var(--gutter); }
 .shell--narrow { max-width: 860px; }
 
-.t-green { color: var(--green); }
+.t-green { color: var(--green-deep); }
 .t-lime  { color: var(--lime); }
 .muted   { color: var(--ink-30); font-weight: 600; }
 .muted--on-ink { color: #9FB0A4; }
@@ -92,6 +105,100 @@ a:hover { color: var(--orange); }
 .small   { font-size: 13px; }
 .strike  { text-decoration: line-through; }
 .off     { color: #B4BEB7; }
+
+/* ── hand-drawn layer ────────────────────────────────────── */
+/* Everything here is decoration. It is aria-hidden in the markup and
+   pointer-events:none, so a doodle can never sit between a user and a control. */
+
+.doodle {
+  position: absolute; z-index: 2;
+  pointer-events: none; line-height: 0;
+  color: var(--ink);
+}
+.doodle svg { display: block; overflow: visible; }
+.doodle path {
+  fill: none; stroke: currentColor; stroke-width: 3;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.doodle path.fill { fill: currentColor; stroke: none; }
+
+.doodle--deep  { color: var(--green-deep); }
+.doodle--green { color: var(--green); }
+.doodle--lime  { color: var(--lime); }
+.doodle--white { color: rgba(255,255,255,.9); }
+.doodle--thin path { stroke-width: 2.4; }
+
+/* Rotated marker highlight, à la the reference's "BEST IN".
+   Two spans rather than a pseudo-element so the tilted block can sit *behind*
+   the glyphs without a negative z-index escaping the stacking context. */
+.mark { position: relative; display: inline-block; }
+.mark__bg {
+  position: absolute; left: -.16em; right: -.16em; top: .06em; bottom: .1em;
+  background: var(--lime); border-radius: 3px;
+  transform: rotate(-1.8deg);
+  z-index: 0;
+}
+.mark__t { position: relative; z-index: 1; }
+.mark--green .mark__bg { background: var(--green); }
+.mark--white .mark__bg { background: #fff; }
+.mark--tight .mark__bg { top: .12em; bottom: .14em; }
+/* The waitlist heading is white; on a lime block it has to flip to ink. */
+.waitlist__title .mark__t { color: var(--ink); }
+
+/* Handwritten annotations */
+.scribble {
+  position: absolute; z-index: 3;
+  font-family: 'Caveat', 'Segoe Print', 'Bradley Hand', cursive;
+  font-weight: 700; font-size: 25px; line-height: 1.05;
+  color: var(--ink); white-space: nowrap;
+  pointer-events: none;
+}
+.scribble--deep  { color: var(--green-deep); }
+.scribble--lime  { color: var(--lime); }
+.scribble--white { color: #fff; }
+
+/* Floating emoji + reaction bubbles */
+.emoji-float {
+  position: absolute; z-index: 2;
+  font-size: 38px; line-height: 1;
+  pointer-events: none;
+  filter: drop-shadow(0 8px 14px rgba(14,38,23,.18));
+  animation: float 7s ease-in-out infinite;
+}
+.reaction {
+  position: absolute; z-index: 3;
+  background: #fff; border-radius: var(--r-pill);
+  padding: 7px 13px;
+  display: flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 800; color: var(--ink);
+  box-shadow: 0 10px 24px rgba(14,38,23,.18);
+  pointer-events: none;
+  animation: float 6s ease-in-out infinite;
+}
+.reaction__e { font-size: 19px; line-height: 1; }
+
+/* Positions that need to change per breakpoint live here rather than inline,
+   so the mobile rules below can actually win. */
+.deco-ako-spark     { right: -70px; top: -8px; }
+.deco-spajza-veg    { left: 40px; top: 76px; }
+.deco-spajza-garlic { right: 54px; bottom: 70px; font-size: 32px; }
+.deco-wait-spark    { left: 52px; top: 56px; }
+
+/* Spiky stamp */
+.burst {
+  position: absolute; z-index: 3;
+  width: 96px; height: 96px;
+  display: grid; place-items: center;
+  pointer-events: none;
+}
+.burst svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.burst svg path { fill: var(--lime); stroke: none; }
+.burst__t {
+  position: relative;
+  font-size: 12.5px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: .04em; color: var(--ink); text-align: center;
+  transform: rotate(-9deg);
+}
 
 @keyframes float      { 0%,100% { transform: translateY(0); }            50% { transform: translateY(-10px); } }
 @keyframes float-slow { 0%,100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-13px) rotate(-1deg); } }
@@ -112,11 +219,11 @@ a:hover { color: var(--orange); }
 }
 .btn--lg { font-size: 16.5px; padding: 18px 32px; }
 
-.btn--green { background: var(--green); color: #fff; box-shadow: 0 10px 26px rgba(27,138,79,.3); }
+.btn--green { background: var(--green); color: #fff; box-shadow: 0 10px 26px rgba(76,175,80,.36); }
 .btn--green:hover { background: var(--orange); color: #fff; box-shadow: 0 10px 26px rgba(255,107,61,.32); }
 
 .btn--white { background: #fff; color: var(--ink); box-shadow: var(--shadow-sm); }
-.btn--white:hover { color: var(--green); }
+.btn--white:hover { color: var(--green-deep); }
 
 .btn--lime { background: var(--lime); color: var(--ink); font-weight: 800; padding: 17px 30px; font-size: 16px; }
 .btn--lime:hover { background: #fff; color: var(--ink); }
@@ -128,7 +235,7 @@ a:hover { color: var(--orange); }
 .site-header {
   position: sticky; top: 0; z-index: 60;
   padding: 16px 0;
-  background: linear-gradient(var(--cream) 72%, rgba(251,248,241,0));
+  background: linear-gradient(var(--cream) 72%, rgba(248,248,248,0));
 }
 
 .navbar {
@@ -150,7 +257,7 @@ a:hover { color: var(--orange); }
 
 .navbar__nav { display: flex; align-items: center; gap: 28px; font-size: 14.5px; font-weight: 600; }
 .navbar__nav a { color: var(--ink-70); }
-.navbar__nav a:hover { color: var(--green); }
+.navbar__nav a:hover { color: var(--green-deep); }
 
 .navbar__cta { font-size: 14.5px; padding: 13px 22px; box-shadow: none; }
 
@@ -195,6 +302,8 @@ a:hover { color: var(--orange); }
   font-size: 12px; font-weight: 800;
 }
 
+.hero__copy { position: relative; }
+
 .hero__title {
   font-weight: 800;
   font-size: clamp(40px, 5vw, 70px);
@@ -202,13 +311,9 @@ a:hover { color: var(--orange); }
   letter-spacing: -.035em;
   margin-top: 22px;
 }
-.hl { position: relative; display: inline-block; }
-.hl__bar { position: absolute; left: -6px; right: -8px; bottom: .12em; height: .24em; background: var(--lime); border-radius: var(--r-pill); z-index: 0; }
-.hl__text { position: relative; z-index: 1; }
-
 .hero__lede { font-size: 19.5px; line-height: 1.55; color: var(--ink-60); max-width: 460px; margin-top: 24px; }
 
-.hero__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.hero__actions { position: relative; display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
 
 .hero__proof {
   display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px;
@@ -239,7 +344,7 @@ a:hover { color: var(--orange); }
 }
 .float-card__icon {
   width: 30px; height: 30px; border-radius: 10px;
-  background: var(--mint); color: var(--green);
+  background: var(--mint); color: var(--green-deep);
   display: flex; align-items: center; justify-content: center;
   font-weight: 800; font-size: 14px;
 }
@@ -253,14 +358,17 @@ a:hover { color: var(--orange); }
 }
 .float-card__label { font-size: 11px; font-weight: 600; color: var(--ink-30); display: block; }
 .float-card__price { font-size: 17px; font-weight: 800; display: block; margin-top: 2px; }
-.float-card__meta  { font-size: 10.5px; font-weight: 700; color: var(--green); display: block; }
+.float-card__meta  { font-size: 10.5px; font-weight: 700; color: var(--green-deep); display: block; }
 
+/* Sits over the lower-left of the mockup, clear of the swipe buttons.
+   Decorative, so it must not intercept clicks meant for the deck. */
 .float-card--pantry {
-  left: 50%; bottom: -18px; transform: translateX(-30%);
+  left: -46px; top: 484px;
   background: var(--lime); border-radius: 14px;
   padding: 10px 14px; font-size: 12px; font-weight: 700; white-space: nowrap;
   box-shadow: 0 10px 24px rgba(14,38,23,.12);
   animation: float-slow 8s ease-in-out infinite;
+  pointer-events: none;
 }
 
 /* ── phone shell ─────────────────────────────────────────── */
@@ -312,8 +420,8 @@ a:hover { color: var(--orange); }
   position: absolute; left: 0; right: 0; top: 0; height: 44px;
   border-radius: 26px;
 }
-.deck__edge--1 { transform: translateY(-9px);  background: #E4DDCC; z-index: 2; }
-.deck__edge--2 { transform: translateY(-18px); background: #EFEADD; z-index: 1; }
+.deck__edge--1 { transform: translateY(-9px);  background: #E3E3E3; z-index: 2; }
+.deck__edge--2 { transform: translateY(-18px); background: #EDEDED; z-index: 1; }
 
 .card {
   position: absolute; inset: 0 0 auto;
@@ -323,13 +431,13 @@ a:hover { color: var(--orange); }
 }
 .card__img {
   position: relative; height: 238px;
-  background-color: #EAE4D6; background-size: cover; background-position: center;
+  background-color: #E8E8E8; background-size: cover; background-position: center;
 }
 .card__tags { position: absolute; top: 12px; left: 12px; right: 12px; display: flex; gap: 6px; flex-wrap: wrap; }
 .card__body { padding: 16px; }
 .card__name { font-size: 19px; font-weight: 800; letter-spacing: -.025em; line-height: 1.2; display: block; }
 .card__cta {
-  margin-top: 12px; background: var(--mint); color: var(--green);
+  margin-top: 12px; background: var(--mint); color: var(--green-deep);
   border-radius: var(--r-pill); padding: 10px; text-align: center;
   font-size: 12.5px; font-weight: 700;
 }
@@ -348,7 +456,7 @@ a:hover { color: var(--orange); }
 .tag--white  { background: rgba(255,255,255,.95); color: var(--ink); }
 .tag--lime   { background: var(--lime); color: var(--ink); }
 .tag--soft   { background: rgba(255,255,255,.95); color: var(--ink-70); font-weight: 700; }
-.tag--mint   { background: var(--mint); color: var(--green); }
+.tag--mint   { background: var(--mint); color: var(--green-deep); }
 .tag--lg     { padding: 9px 15px; font-size: 12.5px; align-self: flex-start; }
 
 .deck__controls { display: flex; justify-content: center; gap: 16px; margin-top: 18px; }
@@ -370,7 +478,7 @@ a:hover { color: var(--orange); }
 .deck__hint { text-align: center; font-size: 11.5px; font-weight: 600; color: var(--ink-30); margin-top: 10px; }
 
 /* ── partners ────────────────────────────────────────────── */
-.section-partners { padding-top: 40px; padding-bottom: 130px; }
+.section-partners { position: relative; padding-top: 40px; padding-bottom: 130px; }
 
 .partners {
   background: #fff; border-radius: 30px;
@@ -389,14 +497,14 @@ a:hover { color: var(--orange); }
 .partners__more { font-size: 14px; font-weight: 600; color: var(--ink-30); }
 
 /* ── generic section furniture ───────────────────────────── */
-.section { padding-bottom: 130px; }
+.section { position: relative; padding-bottom: 130px; }
 .section--split { padding-top: 130px; display: grid; grid-template-columns: 1fr 360px; gap: 72px; align-items: center; }
 .section--pricing { padding-top: 130px; }
 
-.section__head { text-align: center; max-width: 620px; margin: 0 auto 52px; }
+.section__head { position: relative; text-align: center; max-width: 620px; margin: 0 auto 52px; }
 .section__head--tight { max-width: 600px; margin-bottom: 44px; }
 
-.eyebrow { font-size: 13px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--green); }
+.eyebrow { font-size: 13px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--green-deep); }
 .eyebrow--orange { color: var(--orange); }
 
 .section__title {
@@ -454,6 +562,9 @@ a:hover { color: var(--orange); }
 .step.is-on .step__track { background: rgba(255,255,255,.16); }
 .step__fill { display: block; height: 100%; width: 0; border-radius: var(--r-pill); background: var(--lime); }
 .step.is-on .step__fill { animation: fill 5s linear forwards; }
+/* Freeze the bar whenever its ticker is not running (off screen, tab in the
+   background) so the two can never drift apart. */
+.steps__list.is-idle .step__fill { animation-play-state: paused; }
 
 /* step screens */
 .scr { display: none; height: 100%; }
@@ -543,7 +654,7 @@ a:hover { color: var(--orange); }
 
 /* ── green band (donáška) ────────────────────────────────── */
 .band { position: relative; overflow: hidden; }
-.band--green { background: var(--green); border-radius: 48px; margin: 0 20px; }
+.band--green { background: var(--green-panel); border-radius: 48px; margin: 0 20px; }
 .band--sand  { background: var(--sand); }
 .band--mint  { background: var(--mint); padding: 100px 0 110px; }
 
@@ -608,6 +719,7 @@ a:hover { color: var(--orange); }
 
 /* ── allergens ───────────────────────────────────────────── */
 .allergen-card {
+  position: relative;
   background: #fff; border-radius: 28px; padding: 28px;
   box-shadow: 0 8px 30px rgba(14,38,23,.07);
   margin-top: 30px; max-width: 560px;
@@ -649,7 +761,7 @@ a:hover { color: var(--orange); }
 .recipe__body { padding: 18px 20px; flex: 1; display: flex; flex-direction: column; }
 .recipe__name { font-size: 21px; font-weight: 800; letter-spacing: -.025em; line-height: 1.2; }
 .recipe__meta { font-size: 12px; font-weight: 600; color: var(--ink-30); margin-top: 5px; }
-.recipe__label { font-size: 12px; font-weight: 800; color: var(--green); margin-top: 13px; letter-spacing: .04em; }
+.recipe__label { font-size: 12px; font-weight: 800; color: var(--green-deep); margin-top: 13px; letter-spacing: .04em; }
 .recipe__ings { display: flex; flex-direction: column; gap: 6px; margin-top: 9px; }
 .recipe__body .scr__cta { padding: 14px; font-size: 13.5px; font-weight: 800; }
 
@@ -672,13 +784,13 @@ a:hover { color: var(--orange); }
 .how-list strong { color: var(--ink); }
 .how-list__n {
   min-width: 28px; height: 28px; border-radius: 9px;
-  background: var(--mint); color: var(--green);
+  background: var(--mint); color: var(--green-deep);
   display: flex; align-items: center; justify-content: center;
   font-weight: 800; font-size: 13px;
 }
 
 .stats { display: flex; flex-wrap: wrap; gap: 40px; margin-top: 30px; }
-.stats__n { font-size: 32px; font-weight: 800; color: var(--green); }
+.stats__n { font-size: 32px; font-weight: 800; color: var(--green-deep); }
 .stats__l { font-size: 13.5px; color: var(--ink-45); max-width: 170px; }
 
 .pantry-card { background: #fff; border-radius: 34px; padding: 32px; box-shadow: 0 12px 40px rgba(14,38,23,.08); }
@@ -688,7 +800,7 @@ a:hover { color: var(--orange); }
 .grp { display: flex; align-items: center; gap: 8px; margin-top: 24px; font-size: 12.5px; font-weight: 800; letter-spacing: .04em; }
 .pantry-card > .grp:first-of-type { margin-top: 26px; }
 .grp__dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; display: block; }
-.grp--green  { color: var(--green); }
+.grp--green  { color: var(--green-deep); }
 .grp--orange { color: var(--orange); }
 .grp--grey   { color: var(--ink-45); }
 
@@ -701,7 +813,7 @@ a:hover { color: var(--orange); }
   font-size: 13.5px; font-weight: 700;
 }
 .prow--have { background: var(--mint); }
-.prow--have span:last-child { color: var(--green); }
+.prow--have span:last-child { color: var(--green-deep); }
 .prow--soon { background: #FFF1EB; padding: 13px 15px; margin-top: 12px; }
 .prow--soon span:last-child { color: var(--orange); }
 .prow--miss { background: var(--panel); padding: 13px 15px; }
@@ -714,7 +826,7 @@ a:hover { color: var(--orange); }
 .suggest__row .badge { padding: 10px 16px; font-size: 13px; text-transform: none; letter-spacing: 0; }
 
 /* ── recipe rail ─────────────────────────────────────────── */
-.section-rail { padding: 110px 0; }
+.section-rail { position: relative; padding: 110px 0; }
 
 .rail {
   overflow: hidden; margin-top: 76px;
@@ -730,7 +842,7 @@ a:hover { color: var(--orange); }
   box-shadow: 0 6px 24px rgba(14,38,23,.07);
   display: flex; flex-direction: column;
 }
-.rcard__img { height: 186px; background-color: #EAE4D6; background-size: cover; background-position: center; }
+.rcard__img { height: 186px; background-color: #E8E8E8; background-size: cover; background-position: center; }
 .rcard__body { padding: 20px; display: flex; flex-direction: column; gap: 14px; flex: 1; }
 .rcard__name { font-size: 16px; font-weight: 800; letter-spacing: -.02em; }
 .rcard__meta { font-size: 13px; font-weight: 600; color: var(--ink-45); margin-top: 5px; }
@@ -738,13 +850,13 @@ a:hover { color: var(--orange); }
 .rcard__primary { background: var(--green); color: #fff; border-radius: var(--r-pill); padding: 12px; text-align: center; font-size: 13.5px; font-weight: 700; }
 .rcard__primary:hover { background: var(--orange); color: #fff; }
 .rcard__ghost { color: var(--ink-45); border-radius: var(--r-pill); padding: 4px; text-align: center; font-size: 13px; font-weight: 700; }
-.rcard__ghost:hover { color: var(--green); }
+.rcard__ghost:hover { color: var(--green-deep); }
 
 .rail__cta { display: flex; justify-content: center; margin-top: 48px; }
 .rail__cta .btn { font-size: 15.5px; padding: 17px 32px; }
 
 /* ── testimonial mosaic ──────────────────────────────────── */
-.mosaic { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.mosaic { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 .mosaic__col { height: 880px; display: flex; flex-direction: column; gap: 20px; }
 
 .quote {
@@ -757,12 +869,12 @@ a:hover { color: var(--orange); }
 .quote__text { font-size: 16px; line-height: 1.6; color: var(--ink-70); }
 .quote__by { display: flex; align-items: center; gap: 11px; font-size: 13px; font-weight: 700; line-height: 1.35; }
 
-.stars { color: var(--green); font-size: 14px; letter-spacing: .12em; }
+.stars { color: var(--green-deep); font-size: 14px; letter-spacing: .12em; }
 .stars--lime { color: var(--lime); }
 
 .ava {
   width: 36px; height: 36px; border-radius: 50%;
-  background: var(--mint); color: var(--green);
+  background: var(--mint); color: var(--green-deep);
   display: flex; align-items: center; justify-content: center;
   font-weight: 800; font-size: 13px; flex: none;
 }
@@ -772,7 +884,7 @@ a:hover { color: var(--orange); }
 .clip {
   position: relative; flex: 1; min-height: 200px;
   border-radius: 26px; overflow: hidden;
-  background-color: #DCE8DE; background-size: cover; background-position: center;
+  background-color: #E4E4E4; background-size: cover; background-position: center;
 }
 .clip__veil { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14,38,23,.02) 40%, rgba(14,38,23,.64) 100%); }
 .clip__play {
@@ -818,7 +930,7 @@ a:hover { color: var(--orange); }
 }
 .switch__btn.is-on { background: var(--ink); color: #fff; }
 
-.plans { display: grid; grid-template-columns: 1fr 1.12fr; gap: 24px; max-width: 920px; margin: 0 auto; }
+.plans { position: relative; display: grid; grid-template-columns: 1fr 1.12fr; gap: 24px; max-width: 920px; margin: 0 auto; }
 
 .plan {
   background: #fff; border-radius: 30px; padding: 36px;
@@ -849,7 +961,7 @@ a:hover { color: var(--orange); }
 .plan__fine { margin-top: -8px; font-size: 12.5px; color: #7F8F84; text-align: center; }
 
 /* ── FAQ ─────────────────────────────────────────────────── */
-.section-faq { padding-bottom: 120px; }
+.section-faq { position: relative; padding-bottom: 120px; }
 .faq { display: flex; flex-direction: column; gap: 12px; }
 
 .faq__item { background: #fff; border-radius: 22px; padding: 4px 26px; box-shadow: 0 4px 18px rgba(14,38,23,.05); }
@@ -859,15 +971,15 @@ a:hover { color: var(--orange); }
   display: flex; justify-content: space-between; align-items: center; gap: 20px;
 }
 .faq__q span:first-child { font-weight: 700; font-size: 17.5px; letter-spacing: -.015em; }
-.faq__sign { font-size: 20px; font-weight: 700; color: var(--green); min-width: 22px; text-align: right; }
+.faq__sign { font-size: 20px; font-weight: 700; color: var(--green-deep); min-width: 22px; text-align: right; }
 .faq__a { margin: -4px 0 22px; font-size: 16px; line-height: 1.6; color: var(--ink-60); }
 .faq__a[hidden] { display: none; }
 
 /* ── waitlist ────────────────────────────────────────────── */
-.waitlist { padding: 0 20px 30px; }
+.waitlist { position: relative; padding: 0 20px 30px; }
 .waitlist__panel {
   max-width: var(--shell); margin: 0 auto;
-  background: var(--green); border-radius: 48px;
+  background: var(--green-panel); border-radius: 48px;
   overflow: hidden; position: relative;
 }
 .waitlist__blob { position: absolute; border-radius: 50%; }
@@ -941,7 +1053,7 @@ a:hover { color: var(--orange); }
 .site-footer__col { display: flex; flex-direction: column; gap: 10px; font-size: 14.5px; }
 .site-footer__title { font-weight: 700; }
 .site-footer__col a { color: var(--ink-45); }
-.site-footer__col a:hover { color: var(--green); }
+.site-footer__col a:hover { color: var(--green-deep); }
 .site-footer__bar {
   margin-top: 44px; padding-top: 24px; border-top: 1.5px solid var(--line-soft);
   display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
@@ -1063,6 +1175,30 @@ a:hover { color: var(--orange); }
   .phone--recipe { width: 292px; height: 620px; }
   .deck { height: 344px; }
   .card__img { height: 210px; }
+}
+
+/* ── decoration density ─────────────────────────────────────
+   Three tiers, by how much room a decoration needs:
+     --margin  hangs outside its content column, so it needs the page gutter the
+               1200px shell only has above ~1360px; first to go
+     --wide    sits inside the content but relies on desktop whitespace
+     .deco-keep survives all the way down, with mobile positions above
+   Everything else stands down when the layout stacks. The inline .mark
+   highlights are never hidden — they flow with the text at any width. */
+@media (max-width: 1360px) {
+  .doodle--margin, .scribble--margin { display: none; }
+}
+@media (max-width: 1100px) {
+  .doodle--wide { display: none; }
+}
+@media (max-width: 900px) {
+  .doodle, .scribble, .emoji-float, .reaction, .burst { display: none; }
+  .deco-keep { display: block; }
+
+  .deco-ako-spark     { right: 2px; top: -38px; }
+  .deco-spajza-veg    { left: auto; right: 14px; top: 22px; }
+  .deco-spajza-garlic { right: auto; left: 14px; bottom: 22px; }
+  .deco-wait-spark    { left: auto; right: 20px; top: 18px; }
 }
 
 /* ── motion preferences ──────────────────────────────────── */
