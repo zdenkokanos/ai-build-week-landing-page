@@ -145,6 +145,17 @@ a:hover { color: var(--orange); }
   margin: 0 0 .16em .1em;
 }
 
+/* Illustration drawn with the same pen as the doodles — one weight heavier for
+   the structure, `.thin` for the details, one lime shape to carry the eye. */
+.sketch { display: block; width: 100%; height: auto; color: rgba(255,255,255,.94); }
+.sketch path, .sketch circle {
+  fill: none; stroke: currentColor; stroke-width: 5;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.sketch .thin { stroke-width: 3.6; }
+.sketch .ground { opacity: .45; }
+.sketch .lime { fill: var(--lime); stroke: none; }
+
 .doodle--deep  { color: var(--green-deep); }
 .doodle--green { color: var(--green); }
 .doodle--lime  { color: var(--lime); }
@@ -679,7 +690,8 @@ a:hover { color: var(--orange); }
 .band__list { display: flex; flex-direction: column; gap: 12px; margin-top: 30px; max-width: 460px; }
 .band__list li { display: flex; align-items: center; gap: 12px; font-size: 16.5px; font-weight: 600; color: #EAF6EE; }
 .band__copy .btn { margin-top: 32px; }
-.band__side { display: flex; flex-direction: column; gap: 16px; }
+/* Sits a touch lower than the copy column, so the sketch has room on its top edge. */
+.band__side { position: relative; transform: translateY(40px); display: flex; flex-direction: column; gap: 16px; }
 
 .badge {
   display: inline-block; border-radius: var(--r-pill);
@@ -705,6 +717,15 @@ a:hover { color: var(--orange); }
 .ostep__label { flex: 1; font-size: 14.5px; font-weight: 700; }
 .ostep--todo .ostep__label { color: var(--ink-30); }
 .ostep__meta { font-size: 12.5px; font-weight: 600; color: var(--ink-30); }
+
+/* Rides along the top edge of the order card, towards its right corner.
+   Decoration, so it never takes clicks. */
+.courier {
+  position: absolute; right: 34px; top: -84px;
+  width: 104px; z-index: 1;
+  pointer-events: none;
+  animation: float 8s ease-in-out infinite;
+}
 
 .order-card__total {
   border-top: 1.5px solid var(--line); margin-top: 20px; padding-top: 16px;
@@ -1081,6 +1102,11 @@ a:hover { color: var(--orange); }
 
   /* Stacked: the steps lead and the phone follows them, as in the DOM. */
   .steps { grid-template-columns: 1fr; gap: 40px; }
+
+  /* Stacked, there is no gap beside the card to float in — it goes back into
+     the flow under it, still bobbing. */
+  .band__side { transform: none; }
+  .courier { position: static; width: 132px; margin: 8px auto 0; }
 
   .band--green { margin: 0 12px; border-radius: 36px; }
   .band__grid { grid-template-columns: 1fr; gap: 44px; padding-top: 64px; padding-bottom: 64px; }
