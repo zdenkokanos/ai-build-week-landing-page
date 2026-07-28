@@ -8,7 +8,7 @@ const TRACK = [...RECIPES, ...RECIPES]
    is reaching for stays reachable without the strip looking broken.
    updatePlaybackRate retimes the running animation instead of restarting it,
    which a CSS animation-duration swap cannot do without jumping. */
-const SLOW_RATE = 0.2
+const SLOW_RATE = 0.5
 
 export function RecipeRail() {
   const trackRef = useRef<HTMLDivElement>(null)
