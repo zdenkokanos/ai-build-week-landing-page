@@ -5,7 +5,7 @@ const LINKS = [
   { href: '#donaska', label: 'Objednávka' },
   { href: '#alergie', label: 'Alergie' },
   { href: '#spajza', label: 'Špajza' },
-  { href: '#cennik', label: 'Cenník' },
+  { href: '#zadarmo', label: 'Zadarmo' },
 ]
 
 export function Header() {

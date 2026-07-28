@@ -34,13 +34,13 @@ export function Hero() {
           </h1>
 
           <p className="hero__lede">
-            Odswipuješ, na čo máš dnes chuť. MĽASK poskladá nákup, odpočíta čo už máš doma a objedná
-            zvyšok z Woltu či Košíka.
+            Odswipuješ, na čo máš dnes chuť. MĽASK poskladá nákup, odpočíta čo už máš doma a zvyšok
+            objedná z donášky.
           </p>
 
           <div className="hero__actions">
             <a className="btn btn--green btn--lg" href="#waitlist">
-              Vyskúšať 14 dní zadarmo
+              Vyskúšať zadarmo
             </a>
             <a className="btn btn--white btn--lg" href="#ako">
               Ako to funguje
@@ -78,7 +78,7 @@ export function Hero() {
               <span className="tick" aria-hidden="true">
                 ✓
               </span>{' '}
-              SK &amp; CZ
+              Dostupné na Slovensku
             </li>
           </ul>
         </div>

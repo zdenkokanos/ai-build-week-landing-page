@@ -71,11 +71,11 @@ export type FaqItem = { q: string; a: string }
 
 export const FAQ: FaqItem[] = [
   { q: 'Odkiaľ berete recepty?',                    a: 'Z overených slovenských a českých kuchárskych webov. AI ich len číta a rozkladá na suroviny, gramáže a postup — nevymýšľa jedlá. Pri každom recepte je odkaz na originál a jeho autora.' },
-  { q: 'Ako funguje automatická objednávka?',       a: 'Každú surovinu spárujeme s konkrétnym produktom v sortimente donáškovej služby, odpočítame špajzu a naplníme košík. Ty potvrdíš platbu, objednávku doručí kuriér Woltu, Bolt Food alebo Košíka.' },
+  { q: 'Ako funguje automatická objednávka?',       a: 'Každú surovinu spárujeme s konkrétnym produktom v sortimente donáškovej služby, odpočítame špajzu a naplníme košík. Ty potvrdíš platbu a objednávku ti doručí kuriér až domov.' },
   { q: 'Ako viem, že náhrada pri alergii funguje?', a: 'Náhrady vyberáme podľa kuchárskej funkcie suroviny — či viaže, zahusťuje alebo dodáva tuk — a overujeme ich spätnou väzbou od ľudí, ktorí recept naozaj uvarili.' },
-  { q: 'Musím používať donáškovú službu?',          a: 'Nie. V Základe dostaneš nákupný zoznam do obchodu. Automatický košík je pohodlie navyše, nie podmienka.' },
+  { q: 'Musím používať donáškovú službu?',          a: 'Nie. Aj bez nej dostaneš hotový nákupný zoznam do obchodu. Automatický košík je pohodlie navyše, nie podmienka.' },
   { q: 'Musím špajzu vypĺňať ručne?',               a: 'Nie. Nákup cez MĽASK sa zapíše sám a suroviny sa odpočítajú, keď recept označíš ako uvarený.' },
-  { q: 'Čo ak mi appka nesadne?',                   a: '14 dní máš Pro zadarmo a bez karty. Skúšobná verzia jednoducho skončí a nič sa ti nestrhne.' },
+  { q: 'Koľko to stojí?',                           a: 'Zatiaľ nič. Kým appku dokončujeme, máš ju celú zadarmo a bez karty — stačí sa prihlásiť. O cenníku dáme vedieť s dostatočným predstihom.' },
 ]
 
 export type Quote = {

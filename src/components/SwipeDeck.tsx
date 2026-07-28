@@ -109,7 +109,7 @@ export function SwipeDeck() {
       <div className="float-card float-card--cart">
         <span className="float-card__label">Košík je pripravený</span>
         <span className="float-card__price">8,98 €</span>
-        <span className="float-card__meta">Wolt · 25 min</span>
+        <span className="float-card__meta">Donáška · 25 min</span>
       </div>
 
       <div className="float-card float-card--pantry">Špajza ušetrila 4,80 €</div>

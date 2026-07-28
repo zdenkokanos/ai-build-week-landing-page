@@ -1,28 +1,6 @@
-import { useRef, useState, type FormEvent } from 'react'
 import { Doodle } from './Decor'
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
-
 export function Waitlist() {
-  const inputRef = useRef<HTMLInputElement>(null)
-  const [email, setEmail] = useState('')
-  const [msg, setMsg] = useState<{ text: string; error: boolean }>({ text: '', error: false })
-
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    const value = email.trim()
-
-    if (!EMAIL_RE.test(value)) {
-      setMsg({ text: 'Skontroluj e-mailovú adresu.', error: true })
-      inputRef.current?.focus()
-      return
-    }
-
-    // No backend yet — the form confirms locally and keeps the address for wiring up later.
-    setMsg({ text: `Sme dohodnutí. Ozveme sa na ${value}.`, error: false })
-    setEmail('')
-  }
-
   return (
     <section className="waitlist" id="waitlist">
       <div className="waitlist__panel">
@@ -40,7 +18,7 @@ export function Waitlist() {
 
         <div className="waitlist__grid">
           <div className="waitlist__copy">
-            <span className="badge badge--glass">Spustenie jeseň 2026 · SK &amp; CZ</span>
+            <span className="badge badge--glass">Spustenie jeseň 2026 · Slovensko</span>
             <h2 className="waitlist__title">
               Dnes večer už vieš,
               <br />
@@ -51,38 +29,16 @@ export function Waitlist() {
                 <span className="mark__t">nikam ísť.</span>
               </span>
             </h2>
-            <p className="waitlist__lede">
-              Zaregistruj sa a prvých 14 dní máš Pro zadarmo — bez karty.
-            </p>
+            <p className="waitlist__lede">Prihlás sa a začni používať MĽASK — zatiaľ zadarmo.</p>
 
-            <form className="signup" onSubmit={onSubmit} noValidate>
-              <label className="sr-only" htmlFor="email">
-                E-mail
-              </label>
-              <input
-                className="signup__input"
-                type="email"
-                id="email"
-                name="email"
-                placeholder="tvoj@email.sk"
-                autoComplete="email"
-                required
-                ref={inputRef}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <button className="signup__btn" type="submit">
-                Chcem to skúsiť
-              </button>
-            </form>
-            <p className={`signup__msg${msg.error ? ' is-error' : ''}`} role="status" aria-live="polite">
-              {msg.text}
-            </p>
+            <a className="btn btn--lime btn--lg waitlist__cta" href="#">
+              Prihlásiť sa
+            </a>
 
             <p className="waitlist__fine">
               <span>Bez karty</span>
               <span>·</span>
-              <span>Zrušíš dvomi klikmi</span>
+              <span>Odhlásiš sa dvomi klikmi</span>
               <span>·</span>
               <span>4,8 ★ od 1 240 ľudí</span>
             </p>

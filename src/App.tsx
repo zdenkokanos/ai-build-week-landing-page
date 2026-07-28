@@ -6,7 +6,6 @@ import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { HowItWorks } from './components/HowItWorks'
 import { Pantry } from './components/Pantry'
-import { Partners } from './components/Partners'
 import { Pricing } from './components/Pricing'
 import { RecipeRail } from './components/RecipeRail'
 import { Testimonials } from './components/Testimonials'
@@ -22,7 +21,6 @@ export default function App() {
       <div className="page">
         <Header />
         <Hero />
-        <Partners />
         <HowItWorks />
         <Delivery />
         <Allergens />

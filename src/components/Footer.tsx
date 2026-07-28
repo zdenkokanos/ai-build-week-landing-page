@@ -5,7 +5,7 @@ const COLUMNS = [
       { href: '#ako', label: 'Ako to funguje' },
       { href: '#donaska', label: 'Objednávka' },
       { href: '#alergie', label: 'Alergie' },
-      { href: '#cennik', label: 'Cenník' },
+      { href: '#zadarmo', label: 'Zadarmo' },
     ],
   },
   {
