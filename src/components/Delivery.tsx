@@ -1,3 +1,4 @@
+import { CourierBike } from './CourierBike'
 import { Doodle } from './Decor'
 
 export function Delivery() {
@@ -12,12 +13,13 @@ export function Delivery() {
         className="doodle--lime doodle--wide"
         style={{ left: '66px', top: '74px' }}
       />
+      {/* Moved off the bottom-right corner — the courier sketch lives there now. */}
       <Doodle
         shape="wave"
         width={132}
         height={20}
         className="doodle--white doodle--thin doodle--wide"
-        style={{ right: '56px', bottom: '64px' }}
+        style={{ left: '320px', bottom: '52px' }}
       />
       <Doodle
         shape="fork"
@@ -97,6 +99,8 @@ export function Delivery() {
             </div>
             <div className="scr__cta scr__cta--green">Zaplatiť a doručiť</div>
           </div>
+
+          <CourierBike />
         </div>
       </div>
     </section>
