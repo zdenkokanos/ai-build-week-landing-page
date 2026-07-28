@@ -332,7 +332,7 @@ a:hover { color: var(--orange); }
   font-size: clamp(40px, 5vw, 70px);
   line-height: 1.03;
   letter-spacing: -.035em;
-  margin-top: 22px;
+  margin-top: 30px;
 }
 .hero__lede { font-size: 18px; line-height: 1.55; color: var(--ink-60); max-width: 460px; margin-top: 24px; }
 
