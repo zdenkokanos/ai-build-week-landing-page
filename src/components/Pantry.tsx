@@ -1,11 +1,8 @@
 import { Doodle } from './Decor'
 
-const HAVE = [
-  { name: 'Ryža basmati', qty: '1,2 kg' },
-  { name: 'Kokos. mlieko', qty: '2 ks' },
-  { name: 'Cibuľa', qty: '4 ks' },
-  { name: 'Údená paprika', qty: '40 g' },
-]
+/* Only what needs attention gets a row; the stock itself is chips, so the card
+   reads at a glance instead of like a spreadsheet. */
+const STOCK = ['Ryža 1,2 kg', 'Kokosové mlieko 2 ks', 'Cibuľa 4 ks', 'Údená paprika 40 g']
 
 const MISSING = [
   { name: 'Zázvor 100 g', price: '1,29 €' },
@@ -36,16 +33,14 @@ export function Pantry() {
             Appka vie, čo máš doma. Kupuješ len to, čo chýba.
           </h2>
           <p className="section__lede section__lede--left">
-            Špajzu nemusíš vypĺňať ručne. Nákup sa do nej zapíše sám, suroviny sa odpočítajú po
-            uvarení a čerstvé veci ti pripomenieme, kým sú dobré.
+            Pripomenieme aj to, čo treba minúť, kým je to dobré.
           </p>
 
           <ol className="how-list">
             <li>
               <span className="how-list__n">1</span>
               <span>
-                <strong>Nakúpiš</strong> — položky sa zapíšu do špajze automaticky. Pridáš aj ručne
-                alebo odfotíš nákup a appka si z fotky vytiahne, čo treba.
+                <strong>Nakúpiš</strong> — zapíše sa samo. Alebo pridáš ručne či odfotíš nákup.
               </span>
             </li>
             <li>
@@ -57,21 +52,10 @@ export function Pantry() {
             <li>
               <span className="how-list__n">3</span>
               <span>
-                <strong>Ďalší recept</strong> — navrhneme taký, čo dojedá tvoje zásoby.
+                <strong>Ďalší recept</strong> — navrhneme taký, čo dojedá zásoby.
               </span>
             </li>
           </ol>
-
-          <div className="stats">
-            <div>
-              <p className="stats__n">−31 %</p>
-              <p className="stats__l">nižší účet za nákup</p>
-            </div>
-            <div>
-              <p className="stats__n">0</p>
-              <p className="stats__l">surovín hnijúcich v šuflíku</p>
-            </div>
-          </div>
         </div>
 
         <div className="pantry-card">
@@ -80,31 +64,23 @@ export function Pantry() {
             <span className="muted bold small">aktualizované dnes</span>
           </div>
 
-          <p className="grp grp--green">
-            <span className="grp__dot" />
-            MÁŠ DOMA · 18
-          </p>
-          <div className="pantry-grid">
-            {HAVE.map((p) => (
-              <div className="prow prow--have" key={p.name}>
-                <span>{p.name}</span>
-                <span>{p.qty}</span>
-              </div>
+          <div className="pantry-chips">
+            {STOCK.map((item) => (
+              <span className="pchip" key={item}>
+                {item}
+              </span>
             ))}
+            <span className="pchip pchip--more">+14 ďalších</span>
           </div>
 
-          <p className="grp grp--orange">
-            <span className="grp__dot" />
-            MINÚŤ DO 2 DNÍ
-          </p>
           <div className="prow prow--soon">
             <span>Kurací prsník 500 g</span>
-            <span>použiť dnes</span>
+            <span>minúť do 2 dní</span>
           </div>
 
           <p className="grp grp--grey">
             <span className="grp__dot" />
-            CHÝBA NA DNEŠNÝ RECEPT · 2
+            CHÝBA NA DNEŠNÝ RECEPT
           </p>
           <div className="pantry-stack">
             {MISSING.map((p) => (
@@ -116,9 +92,7 @@ export function Pantry() {
           </div>
 
           <div className="suggest">
-            <p className="suggest__text">
-              Dnes navrhneme kokosové curry — dojedá kurča aj mlieko zo špajze.
-            </p>
+            <p className="suggest__text">Dnes navrhneme kokosové curry — dojedá kurča aj mlieko.</p>
             <div className="suggest__row">
               <span className="suggest__price">Dokúpiť 2 veci · 2,78 €</span>
               <span className="badge badge--lime">Objednať</span>
