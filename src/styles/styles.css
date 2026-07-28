@@ -800,7 +800,9 @@ a:hover { color: var(--orange); }
 .ing.is-swapped .ing__right { color: var(--ink); }
 
 /* ── pantry ──────────────────────────────────────────────── */
-.pantry { padding: 100px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+/* Longhand: this block is also a .shell, and the shorthand would wipe the
+   gutter padding that keeps it off the screen edge. */
+.pantry { padding-top: 100px; padding-bottom: 100px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
 
 .how-list { display: flex; flex-direction: column; gap: 12px; margin-top: 28px; max-width: 500px; }
 .how-list li { display: flex; gap: 13px; align-items: center; background: #fff; border-radius: 18px; padding: 16px 18px; font-size: 15px; font-weight: 600; color: var(--ink-70); }
@@ -1135,14 +1137,14 @@ a:hover { color: var(--orange); }
   .section-partners { padding-bottom: 90px; }
   .section__title--left, .section__lede--left { text-align: left; }
 
+  /* Stacked: the steps lead and the phone follows them, as in the DOM. */
   .steps { grid-template-columns: 1fr; gap: 40px; }
-  .steps__phone { order: -1; }
 
   .band--green { margin: 0 12px; border-radius: 36px; }
   .band__grid { grid-template-columns: 1fr; gap: 44px; padding-top: 64px; padding-bottom: 64px; }
   .band--mint { padding: 72px 0 80px; }
 
-  .pantry { grid-template-columns: 1fr; gap: 44px; padding: 72px 0; }
+  .pantry { grid-template-columns: 1fr; gap: 44px; padding-top: 72px; padding-bottom: 72px; }
   .section-rail { padding: 80px 0; }
   .rail { margin-top: 52px; }
 
