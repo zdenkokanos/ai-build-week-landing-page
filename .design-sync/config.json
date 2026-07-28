@@ -1,0 +1,45 @@
+{
+  "shape": "package",
+  "pkg": "@mlask/ui",
+  "globalName": "MlaskUI",
+  "projectId": "43c500df-14a9-460a-b056-38fb0f1bd8e5",
+  "buildCmd": "npm run build -w @mlask/ui",
+  "srcDir": "src",
+  "tsconfig": "tsconfig.json",
+  "cssEntry": "src/styles.css",
+  "readmeHeader": ".design-sync/conventions.md",
+  "overrides": {
+    "Button": {
+      "cardMode": "column"
+    },
+    "Band": {
+      "cardMode": "column"
+    },
+    "Shell": {
+      "cardMode": "column"
+    },
+    "SectionHeading": {
+      "cardMode": "column"
+    },
+    "PhoneFrame": {
+      "cardMode": "single",
+      "primaryStory": "AppScreen",
+      "viewport": "420x740"
+    },
+    "Doodle": {
+      "cardMode": "column",
+      "viewport": "1200x320"
+    },
+    "Scribble": {
+      "cardMode": "single",
+      "primaryStory": "Annotation",
+      "viewport": "1200x220"
+    },
+    "Mark": {
+      "cardMode": "column"
+    },
+    "Card": {
+      "cardMode": "column"
+    }
+  }
+}

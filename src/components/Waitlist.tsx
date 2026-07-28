@@ -1,4 +1,4 @@
-import { Doodle } from './Decor'
+import { Doodle } from '@mlask/ui'
 
 export function Waitlist() {
   return (

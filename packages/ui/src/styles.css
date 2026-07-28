@@ -1,3 +1,9 @@
+/* The families the design system expects. Imported here rather than left to the
+   host page's <link>, so anything built with this stylesheet gets the real type.
+   Roc Grotesk is licensed and cannot ship — Archivo is the metric-compatible
+   fallback the stack falls through to. */
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500..900&family=Caveat:wght@600;700&family=Inter:wght@400..800&display=swap');
+
 /* ═══════════════════════════════════════════════════════════
    MĽASK — landing page
    ═══════════════════════════════════════════════════════════ */

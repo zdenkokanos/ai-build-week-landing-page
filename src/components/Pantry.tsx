@@ -1,4 +1,4 @@
-import { Doodle } from './Decor'
+import { Doodle } from '@mlask/ui'
 
 /* Only what needs attention gets a row; the stock itself is chips, so the card
    reads at a glance instead of like a spreadsheet. */

@@ -73,22 +73,27 @@ const SHAPES: Record<DoodleShape, { viewBox: string; paths: ReactNode }> = {
   },
 }
 
-export function Doodle({
-  shape,
-  width,
-  height,
-  className = '',
-  style,
-}: {
+export type DoodleProps = {
   shape: DoodleShape
   width: number
   height: number
+  /**
+   * Decoration is hidden below 900px by default — it needs whitespace the phone
+   * layout doesn't have. Set this on the one or two marks worth keeping there.
+   */
+  keep?: boolean
   className?: string
   style?: CSSProperties
-}) {
+}
+
+export function Doodle({ shape, width, height, keep = false, className = '', style }: DoodleProps) {
   const { viewBox, paths } = SHAPES[shape]
   return (
-    <span className={`doodle ${className}`.trim()} style={style} aria-hidden="true">
+    <span
+      className={['doodle', keep ? 'deco-keep' : '', className].filter(Boolean).join(' ')}
+      style={style}
+      aria-hidden="true"
+    >
       <svg width={width} height={height} viewBox={viewBox}>
         {paths}
       </svg>
@@ -96,17 +101,21 @@ export function Doodle({
   )
 }
 
-export function Scribble({
-  children,
-  className = '',
-  style,
-}: {
+export type ScribbleProps = {
   children: ReactNode
+  /** Keeps the note visible below 900px, where decoration is hidden by default. */
+  keep?: boolean
   className?: string
   style?: CSSProperties
-}) {
+}
+
+export function Scribble({ children, keep = false, className = '', style }: ScribbleProps) {
   return (
-    <span className={`scribble ${className}`.trim()} style={style} aria-hidden="true">
+    <span
+      className={['scribble', keep ? 'deco-keep' : '', className].filter(Boolean).join(' ')}
+      style={style}
+      aria-hidden="true"
+    >
       {children}
     </span>
   )

@@ -1,5 +1,5 @@
 import { CLIPS, QUOTES, type Clip as ClipData, type Quote as QuoteData } from '../data/content'
-import { Doodle } from './Decor'
+import { Doodle } from '@mlask/ui'
 
 function Quote({ q }: { q: QuoteData }) {
   return (

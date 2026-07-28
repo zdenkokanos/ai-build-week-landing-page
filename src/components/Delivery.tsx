@@ -1,5 +1,5 @@
 import { CourierBike } from './CourierBike'
-import { Doodle } from './Decor'
+import { Doodle } from '@mlask/ui'
 
 export function Delivery() {
   return (

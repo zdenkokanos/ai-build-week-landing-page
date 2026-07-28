@@ -1,4 +1,4 @@
-import { Doodle, Scribble } from './Decor'
+import { Button, Doodle, Mark, Scribble, Tick } from '@mlask/ui'
 import { SwipeDeck } from './SwipeDeck'
 
 export function Hero() {
@@ -22,10 +22,7 @@ export function Hero() {
             <br />
             <span className="t-green">Nákup dorazí</span>
             <br />
-            <span className="mark">
-              <span className="mark__bg" aria-hidden="true" />
-              <span className="mark__t">sám domov.</span>
-            </span>
+            <Mark>sám domov.</Mark>
           </h1>
 
           <p className="hero__lede">
@@ -34,12 +31,12 @@ export function Hero() {
           </p>
 
           <div className="hero__actions">
-            <a className="btn btn--green btn--lg" href="#waitlist">
+            <Button variant="green" size="lg" href="#waitlist">
               Vyskúšať zadarmo
-            </a>
-            <a className="btn btn--white btn--lg" href="#ako">
+            </Button>
+            <Button variant="white" size="lg" href="#ako">
               Ako to funguje
-            </a>
+            </Button>
 
             <Scribble
               className="scribble--deep scribble--margin"
@@ -58,22 +55,13 @@ export function Hero() {
 
           <ul className="hero__proof">
             <li>
-              <span className="tick" aria-hidden="true">
-                ✓
-              </span>{' '}
-              Bez karty
+              <Tick /> Bez karty
             </li>
             <li>
-              <span className="tick" aria-hidden="true">
-                ✓
-              </span>{' '}
-              Suroviny do 40 minút
+              <Tick /> Suroviny do 40 minút
             </li>
             <li>
-              <span className="tick" aria-hidden="true">
-                ✓
-              </span>{' '}
-              Dostupné na Slovensku
+              <Tick /> Dostupné na Slovensku
             </li>
           </ul>
         </div>
