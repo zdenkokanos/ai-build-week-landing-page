@@ -36,15 +36,16 @@ export function Pantry() {
             Appka vie, čo máš doma. Kupuješ len to, čo chýba.
           </h2>
           <p className="section__lede section__lede--left">
-            Špajzu nevypĺňaš ručne. Nákup sa do nej zapíše sám, suroviny sa odpočítajú po uvarení a
-            čerstvé veci ti pripomenieme, kým sú dobré.
+            Špajzu nemusíš vypĺňať ručne. Nákup sa do nej zapíše sám, suroviny sa odpočítajú po
+            uvarení a čerstvé veci ti pripomenieme, kým sú dobré.
           </p>
 
           <ol className="how-list">
             <li>
               <span className="how-list__n">1</span>
               <span>
-                <strong>Nakúpiš</strong> — položky sa zapíšu do špajze automaticky.
+                <strong>Nakúpiš</strong> — položky sa zapíšu do špajze automaticky. Pridáš aj ručne
+                alebo odfotíš nákup a appka si z fotky vytiahne, čo treba.
               </span>
             </li>
             <li>
