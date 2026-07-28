@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { ALLERGENS, INGREDIENTS, type AllergenKey } from '../data/content'
-import { Doodle, Scribble } from './Decor'
+import { Doodle, Scribble } from '@mlask/ui'
 
 type Diet = Record<AllergenKey, boolean>
 

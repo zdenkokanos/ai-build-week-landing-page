@@ -2,7 +2,7 @@ import { useRef, useState, type KeyboardEvent } from 'react'
 import { STEPS } from '../data/content'
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion'
 import { useVisibleInterval } from '../hooks/useVisibleInterval'
-import { Doodle } from './Decor'
+import { Doodle } from '@mlask/ui'
 import { StepScreens } from './StepScreens'
 
 export function HowItWorks() {

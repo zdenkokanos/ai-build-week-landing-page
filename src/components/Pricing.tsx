@@ -1,4 +1,4 @@
-import { Doodle, Scribble } from './Decor'
+import { Doodle, Scribble } from '@mlask/ui'
 
 const FEATURES = [
   'Neobmedzené swipy',
