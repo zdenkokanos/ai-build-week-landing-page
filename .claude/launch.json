@@ -3,9 +3,10 @@
   "configurations": [
     {
       "name": "mlask",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "4173"],
-      "port": 4173
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 4173,
+      "autoPort": true
     }
   ]
 }
