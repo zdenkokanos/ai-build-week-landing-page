@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MĽASK — Vyber si recept, nákup dorazí sám</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #FBF8F1; color: #0E2617; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #1B8A4F; text-decoration: none; }
+  a:hover { color: #FF6B3D; }
+  @keyframes mlask-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  @keyframes mlask-float-slow { 0%,100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-13px) rotate(-1deg); } }
+  @keyframes mlask-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.07); } }
+  @keyframes mlask-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes mlask-progress { from { width: 0%; } to { width: 100%; } }
+  @keyframes mlask-rail { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  ::selection { background: #D9F27E; }
+</style>
+</helmet>
+
+<div style="overflow-x: hidden;">
+
+<header style="position: sticky; top: 0; z-index: 60; padding: 16px 0; background: linear-gradient(#FBF8F1 72%, rgba(251,248,241,0));">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 0 28px;">
+    <div style="background: #FFFFFF; border-radius: 999px; box-shadow: 0 6px 26px rgba(14,38,23,.08); height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 12px 0 24px; gap: 20px;">
+      <a href="#top" style="display: flex; align-items: center; gap: 9px;">
+        <span style="width: 30px; height: 30px; border-radius: 50% 50% 50% 8px; background: #1B8A4F; display: block;"></span>
+        <span style="font-weight: 800; font-size: 21px; letter-spacing: -.02em; color: #0E2617;">mľask</span>
+      </a>
+      <nav style="display: flex; align-items: center; gap: 28px; font-size: 14.5px; font-weight: 600; color: #3E5346;">
+        <a href="#ako" style="color: #3E5346;" style-hover="color: #1B8A4F;">Ako to funguje</a>
+        <a href="#donaska" style="color: #3E5346;" style-hover="color: #1B8A4F;">Objednávka</a>
+        <a href="#alergie" style="color: #3E5346;" style-hover="color: #1B8A4F;">Alergie</a>
+        <a href="#spajza" style="color: #3E5346;" style-hover="color: #1B8A4F;">Špajza</a>
+        <a href="#cennik" style="color: #3E5346;" style-hover="color: #1B8A4F;">Cenník</a>
+      </nav>
+      <a href="#waitlist" style="background: #1B8A4F; color: #FFFFFF; font-weight: 700; font-size: 14.5px; padding: 13px 22px; border-radius: 999px; white-space: nowrap;" style-hover="background: #FF6B3D;">Vyskúšať zadarmo</a>
+    </div>
+  </div>
+</header>
+
+<section id="top" style="position: relative; padding: 30px 0 40px;">
+  <div style="position: absolute; top: -190px; right: -170px; width: 640px; height: 640px; border-radius: 50%; background: #E7F7EC;"></div>
+  <div style="position: absolute; top: 320px; left: -210px; width: 400px; height: 400px; border-radius: 50%; background: #F4F0E3;"></div>
+  <div style="position: relative; max-width: 1200px; margin: 0 auto; padding: 0 28px; display: grid; grid-template-columns: 1fr 372px; gap: 48px; align-items: center;">
+    <div>
+      <div style="display: inline-flex; align-items: center; gap: 9px; background: #FFFFFF; border-radius: 999px; padding: 8px 16px 8px 10px; font-size: 13.5px; font-weight: 600; color: #3E5346; box-shadow: 0 4px 18px rgba(14,38,23,.07);">
+        <span style="background: #D9F27E; color: #0E2617; border-radius: 999px; padding: 4px 10px; font-size: 12px; font-weight: 800;">Novinka</span>
+        Recepty z reálnych kuchárskych webov
+      </div>
+      <h1 style="font-weight: 800; font-size: clamp(44px, 5vw, 70px); line-height: 1.03; letter-spacing: -.035em; margin: 22px 0 0; color: #0E2617;">
+        Vyber si recept.<br>
+        <span style="color: #1B8A4F;">Nákup dorazí</span><br>
+        <span style="position: relative; display: inline-block;">
+          <span style="position: absolute; left: -6px; right: -8px; bottom: 8px; height: 17px; background: #D9F27E; border-radius: 999px; z-index: 0;"></span>
+          <span style="position: relative; z-index: 1;">sám domov.</span>
+        </span>
+      </h1>
+      <p style="font-size: 19.5px; line-height: 1.55; max-width: 460px; margin: 24px 0 0; color: #4A5A4F;">
+        Odswipuješ, na čo máš dnes chuť. MĽASK poskladá nákup, odpočíta čo už máš doma a objedná zvyšok z Woltu či Košíka.
+      </p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px;">
+        <a href="#waitlist" style="background: #1B8A4F; color: #FFFFFF; font-weight: 700; font-size: 16.5px; padding: 18px 32px; border-radius: 999px; box-shadow: 0 10px 26px rgba(27,138,79,.3);" style-hover="background: #FF6B3D; box-shadow: 0 10px 26px rgba(255,107,61,.32);">Vyskúšať 14 dní zadarmo</a>
+        <a href="#ako" style="background: #FFFFFF; color: #0E2617; font-weight: 700; font-size: 16.5px; padding: 18px 30px; border-radius: 999px; box-shadow: 0 6px 20px rgba(14,38,23,.08);" style-hover="color: #1B8A4F;">Ako to funguje</a>
+      </div>
+      <div style="display: flex; align-items: center; gap: 22px; margin-top: 26px; font-size: 14px; font-weight: 600; color: #6E7C71;">
+        <span style="display: flex; align-items: center; gap: 8px;"><span style="width: 18px; height: 18px; border-radius: 50%; background: #D9F27E; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; color: #0E2617; font-weight: 800;">✓</span> Bez karty</span>
+        <span style="display: flex; align-items: center; gap: 8px;"><span style="width: 18px; height: 18px; border-radius: 50%; background: #D9F27E; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; color: #0E2617; font-weight: 800;">✓</span> Suroviny do 40 minút</span>
+        <span style="display: flex; align-items: center; gap: 8px;"><span style="width: 18px; height: 18px; border-radius: 50%; background: #D9F27E; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; color: #0E2617; font-weight: 800;">✓</span> SK &amp; CZ</span>
+      </div>
+    </div>
+
+    <div style="position: relative; display: flex; justify-content: center;">
+      <div style="position: absolute; z-index: 4; left: -58px; top: 156px; background: #FFFFFF; border-radius: 16px; padding: 11px 13px; box-shadow: 0 12px 32px rgba(14,38,23,.14); display: flex; align-items: center; gap: 9px; animation: mlask-float 6s ease-in-out infinite;">
+        <span style="width: 30px; height: 30px; border-radius: 10px; background: #E7F7EC; color: #1B8A4F; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px;">♥</span>
+        <span style="font-size: 12px; font-weight: 700; line-height: 1.3; white-space: nowrap;">{{ deckCounter }}<br><span style="font-weight: 600; color: #9AA69D;">v dnešnom výbere</span></span>
+      </div>
+      <div style="position: absolute; z-index: 4; right: -28px; top: 250px; background: #FFFFFF; border-radius: 16px; padding: 12px 14px; box-shadow: 0 12px 32px rgba(14,38,23,.14); animation: mlask-float 7s ease-in-out .8s infinite;">
+        <span style="font-size: 11px; font-weight: 600; color: #9AA69D;">Košík je pripravený</span>
+        <div style="font-size: 17px; font-weight: 800; margin-top: 2px;">8,98 €</div>
+        <div style="font-size: 10.5px; font-weight: 700; color: #1B8A4F;">Wolt · 25 min</div>
+      </div>
+      
+
+      <div style="position: relative; z-index: 2; width: 318px; height: 614px; border-radius: 48px; background: #0E2617; padding: 9px; box-shadow: 0 30px 70px rgba(14,38,23,.24);">
+        <div style="position: relative; height: 100%; border-radius: 40px; background: #FFFFFF; overflow: hidden; display: flex; flex-direction: column;">
+          <div style="position: absolute; top: 11px; left: 50%; transform: translateX(-50%); width: 96px; height: 24px; border-radius: 999px; background: #0E2617; z-index: 5;"></div>
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 22px 0; font-size: 11.5px; font-weight: 700;">
+            <span>9:41</span><span style="letter-spacing: .1em;">▮▮▮ ▰</span>
+          </div>
+          <div style="padding: 18px 20px 0; display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 19px; font-weight: 800; letter-spacing: -.025em;">Na čo máš chuť?</span>
+            <span style="width: 28px; height: 28px; border-radius: 50%; background: #E7F7EC; display: block;"></span>
+          </div>
+          <div style="position: relative; margin: 26px 22px 0; height: 378px;">
+            <sc-for list="{{ deck }}" as="card" hint-placeholder-count="3">
+              <div style="position: absolute; top: 0; left: 0; right: 0; border-radius: 26px; background: #FFFFFF; overflow: hidden; box-shadow: 0 14px 34px rgba(14,38,23,.16); transition: {{ card.transition }}; transform: {{ card.transform }}; opacity: {{ card.opacity }}; visibility: {{ card.vis }}; z-index: {{ card.z }};">
+                <div style="position: relative; height: 238px; background-color: #EAE4D6; background-image: url({{ card.img }}); background-size: cover; background-position: center;">
+                  <div style="position: absolute; top: 12px; left: 12px; right: 12px; display: flex; gap: 6px; flex-wrap: wrap;">
+                    <span style="background: rgba(255,255,255,.95); border-radius: 999px; padding: 6px 11px; font-size: 11.5px; font-weight: 800;">{{ card.time }}</span>
+                    <span style="background: #D9F27E; border-radius: 999px; padding: 6px 11px; font-size: 11.5px; font-weight: 800;">{{ card.diet }}</span>
+                    <span style="background: rgba(255,255,255,.95); border-radius: 999px; padding: 6px 11px; font-size: 11.5px; font-weight: 700; color: #3E5346;">{{ card.cuisine }}</span>
+                  </div>
+                  <div style="position: absolute; bottom: 12px; left: 12px; background: {{ card.stampBg }}; color: #FFFFFF; border-radius: 12px; padding: 8px 13px; font-size: 13.5px; font-weight: 800; letter-spacing: .04em; transform: rotate(-6deg); opacity: {{ card.stampOpacity }}; transition: opacity .18s;">{{ card.stampText }}</div>
+                </div>
+                <div style="padding: 16px 16px 16px;">
+                  <span style="font-size: 19px; font-weight: 800; letter-spacing: -.025em; line-height: 1.2; display: block;">{{ card.name }}</span>
+                  <div style="margin-top: 12px; background: #E7F7EC; color: #1B8A4F; border-radius: 999px; padding: 10px; text-align: center; font-size: 12.5px; font-weight: 700;">Objednať ingrediencie</div>
+                  <div style="margin-top: 8px; font-size: 11px; font-weight: 600; color: #9AA69D; text-align: center;">{{ card.pantry }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display: flex; justify-content: center; gap: 16px; margin-top: 18px;">
+            <button type="button" onClick="{{ onSkip }}" style="width: 54px; height: 54px; border: none; background: #F1EDE4; color: #6E7C71; border-radius: 50%; font-size: 19px; font-weight: 800; cursor: pointer; font-family: inherit; transition: transform .15s, background .15s;" style-hover="background: #E7E0D0; transform: scale(1.08);">✕</button>
+            <button type="button" onClick="{{ onLike }}" style="width: 54px; height: 54px; border: none; background: #1B8A4F; color: #FFFFFF; border-radius: 50%; font-size: 19px; font-weight: 800; cursor: pointer; font-family: inherit; transition: transform .15s, background .15s; animation: mlask-pulse 2.8s ease-in-out infinite;" style-hover="background: #FF6B3D; transform: scale(1.08);">♥</button>
+          </div>
+          <div style="text-align: center; font-size: 11.5px; font-weight: 600; color: #9AA69D; margin-top: 10px;">{{ deckHint }}</div>
+        </div>
+      </div>
+    </div>
+  <div style="position: absolute; z-index: 4; left: 743px; background: #D9F27E; border-radius: 14px; padding: 10px 14px; box-shadow: 0 10px 24px rgba(14,38,23,.12); font-size: 12px; font-weight: 700; white-space: nowrap; animation: mlask-float-slow 8s ease-in-out infinite; top: 518px">
+        Špajza ušetrila 4,80 €
+      </div></div>
+</section>
+
+<section style="max-width: 1200px; margin: 0 auto; padding: 40px 28px 130px;">
+  <div style="background: #FFFFFF; border-radius: 30px; padding: 28px 40px; box-shadow: 0 6px 26px rgba(14,38,23,.06); display: flex; align-items: center; justify-content: space-between; gap: 36px; flex-wrap: wrap;">
+    <span style="font-size: 15px; font-weight: 700; color: #6E7C71;">Nakupujeme za teba u:</span>
+    <div style="display: flex; align-items: center; gap: 44px; flex-wrap: wrap;">
+      <span style="width: 100px; height: 48px; display: flex; align-items: center; justify-content: center; overflow: hidden;"><img src="assets/wolt.png" alt="Wolt" style="width: 88px; height: 88px; object-fit: contain; display: block;"></span>
+      <span style="width: 100px; height: 48px; display: flex; align-items: center; justify-content: center;"><img src="assets/bolt.png" alt="Bolt Food" style="height: 28px; width: auto; object-fit: contain; display: block;"></span>
+      <span style="width: 100px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 7px; overflow: hidden;"><img src="assets/kosik.png" alt="Košík" style="height: 48px; width: auto; object-fit: contain; display: block;"></span>
+      <span style="font-size: 14px; font-weight: 600; color: #9AA69D;">ďalšie pribúdajú</span>
+    </div>
+  </div>
+</section>
+
+<section id="ako" style="max-width: 1200px; margin: 0 auto; padding: 0 28px 130px;">
+  <div style="text-align: center; max-width: 620px; margin: 0 auto 52px;">
+    <span style="font-size: 13px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #1B8A4F;">Ako to funguje</span>
+    <h2 style="font-weight: 800; font-size: clamp(36px, 4vw, 50px); line-height: 1.04; letter-spacing: -.035em; margin: 14px 0 0;">Štyri kroky, dve minúty</h2>
+    <p style="font-size: 17.5px; line-height: 1.55; color: #4A5A4F; margin: 14px 0 0;">Kroky sa prepínajú samé — alebo klikni na ktorýkoľvek.</p>
+  </div>
+  <div style="background: #FFFFFF; border-radius: 40px; padding: 44px; box-shadow: 0 10px 40px rgba(14,38,23,.07); display: grid; grid-template-columns: 1fr 320px; gap: 52px; align-items: center;">
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <sc-for list="{{ steps }}" as="step" hint-placeholder-count="4">
+        <button type="button" onClick="{{ step.select }}" style="text-align: left; border: none; cursor: pointer; font-family: inherit; border-radius: 24px; padding: 22px 24px; display: flex; gap: 18px; align-items: flex-start; transition: background .25s, transform .25s; background: {{ step.bg }}; color: {{ step.fg }};" style-hover="transform: translateX(4px);">
+          <span style="min-width: 38px; height: 38px; border-radius: 13px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 15px; background: {{ step.numBg }}; color: #0E2617;">{{ step.n }}</span>
+          <span style="display: block; flex: 1;">
+            <span style="display: block; font-weight: 800; font-size: 19px; letter-spacing: -.02em;">{{ step.title }}</span>
+            <span style="display: block; font-size: 15px; line-height: 1.55; margin-top: 5px; color: {{ step.bodyFg }};">{{ step.body }}</span>
+            <span style="display: block; height: 4px; border-radius: 999px; margin-top: 14px; background: {{ step.trackBg }};">
+              <sc-if value="{{ step.active }}" hint-placeholder-val="{{ false }}">
+                <span style="display: block; height: 4px; border-radius: 999px; background: #D9F27E; animation: mlask-progress 5s linear forwards;"></span>
+              </sc-if>
+            </span>
+          </span>
+        </button>
+      </sc-for>
+    </div>
+
+    <div style="display: flex; justify-content: center;">
+      <div style="width: 300px; height: 616px; border-radius: 46px; background: #0E2617; padding: 9px; box-shadow: 0 24px 60px rgba(14,38,23,.2);">
+        <div style="position: relative; height: 100%; border-radius: 38px; background: #F7F4EC; overflow: hidden;">
+          <sc-if value="{{ isStep1 }}" hint-placeholder-val="{{ true }}">
+            <div style="padding: 34px 22px; animation: mlask-in .35s ease both;">
+              <div style="display: flex; gap: 5px; margin-bottom: 22px;">
+                <span style="flex: 1; height: 5px; border-radius: 999px; background: #1B8A4F;"></span>
+                <span style="flex: 1; height: 5px; border-radius: 999px; background: #1B8A4F;"></span>
+                <span style="flex: 1; height: 5px; border-radius: 999px; background: #1B8A4F;"></span>
+                <span style="flex: 1; height: 5px; border-radius: 999px; background: #E7E2D6;"></span>
+              </div>
+              <div style="font-size: 12px; font-weight: 700; color: #9AA69D; letter-spacing: .05em;">KROK 3 / 4</div>
+              <h4 style="font-weight: 800; font-size: 25px; line-height: 1.1; letter-spacing: -.025em; margin: 8px 0 22px;">Koľko času máš vo všedný deň?</h4>
+              <div style="display: flex; flex-direction: column; gap: 10px;">
+                <div style="background: #FFFFFF; border-radius: 18px; padding: 16px 17px; font-size: 14.5px; font-weight: 700; display: flex; justify-content: space-between;"><span>Do 15 minút</span><span style="color: #9AA69D; font-weight: 600;">rýchlovky</span></div>
+                <div style="background: #1B8A4F; color: #FFFFFF; border-radius: 18px; padding: 16px 17px; font-size: 14.5px; font-weight: 700; display: flex; justify-content: space-between;"><span>20 – 40 minút</span><span style="font-weight: 800;">✓</span></div>
+                <div style="background: #FFFFFF; border-radius: 18px; padding: 16px 17px; font-size: 14.5px; font-weight: 700; display: flex; justify-content: space-between;"><span>Hodina a viac</span><span style="color: #9AA69D; font-weight: 600;">víkend</span></div>
+              </div>
+              <div style="margin-top: 26px; display: flex; flex-wrap: wrap; gap: 7px;">
+                <span style="background: #FFF1EB; color: #FF6B3D; border-radius: 999px; padding: 8px 13px; font-size: 12.5px; font-weight: 700;">bez lepku</span>
+                <span style="background: #FFFFFF; border-radius: 999px; padding: 8px 13px; font-size: 12.5px; font-weight: 700; color: #3E5346;">bez orechov</span>
+                <span style="background: #FFFFFF; border-radius: 999px; padding: 8px 13px; font-size: 12.5px; font-weight: 700; color: #3E5346;">4 porcie</span>
+              </div>
+              <div style="margin-top: 34px; background: #0E2617; color: #FFFFFF; border-radius: 999px; padding: 16px; text-align: center; font-size: 14.5px; font-weight: 700;">Pokračovať</div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ isStep2 }}" hint-placeholder-val="{{ false }}">
+            <div style="padding: 30px 20px; animation: mlask-in .35s ease both;">
+              <div style="font-size: 19px; font-weight: 800; letter-spacing: -.02em;">Na čo máš chuť?</div>
+              <div style="position: relative; margin-top: 18px; height: 400px;">
+                <div style="position: absolute; inset: 0; border-radius: 24px; background: #FFFFFF; box-shadow: 0 10px 26px rgba(14,38,23,.1); transform: translateY(-12px) scale(.94); opacity: .6;"></div>
+                <div style="position: absolute; inset: 0; border-radius: 24px; background: #FFFFFF; overflow: hidden; box-shadow: 0 14px 34px rgba(14,38,23,.16); transform: rotate(-4deg);">
+                  <div style="height: 250px; background-image: url(https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=700&amp;q=70); background-size: cover; background-position: center; position: relative;">
+                    <div style="position: absolute; top: 12px; left: 12px; display: flex; gap: 6px;">
+                      <span style="background: rgba(255,255,255,.95); border-radius: 999px; padding: 5px 10px; font-size: 11px; font-weight: 800;">32 min</span>
+                      <span style="background: #D9F27E; border-radius: 999px; padding: 5px 10px; font-size: 11px; font-weight: 800;">bez laktózy</span>
+                    </div>
+                  </div>
+                  <div style="padding: 18px 16px;">
+                    <span style="font-size: 19px; font-weight: 800; letter-spacing: -.02em;">Kokosové curry</span>
+                    <div style="margin-top: 12px; display: flex; align-items: center; justify-content: space-between;">
+                      <span style="font-size: 11.5px; font-weight: 600; color: #9AA69D;">6 z 9 surovín doma</span>
+                      <span style="background: #E7F7EC; color: #1B8A4F; border-radius: 999px; padding: 7px 13px; font-size: 12px; font-weight: 700;">Objednať</span>
+                    </div>
+                  </div>
+                  <div style="position: absolute; top: 214px; left: 14px; background: #1B8A4F; color: #FFFFFF; border-radius: 12px; padding: 7px 12px; font-size: 13px; font-weight: 800; transform: rotate(-6deg);">MŇAM</div>
+                </div>
+              </div>
+              <div style="display: flex; justify-content: center; gap: 16px; margin-top: 22px;">
+                <span style="width: 52px; height: 52px; border-radius: 50%; background: #FFFFFF; color: #9AA69D; display: flex; align-items: center; justify-content: center; font-size: 19px; font-weight: 800;">✕</span>
+                <span style="width: 52px; height: 52px; border-radius: 50%; background: #1B8A4F; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 19px; font-weight: 800;">♥</span>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ isStep3 }}" hint-placeholder-val="{{ false }}">
+            <div style="padding: 30px 20px; animation: mlask-in .35s ease both;">
+              <div style="font-size: 19px; font-weight: 800; letter-spacing: -.02em;">Nákupný zoznam</div>
+              <div style="font-size: 12.5px; font-weight: 600; color: #6E7C71; margin-top: 4px;">Šošovicový guláš · 4 porcie</div>
+              <div style="display: flex; flex-direction: column; gap: 9px; margin-top: 20px;">
+                <div style="background: #FFFFFF; border-radius: 16px; padding: 14px 15px; display: flex; justify-content: space-between; font-size: 14px; font-weight: 700;"><span>Červená šošovica</span><span style="color: #9AA69D;">250 g</span></div>
+                <div style="background: #FFFFFF; border-radius: 16px; padding: 14px 15px; display: flex; justify-content: space-between; font-size: 14px; font-weight: 700;"><span>Rajčinový pretlak</span><span style="color: #9AA69D;">70 g</span></div>
+                <div style="background: #D9F27E; border-radius: 16px; padding: 14px 15px; display: flex; justify-content: space-between; font-size: 14px; font-weight: 700;"><span style="text-decoration: line-through;">Cibuľa</span><span>máš doma</span></div>
+                <div style="background: #D9F27E; border-radius: 16px; padding: 14px 15px; display: flex; justify-content: space-between; font-size: 14px; font-weight: 700;"><span style="text-decoration: line-through;">Údená paprika</span><span>máš doma</span></div>
+              </div>
+              <div style="background: #FFFFFF; border-radius: 20px; padding: 18px; margin-top: 22px;">
+                <div style="font-size: 12.5px; font-weight: 700; color: #9AA69D;">Najlacnejší košík</div>
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 12px;">
+                  <span style="width: 62px; height: 20px; display: flex; align-items: center;"><img src="assets/wolt.png" alt="Wolt" style="max-width: 100%; max-height: 100%; object-fit: contain;"></span>
+                  <span style="font-size: 17px; font-weight: 800;">8,98 €</span>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 12px; opacity: .5;">
+                  <span style="width: 62px; height: 18px; display: flex; align-items: center;"><img src="assets/bolt.png" alt="Bolt Food" style="max-width: 100%; max-height: 100%; object-fit: contain;"></span>
+                  <span style="font-size: 15px; font-weight: 700;">9,60 €</span>
+                </div>
+              </div>
+              <div style="margin-top: 26px; background: #1B8A4F; color: #FFFFFF; border-radius: 999px; padding: 16px; text-align: center; font-size: 14.5px; font-weight: 800;">Zaplatiť a doručiť</div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ isStep4 }}" hint-placeholder-val="{{ false }}">
+            <div style="height: 100%; display: flex; flex-direction: column; animation: mlask-in .35s ease both;">
+              <div style="height: 232px; background-image: url(https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=700&amp;q=70); background-size: cover; background-position: center;"></div>
+              <div style="padding: 24px 22px 22px; flex: 1; display: flex; flex-direction: column;">
+                <div style="display: inline-flex; align-self: flex-start; align-items: center; gap: 8px; background: #E7F7EC; color: #1B8A4F; border-radius: 999px; padding: 9px 15px; font-size: 12.5px; font-weight: 800;">Kuriér je pred dverami</div>
+                <div style="font-size: 24px; font-weight: 800; letter-spacing: -.025em; margin-top: 18px; line-height: 1.15;">Suroviny doručené za 24 minút</div>
+                <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 20px;">
+                  <div style="display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700;"><span style="width: 22px; height: 22px; border-radius: 50%; background: #1B8A4F; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 11px;">✓</span> Nákup zapísaný do špajze</div>
+                  <div style="display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700;"><span style="width: 22px; height: 22px; border-radius: 50%; background: #1B8A4F; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 11px;">✓</span> Postup rozdelený na kroky</div>
+                </div>
+                <div style="margin-top: auto; background: #0E2617; color: #FFFFFF; border-radius: 999px; padding: 16px; text-align: center; font-size: 14.5px; font-weight: 800;">Začať variť</div>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="donaska" style="background: #1B8A4F; border-radius: 48px; margin: 0 20px; position: relative; overflow: hidden;">
+  <div style="position: absolute; left: -120px; bottom: -140px; width: 420px; height: 420px; border-radius: 50%; background: rgba(255,255,255,.07);"></div>
+  <div style="position: relative; max-width: 1200px; margin: 0 auto; padding: 92px 28px;">
+    <div style="display: grid; grid-template-columns: 1fr 400px; gap: 64px; align-items: center;">
+      <div style="color: #FFFFFF;">
+        <span style="display: inline-block; background: #D9F27E; color: #0E2617; border-radius: 999px; padding: 7px 15px; font-size: 12.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;">Automatická objednávka</span>
+        <h2 style="font-weight: 800; font-size: clamp(36px, 4.2vw, 52px); line-height: 1.03; letter-spacing: -.035em; margin: 20px 0 0;">Nákup vybavíme za teba.<br>Ty len otvoríš dvere.</h2>
+        <p style="font-size: 18.5px; line-height: 1.6; color: #DDF0E4; margin: 18px 0 0; max-width: 480px;">Toto je celý rozdiel oproti receptovým appkám: z receptu vieme spraviť hotovú objednávku potravín.</p>
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 30px; max-width: 460px;">
+          <span style="display: flex; align-items: center; gap: 12px; font-size: 16.5px; font-weight: 600; color: #EAF6EE;"><span style="min-width: 22px; height: 22px; border-radius: 50%; background: #D9F27E; color: #0E2617; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800;">✓</span> Suroviny spárujeme s produktami v obchode</span>
+          <span style="display: flex; align-items: center; gap: 12px; font-size: 16.5px; font-weight: 600; color: #EAF6EE;"><span style="min-width: 22px; height: 22px; border-radius: 50%; background: #D9F27E; color: #0E2617; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800;">✓</span> Porovnáme ceny vrátane doručenia</span>
+          <span style="display: flex; align-items: center; gap: 12px; font-size: 16.5px; font-weight: 600; color: #EAF6EE;"><span style="min-width: 22px; height: 22px; border-radius: 50%; background: #D9F27E; color: #0E2617; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800;">✓</span> Košík vidíš a upravíš pred platbou</span>
+        </div>
+        <a href="#waitlist" style="display: inline-block; margin-top: 32px; background: #D9F27E; color: #0E2617; font-weight: 800; font-size: 16px; padding: 17px 30px; border-radius: 999px;" style-hover="background: #FFFFFF; color: #0E2617;">Objednať prvý nákup</a>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div style="background: #FFFFFF; border-radius: 28px; padding: 26px; box-shadow: 0 20px 50px rgba(0,0,0,.16);">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <span style="font-size: 17px; font-weight: 800; letter-spacing: -.02em;">Objednávka na dnes</span>
+            <span style="background: #E7F7EC; color: #1B8A4F; border-radius: 999px; padding: 6px 11px; font-size: 11.5px; font-weight: 800;">v príprave</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 20px;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="width: 26px; height: 26px; border-radius: 50%; background: #1B8A4F; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800;">✓</span>
+              <span style="flex: 1; font-size: 14.5px; font-weight: 700;">Recept vybraný</span>
+              <span style="font-size: 12.5px; font-weight: 600; color: #9AA69D;">Kokosové curry</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="width: 26px; height: 26px; border-radius: 50%; background: #1B8A4F; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800;">✓</span>
+              <span style="flex: 1; font-size: 14.5px; font-weight: 700;">Špajza odpočítaná</span>
+              <span style="font-size: 12.5px; font-weight: 600; color: #9AA69D;">−4,80 €</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="width: 26px; height: 26px; border-radius: 50%; background: #1B8A4F; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800;">✓</span>
+              <span style="flex: 1; font-size: 14.5px; font-weight: 700;">Košík naplnený</span>
+              <span style="font-size: 12.5px; font-weight: 600; color: #9AA69D;">3 položky</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="width: 26px; height: 26px; border-radius: 50%; background: #F1EDE4; color: #9AA69D; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800;">4</span>
+              <span style="flex: 1; font-size: 14.5px; font-weight: 700; color: #9AA69D;">Platba a doručenie</span>
+            </div>
+          </div>
+          <div style="border-top: 1.5px solid #F1EDE4; margin-top: 20px; padding-top: 16px; display: flex; align-items: baseline; justify-content: space-between;">
+            <span style="font-size: 13px; font-weight: 700; color: #1B8A4F;">Doručenie 25 minút</span>
+            <span style="font-size: 24px; font-weight: 800; letter-spacing: -.02em;">8,98 €</span>
+          </div>
+          <div style="background: #1B8A4F; color: #FFFFFF; border-radius: 999px; padding: 15px; text-align: center; font-size: 15px; font-weight: 800; margin-top: 14px;">Zaplatiť a doručiť</div>
+        </div>
+        <div style="background: rgba(255,255,255,.14); border-radius: 24px; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px;">
+          <span style="font-size: 13px; font-weight: 700; color: #FFFFFF;">Doručí ti</span>
+          <span style="display: flex; align-items: center; gap: 20px;">
+            <span style="width: 74px; height: 42px; display: flex; align-items: center; justify-content: center; overflow: hidden;"><img src="assets/wolt.png" alt="Wolt" style="width: 74px; height: 74px; object-fit: contain; display: block;"></span>
+            <span style="width: 70px; height: 42px; display: flex; align-items: center;"><img src="assets/bolt.png" alt="Bolt Food" style="width: 70px; height: auto; object-fit: contain; display: block;"></span>
+            <span style="width: 70px; height: 42px; display: flex; align-items: center; border-radius: 6px; overflow: hidden;"><img src="assets/kosik.png" alt="Košík" style="width: 70px; height: auto; object-fit: contain; display: block;"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="alergie" style="max-width: 1200px; margin: 0 auto; padding: 130px 28px;">
+  <div style="display: grid; grid-template-columns: 1fr 360px; gap: 72px; align-items: center;">
+    <div>
+      <span style="font-size: 13px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #1B8A4F;">Alergie a intolerancie</span>
+      <h2 style="font-weight: 800; font-size: clamp(36px, 4.2vw, 52px); line-height: 1.03; letter-spacing: -.035em; margin: 14px 0 0;">Recept sa neškrtá.<br>Iba sa prepíše.</h2>
+      <p style="font-size: 18.5px; line-height: 1.6; color: #4A5A4F; margin: 18px 0 0; max-width: 500px;">Iné appky ti recept pri alergii schovajú. My vymeníme len tú jednu surovinu — a do košíka padne rovno tá náhrada.</p>
+
+      <div style="background: #FFFFFF; border-radius: 28px; padding: 28px; box-shadow: 0 8px 30px rgba(14,38,23,.07); margin-top: 30px; max-width: 560px;">
+        <div style="font-size: 14px; font-weight: 800; color: #0E2617;">Zaškrtni, čo nesmieš jesť:</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 9px; margin-top: 14px;">
+          <sc-for list="{{ allergens }}" as="a" hint-placeholder-count="4">
+            <button type="button" onClick="{{ a.toggle }}" style="border: none; cursor: pointer; font-family: inherit; border-radius: 999px; padding: 11px 17px; font-size: 13.5px; font-weight: 700; display: flex; align-items: center; gap: 8px; transition: background .2s, color .2s, transform .2s; background: {{ a.bg }}; color: {{ a.fg }};" style-hover="transform: translateY(-2px);">
+              <span style="width: 17px; height: 17px; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; background: {{ a.boxBg }}; color: {{ a.boxFg }};">{{ a.mark }}</span>
+              {{ a.label }}
+            </button>
+          </sc-for>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; margin-top: 20px; padding-top: 18px; border-top: 1.5px solid #F1EDE4;">
+          <span style="background: #D9F27E; border-radius: 999px; padding: 8px 14px; font-size: 13px; font-weight: 800;">{{ swapCount }}</span>
+          <span style="font-size: 14.5px; font-weight: 600; color: #4A5A4F;">{{ swapNote }}</span>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 26px; max-width: 560px;">
+        <div style="background: #E7F7EC; border-radius: 22px; padding: 24px;">
+          <div style="font-weight: 800; font-size: 16px;">Kontrola pred košíkom</div>
+          <p style="margin: 8px 0 0; font-size: 14.5px; line-height: 1.5; color: #3E5346;">Zloženie každého produktu porovnáme s tvojím profilom pred objednávkou.</p>
+        </div>
+        <div style="background: #E7F7EC; border-radius: 22px; padding: 24px;">
+          <div style="font-weight: 800; font-size: 16px;">Profil domácnosti</div>
+          <p style="margin: 8px 0 0; font-size: 14.5px; line-height: 1.5; color: #3E5346;">Ty bez lepku, partner bez orechov. Jedno jedlo pre všetkých.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="position: relative; display: flex; justify-content: center;">
+      <div style="width: 328px; height: 664px; border-radius: 48px; background: #0E2617; padding: 10px; box-shadow: 0 26px 64px rgba(14,38,23,.2);">
+        <div style="position: relative; height: 100%; border-radius: 39px; background: #FFFFFF; overflow: hidden; display: flex; flex-direction: column;">
+          <div style="position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 96px; height: 24px; border-radius: 999px; background: #0E2617; z-index: 5;"></div>
+          <div style="height: 196px; background-image: url(https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=800&amp;q=70); background-size: cover; background-position: center;"></div>
+          <div style="padding: 20px; flex: 1; display: flex; flex-direction: column;">
+            <span style="font-size: 21px; font-weight: 800; letter-spacing: -.025em;">Smotanové cestoviny s kuracím</span>
+            <div style="font-size: 12px; font-weight: 600; color: #9AA69D; margin-top: 5px;">varecha.sk · 25 min · 2 porcie</div>
+            <div style="font-size: 12px; font-weight: 800; color: #1B8A4F; margin-top: 16px; letter-spacing: .04em;">SUROVINY</div>
+            <div style="display: flex; flex-direction: column; gap: 7px; margin-top: 10px;">
+              <sc-for list="{{ ingredients }}" as="ing" hint-placeholder-count="7">
+                <div style="border-radius: 13px; padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; gap: 8px; transition: background .25s; background: {{ ing.bg }};">
+                  <span style="font-size: 12.5px; font-weight: 700; color: {{ ing.nameColor }}; text-decoration: {{ ing.deco }};">{{ ing.name }}</span>
+                  <span style="font-size: 11.5px; font-weight: 700; color: {{ ing.rightColor }}; text-align: right;">{{ ing.right }}</span>
+                </div>
+              </sc-for>
+            </div>
+            <div style="margin-top: auto; background: #1B8A4F; color: #FFFFFF; border-radius: 999px; padding: 14px; text-align: center; font-size: 13.5px; font-weight: 800;">Objednať suroviny domov</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="spajza" style="background: #F4F0E3;">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 100px 28px;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+      <div>
+        <span style="font-size: 13px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #1B8A4F;">Špajza</span>
+        <h2 style="font-weight: 800; font-size: clamp(34px, 3.9vw, 48px); line-height: 1.04; letter-spacing: -.035em; margin: 14px 0 0;">Appka vie, čo máš doma. Kupuješ len to, čo chýba.</h2>
+        <p style="font-size: 17.5px; line-height: 1.6; color: #4A5A4F; margin: 16px 0 0; max-width: 500px;">Špajzu nevypĺňaš ručne. Nákup sa do nej zapíše sám, suroviny sa odpočítajú po uvarení a čerstvé veci ti pripomenieme, kým sú dobré.</p>
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 28px; max-width: 500px;">
+          <div style="display: flex; gap: 13px; align-items: center; background: #FFFFFF; border-radius: 18px; padding: 16px 18px;">
+            <span style="min-width: 28px; height: 28px; border-radius: 9px; background: #E7F7EC; color: #1B8A4F; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px;">1</span>
+            <span style="font-size: 15px; font-weight: 600; color: #3E5346;"><strong style="color: #0E2617;">Nakúpiš</strong> — položky sa zapíšu do špajze automaticky.</span>
+          </div>
+          <div style="display: flex; gap: 13px; align-items: center; background: #FFFFFF; border-radius: 18px; padding: 16px 18px;">
+            <span style="min-width: 28px; height: 28px; border-radius: 9px; background: #E7F7EC; color: #1B8A4F; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px;">2</span>
+            <span style="font-size: 15px; font-weight: 600; color: #3E5346;"><strong style="color: #0E2617;">Uvaríš</strong> — použité gramáže sa odpočítajú.</span>
+          </div>
+          <div style="display: flex; gap: 13px; align-items: center; background: #FFFFFF; border-radius: 18px; padding: 16px 18px;">
+            <span style="min-width: 28px; height: 28px; border-radius: 9px; background: #E7F7EC; color: #1B8A4F; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px;">3</span>
+            <span style="font-size: 15px; font-weight: 600; color: #3E5346;"><strong style="color: #0E2617;">Ďalší recept</strong> — navrhneme taký, čo dojedá tvoje zásoby.</span>
+          </div>
+        </div>
+        <div style="display: flex; gap: 40px; margin-top: 30px;">
+          <div><div style="font-size: 32px; font-weight: 800; color: #1B8A4F;">−31 %</div><div style="font-size: 13.5px; color: #6E7C71; max-width: 150px;">nižší účet za nákup</div></div>
+          <div><div style="font-size: 32px; font-weight: 800; color: #1B8A4F;">0</div><div style="font-size: 13.5px; color: #6E7C71; max-width: 170px;">surovín hnijúcich v šuflíku</div></div>
+        </div>
+      </div>
+
+      <div style="background: #FFFFFF; border-radius: 34px; padding: 32px; box-shadow: 0 12px 40px rgba(14,38,23,.08);">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 20px; font-weight: 800; letter-spacing: -.02em;">Moja špajza</span>
+          <span style="font-size: 12.5px; font-weight: 700; color: #9AA69D;">aktualizované dnes</span>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 8px; margin-top: 26px;">
+          <span style="width: 8px; height: 8px; border-radius: 50%; background: #1B8A4F; display: block;"></span>
+          <span style="font-size: 12.5px; font-weight: 800; letter-spacing: .04em; color: #1B8A4F;">MÁŠ DOMA · 18</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px;">
+          <div style="background: #E7F7EC; border-radius: 14px; padding: 12px 14px; display: flex; justify-content: space-between; font-size: 13.5px; font-weight: 700;"><span>Ryža basmati</span><span style="color: #1B8A4F;">1,2 kg</span></div>
+          <div style="background: #E7F7EC; border-radius: 14px; padding: 12px 14px; display: flex; justify-content: space-between; font-size: 13.5px; font-weight: 700;"><span>Kokos. mlieko</span><span style="color: #1B8A4F;">2 ks</span></div>
+          <div style="background: #E7F7EC; border-radius: 14px; padding: 12px 14px; display: flex; justify-content: space-between; font-size: 13.5px; font-weight: 700;"><span>Cibuľa</span><span style="color: #1B8A4F;">4 ks</span></div>
+          <div style="background: #E7F7EC; border-radius: 14px; padding: 12px 14px; display: flex; justify-content: space-between; font-size: 13.5px; font-weight: 700;"><span>Údená paprika</span><span style="color: #1B8A4F;">40 g</span></div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 8px; margin-top: 24px;">
+          <span style="width: 8px; height: 8px; border-radius: 50%; background: #FF6B3D; display: block;"></span>
+          <span style="font-size: 12.5px; font-weight: 800; letter-spacing: .04em; color: #FF6B3D;">MINÚŤ DO 2 DNÍ</span>
+        </div>
+        <div style="background: #FFF1EB; border-radius: 14px; padding: 13px 15px; margin-top: 12px; display: flex; justify-content: space-between; font-size: 13.5px; font-weight: 700;">
+          <span>Kurací prsník 500 g</span><span style="color: #FF6B3D;">použiť dnes</span>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 8px; margin-top: 24px;">
+          <span style="width: 8px; height: 8px; border-radius: 50%; background: #9AA69D; display: block;"></span>
+          <span style="font-size: 12.5px; font-weight: 800; letter-spacing: .04em; color: #6E7C71;">CHÝBA NA DNEŠNÝ RECEPT · 2</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px;">
+          <div style="background: #F7F4EC; border-radius: 14px; padding: 13px 15px; display: flex; justify-content: space-between; font-size: 13.5px; font-weight: 700;"><span>Zázvor 100 g</span><span style="color: #6E7C71;">1,29 €</span></div>
+          <div style="background: #F7F4EC; border-radius: 14px; padding: 13px 15px; display: flex; justify-content: space-between; font-size: 13.5px; font-weight: 700;"><span>Koriander zväzok</span><span style="color: #6E7C71;">1,49 €</span></div>
+        </div>
+
+        <div style="background: #0E2617; border-radius: 22px; padding: 20px; margin-top: 24px; color: #FFFFFF;">
+          <div style="font-size: 14.5px; font-weight: 700; line-height: 1.5;">Dnes navrhneme kokosové curry — dojedá kurča aj mlieko zo špajze.</div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 16px;">
+            <span style="font-size: 13px; font-weight: 700; color: #D9F27E;">Dokúpiť 2 veci · 2,78 €</span>
+            <span style="background: #D9F27E; color: #0E2617; border-radius: 999px; padding: 10px 16px; font-size: 13px; font-weight: 800;">Objednať</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="recepty" style="padding: 110px 0;">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 0 28px;">
+    <div>
+      <span style="font-size: 13px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #FF6B3D;">Reálne recepty</span>
+      <h2 style="font-weight: 800; font-size: clamp(34px, 3.8vw, 48px); line-height: 1.04; letter-spacing: -.035em; margin: 14px 0 0; max-width: 900px;">Recepty nevymýšľame. Berieme tie, ktoré niekto naozaj uvaril.</h2>
+      <p style="font-size: 17.5px; line-height: 1.6; color: #4A5A4F; margin: 16px 0 0; max-width: 720px;">AI číta overené SK a CZ kuchárske weby, recept rozloží na suroviny a gramáže a odkáže na originál. Z každého vieš rovno objednať nákup.</p>
+    </div>
+  </div>
+  <div style="overflow: hidden; margin-top: 76px; mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);">
+    <div style="display: flex; width: max-content; animation: mlask-rail 52s linear infinite;">
+      <sc-for list="{{ recipeRail }}" as="r" hint-placeholder-count="12">
+        <div style="width: 292px; margin-right: 20px; background: #FFFFFF; border-radius: 26px; overflow: hidden; box-shadow: 0 6px 24px rgba(14,38,23,.07); display: flex; flex-direction: column;">
+          <div style="height: 186px; background-color: #EAE4D6; background-image: url({{ r.img }}); background-size: cover; background-position: center;"></div>
+          <div style="padding: 20px; display: flex; flex-direction: column; gap: 14px; flex: 1;">
+            <div>
+              <div style="font-size: 16px; font-weight: 800; letter-spacing: -.02em;">{{ r.name }}</div>
+              <div style="font-size: 13px; font-weight: 600; color: #6E7C71; margin-top: 5px;">{{ r.meta }}</div>
+            </div>
+            <div style="margin-top: auto; display: flex; flex-direction: column; gap: 8px;">
+              <a href="#waitlist" style="background: #1B8A4F; color: #FFFFFF; border-radius: 999px; padding: 12px; text-align: center; font-size: 13.5px; font-weight: 700;" style-hover="background: #FF6B3D;">Objednať ingrediencie</a>
+              <a href="#waitlist" style="background: transparent; color: #6E7C71; border-radius: 999px; padding: 4px; text-align: center; font-size: 13px; font-weight: 700;" style-hover="color: #1B8A4F;">Zobraziť recept</a>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  <div style="display: flex; justify-content: center; margin-top: 48px;">
+    <a href="#waitlist" style="background: #FFFFFF; color: #0E2617; font-weight: 700; font-size: 15.5px; padding: 17px 32px; border-radius: 999px; box-shadow: 0 6px 20px rgba(14,38,23,.08);" style-hover="color: #1B8A4F;">Zobraziť všetky recepty</a>
+  </div>
+</section>
+
+<section id="ludia" style="background: #E7F7EC; padding: 100px 0 110px;">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 0 28px;">
+    <h2 style="font-weight: 800; font-size: clamp(32px, 3.6vw, 46px); line-height: 1.08; letter-spacing: -.035em; margin: 0 auto 52px; text-align: center; max-width: 620px; color: #0E2617;">Ľudia, ktorí prestali stáť pred chladničkou</h2>
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+      <div style="height: 880px; display: flex; flex-direction: column; gap: 20px;">
+        <div style="background: #FFFFFF; color: #0E2617; border-radius: 26px; padding: 26px; box-shadow: 0 6px 22px rgba(14,38,23,.06); display: flex; flex-direction: column; gap: 14px;">
+          <div style="color: #1B8A4F; font-size: 14px; letter-spacing: .12em;">★★★★★</div>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #3E5346;">„Celiakia mi z varenia spravila logistiku. Konečne recept, ktorý nemusím prepisovať — a rovno aj nákup.“</p>
+          <div style="display: flex; align-items: center; gap: 11px;">
+            <span style="width: 36px; height: 36px; border-radius: 50%; background: #E7F7EC; color: #1B8A4F; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px;">ZK</span>
+            <span style="font-size: 13px; font-weight: 700; line-height: 1.35;">Zuzana K.<br><span style="font-weight: 600; color: #9AA69D;">Bratislava · bez lepku</span></span>
+          </div>
+        </div>
+        <div style="position: relative; flex: 1; min-height: 200px; border-radius: 26px; overflow: hidden; background-color: #DCE8DE; background-image: url(https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=700&amp;q=70); background-size: cover; background-position: center;">
+          <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14,38,23,.02) 40%, rgba(14,38,23,.64) 100%);"></div>
+          <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 56px; height: 56px; border-radius: 50%; background: #1B8A4F; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 8px 24px rgba(0,0,0,.25);">▶</div>
+          <div style="position: absolute; left: 16px; right: 16px; bottom: 16px; display: flex; flex-direction: column; gap: 10px;">
+            <span style="background: rgba(255,255,255,.94); color: #0E2617; border-radius: 12px; padding: 8px 12px; font-size: 12.5px; font-weight: 700; line-height: 1.35;">Takto mi príde nákup na celý týždeň</span>
+            <span style="display: flex; align-items: center; gap: 9px;">
+              <span style="width: 30px; height: 30px; border-radius: 50%; background: #D9F27E; color: #0E2617; display: flex; align-items: center; justify-content: center; font-size: 11.5px; font-weight: 800; border: 2px solid #FFFFFF;">LV</span>
+              <span style="color: #FFFFFF; font-size: 13px; font-weight: 800;">lenka.varí</span>
+            </span>
+          </div>
+        </div>
+        <div style="background: #FFFFFF; color: #0E2617; border-radius: 26px; padding: 26px; box-shadow: 0 6px 22px rgba(14,38,23,.06); display: flex; flex-direction: column; gap: 14px;">
+          <div style="color: #1B8A4F; font-size: 14px; letter-spacing: .12em;">★★★★★</div>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #3E5346;">„Prestala som variť to isté dokola. Swipy mi ukážu aj veci, ktoré by som nikdy nehľadala.“</p>
+          <div style="display: flex; align-items: center; gap: 11px;">
+            <span style="width: 36px; height: 36px; border-radius: 50%; background: #E7F7EC; color: #1B8A4F; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px;">IM</span>
+            <span style="font-size: 13px; font-weight: 700; line-height: 1.35;">Ivana M.<br><span style="font-weight: 600; color: #9AA69D;">Trnava · varí pre dvoch</span></span>
+          </div>
+        </div>
+      </div>
+      <div style="height: 880px; display: flex; flex-direction: column; gap: 20px;">
+        <div style="position: relative; flex: 1; min-height: 200px; border-radius: 26px; overflow: hidden; background-color: #DCE8DE; background-image: url(https://images.unsplash.com/photo-1493770348161-369560ae357d?w=700&amp;q=70); background-size: cover; background-position: center;">
+          <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14,38,23,.02) 40%, rgba(14,38,23,.64) 100%);"></div>
+          <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 56px; height: 56px; border-radius: 50%; background: #1B8A4F; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 8px 24px rgba(0,0,0,.25);">▶</div>
+          <div style="position: absolute; left: 16px; right: 16px; bottom: 16px; display: flex; flex-direction: column; gap: 10px;">
+            <span style="background: rgba(255,255,255,.94); color: #0E2617; border-radius: 12px; padding: 8px 12px; font-size: 12.5px; font-weight: 700; line-height: 1.35;">Večera vymyslená za 5 sekúnd. Ukazujem ako.</span>
+            <span style="display: flex; align-items: center; gap: 9px;">
+              <span style="width: 30px; height: 30px; border-radius: 50%; background: #D9F27E; color: #0E2617; display: flex; align-items: center; justify-content: center; font-size: 11.5px; font-weight: 800; border: 2px solid #FFFFFF;">MH</span>
+              <span style="color: #FFFFFF; font-size: 13px; font-weight: 800;">martin.h</span>
+            </span>
+          </div>
+        </div>
+        <div style="background: #0E2617; color: #FFFFFF; border-radius: 26px; padding: 26px; box-shadow: 0 6px 22px rgba(14,38,23,.06); display: flex; flex-direction: column; gap: 14px;">
+          <div style="color: #D9F27E; font-size: 14px; letter-spacing: .12em;">★★★★★</div>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #DCE5DE;">„Swipujem počas cesty z práce. Kým prídem domov, potraviny sú pred dverami.“</p>
+          <div style="display: flex; align-items: center; gap: 11px;">
+            <span style="width: 36px; height: 36px; border-radius: 50%; background: #D9F27E; color: #0E2617; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px;">MH</span>
+            <span style="font-size: 13px; font-weight: 700; line-height: 1.35;">Martin H.<br><span style="font-weight: 600; color: #9FB0A4;">Košice · varí každý deň</span></span>
+          </div>
+        </div>
+        <div style="background: #FFFFFF; color: #0E2617; border-radius: 26px; padding: 26px; box-shadow: 0 6px 22px rgba(14,38,23,.06); display: flex; flex-direction: column; gap: 14px;">
+          <div style="color: #1B8A4F; font-size: 14px; letter-spacing: .12em;">★★★★★</div>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #3E5346;">„Konečne appka, kde nemusím písať nákupný zoznam. Vypíše sa sama.“</p>
+          <div style="display: flex; align-items: center; gap: 11px;">
+            <span style="width: 36px; height: 36px; border-radius: 50%; background: #E7F7EC; color: #1B8A4F; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px;">PŠ</span>
+            <span style="font-size: 13px; font-weight: 700; line-height: 1.35;">Peter Š.<br><span style="font-weight: 600; color: #9AA69D;">Prešov · 2 deti</span></span>
+          </div>
+        </div>
+      </div>
+      <div style="height: 880px; display: flex; flex-direction: column; gap: 20px;">
+        <div style="background: #FFFFFF; color: #0E2617; border-radius: 26px; padding: 26px; box-shadow: 0 6px 22px rgba(14,38,23,.06); display: flex; flex-direction: column; gap: 14px;">
+          <div style="color: #1B8A4F; font-size: 14px; letter-spacing: .12em;">★★★★★</div>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #3E5346;">„Dvaja dospelí, dve deti, štyri názory. Appka z toho vyrobí jednu večeru a jeden nákup — a nič nevyhodíme.“</p>
+          <div style="display: flex; align-items: center; gap: 11px;">
+            <span style="width: 36px; height: 36px; border-radius: 50%; background: #E7F7EC; color: #1B8A4F; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px;">LP</span>
+            <span style="font-size: 13px; font-weight: 700; line-height: 1.35;">Lenka a Peter<br><span style="font-weight: 600; color: #9AA69D;">Žilina · rodina so 4 členmi</span></span>
+          </div>
+        </div>
+        <div style="position: relative; flex: 1; min-height: 200px; border-radius: 26px; overflow: hidden; background-color: #DCE8DE; background-image: url(https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=700&amp;q=70); background-size: cover; background-position: center;">
+          <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14,38,23,.02) 40%, rgba(14,38,23,.64) 100%);"></div>
+          <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 56px; height: 56px; border-radius: 50%; background: #1B8A4F; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 8px 24px rgba(0,0,0,.25);">▶</div>
+          <div style="position: absolute; left: 16px; right: 16px; bottom: 16px; display: flex; flex-direction: column; gap: 10px;">
+            <span style="background: rgba(255,255,255,.94); color: #0E2617; border-radius: 12px; padding: 8px 12px; font-size: 12.5px; font-weight: 700; line-height: 1.35;">Mesiac bez cesty do obchodu</span>
+            <span style="display: flex; align-items: center; gap: 9px;">
+              <span style="width: 30px; height: 30px; border-radius: 50%; background: #D9F27E; color: #0E2617; display: flex; align-items: center; justify-content: center; font-size: 11.5px; font-weight: 800; border: 2px solid #FFFFFF;">TB</span>
+              <span style="color: #FFFFFF; font-size: 13px; font-weight: 800;">tomas.b</span>
+            </span>
+          </div>
+        </div>
+        <div style="background: #FFFFFF; color: #0E2617; border-radius: 26px; padding: 26px; box-shadow: 0 6px 22px rgba(14,38,23,.06); display: flex; flex-direction: column; gap: 14px;">
+          <div style="color: #1B8A4F; font-size: 14px; letter-spacing: .12em;">★★★★★</div>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #3E5346;">„Laktóza už nie je problém. Náhrady naozaj chutia rovnako.“</p>
+          <div style="display: flex; align-items: center; gap: 11px;">
+            <span style="width: 36px; height: 36px; border-radius: 50%; background: #E7F7EC; color: #1B8A4F; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px;">KB</span>
+            <span style="font-size: 13px; font-weight: 700; line-height: 1.35;">Katka B.<br><span style="font-weight: 600; color: #9AA69D;">Nitra · bez laktózy</span></span>
+          </div>
+        </div>
+      </div>
+      <div style="height: 880px; display: flex; flex-direction: column; gap: 20px;">
+        <div style="background: #FFFFFF; border-radius: 26px; padding: 26px; box-shadow: 0 6px 22px rgba(14,38,23,.06); display: flex; flex-direction: column; gap: 16px;">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <span style="font-size: 40px; font-weight: 800; letter-spacing: -.04em; color: #0E2617;">4,8</span>
+            <span>
+              <span style="display: block; color: #1B8A4F; font-size: 14px; letter-spacing: .12em;">★★★★★</span>
+              <span style="display: block; font-size: 13px; font-weight: 600; color: #9AA69D; margin-top: 3px;">1 240 recenzií</span>
+            </span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 9px;">
+            <span style="background: #0E2617; color: #FFFFFF; border-radius: 14px; padding: 13px 16px; font-size: 13.5px; font-weight: 700; display: flex; justify-content: space-between; align-items: center;">App Store<span style="color: #D9F27E;">↓</span></span>
+            <span style="background: #0E2617; color: #FFFFFF; border-radius: 14px; padding: 13px 16px; font-size: 13.5px; font-weight: 700; display: flex; justify-content: space-between; align-items: center;">Google Play<span style="color: #D9F27E;">↓</span></span>
+          </div>
+        </div>
+        <div style="position: relative; flex: 1; min-height: 200px; border-radius: 26px; overflow: hidden; background-color: #DCE8DE; background-image: url(https://images.unsplash.com/photo-1529042410759-befb1204b468?w=700&amp;q=70); background-size: cover; background-position: center;">
+          <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14,38,23,.02) 40%, rgba(14,38,23,.64) 100%);"></div>
+          <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 56px; height: 56px; border-radius: 50%; background: #1B8A4F; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 8px 24px rgba(0,0,0,.25);">▶</div>
+          <div style="position: absolute; left: 16px; right: 16px; bottom: 16px; display: flex; flex-direction: column; gap: 10px;">
+            <span style="background: rgba(255,255,255,.94); color: #0E2617; border-radius: 12px; padding: 8px 12px; font-size: 12.5px; font-weight: 700; line-height: 1.35;">Ako nakupujem podľa receptov</span>
+            <span style="display: flex; align-items: center; gap: 9px;">
+              <span style="width: 30px; height: 30px; border-radius: 50%; background: #D9F27E; color: #0E2617; display: flex; align-items: center; justify-content: center; font-size: 11.5px; font-weight: 800; border: 2px solid #FFFFFF;">ZK</span>
+              <span style="color: #FFFFFF; font-size: 13px; font-weight: 800;">zuzana.k</span>
+            </span>
+          </div>
+        </div>
+        <div style="background: #FFFFFF; color: #0E2617; border-radius: 26px; padding: 26px; box-shadow: 0 6px 22px rgba(14,38,23,.06); display: flex; flex-direction: column; gap: 14px;">
+          <div style="color: #1B8A4F; font-size: 14px; letter-spacing: .12em;">★★★★★</div>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #3E5346;">„Bývam sám a nakupovanie som nesnášal. Teraz mi príde presne toľko, koľko zjem.“</p>
+          <div style="display: flex; align-items: center; gap: 11px;">
+            <span style="width: 36px; height: 36px; border-radius: 50%; background: #E7F7EC; color: #1B8A4F; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px;">TB</span>
+            <span style="font-size: 13px; font-weight: 700; line-height: 1.35;">Tomáš B.<br><span style="font-weight: 600; color: #9AA69D;">Nitra · varí pre jedného</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<sc-if value="{{ showPricing }}" hint-placeholder-val="{{ true }}">
+<section id="cennik" style="max-width: 1200px; margin: 0 auto; padding: 0 28px 130px; padding-top: 130px">
+  <div style="text-align: center; max-width: 600px; margin: 0 auto 44px;">
+    <h2 style="font-weight: 800; font-size: clamp(32px, 3.6vw, 44px); line-height: 1.05; letter-spacing: -.035em; margin: 0;">Lacnejšie ako jedna objednaná pizza.</h2>
+    <div style="display: inline-flex; align-items: center; gap: 6px; background: #FFFFFF; border-radius: 999px; padding: 6px; margin-top: 24px; box-shadow: 0 6px 20px rgba(14,38,23,.07);">
+      <button type="button" onClick="{{ setMonthly }}" style="border: none; border-radius: 999px; padding: 11px 20px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: inherit; background: {{ monthlyBg }}; color: {{ monthlyFg }};">Mesačne</button>
+      <button type="button" onClick="{{ setAnnual }}" style="border: none; border-radius: 999px; padding: 11px 20px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: inherit; background: {{ annualBg }}; color: {{ annualFg }};">Ročne · −20 %</button>
+    </div>
+  </div>
+  <div style="display: grid; grid-template-columns: 1fr 1.12fr; gap: 24px; max-width: 920px; margin: 0 auto;">
+    <div style="background: #FFFFFF; border-radius: 30px; padding: 36px; box-shadow: 0 8px 28px rgba(14,38,23,.06); display: flex; flex-direction: column; gap: 20px;">
+      <div>
+        <h3 style="font-weight: 800; font-size: 24px; margin: 0; letter-spacing: -.025em;">Základ</h3>
+        <p style="margin: 6px 0 0; font-size: 14.5px; color: #9AA69D; font-weight: 600;">Na vyskúšanie.</p>
+      </div>
+      <div style="font-weight: 800; font-size: 46px; line-height: 1; letter-spacing: -.035em;">0 €</div>
+      <div style="display: flex; flex-direction: column; gap: 11px; font-size: 15px; color: #3E5346;">
+        <span style="display: flex; gap: 10px;"><strong style="color: #1B8A4F;">✓</strong> 3 swipy denne</span>
+        <span style="display: flex; gap: 10px;"><strong style="color: #1B8A4F;">✓</strong> Základné alergény</span>
+        <span style="display: flex; gap: 10px;"><strong style="color: #1B8A4F;">✓</strong> Nákupný zoznam</span>
+        <span style="display: flex; gap: 10px; color: #B4BEB7;"><strong>—</strong> Bez špajze a objednávky</span>
+      </div>
+      <a href="#waitlist" style="margin-top: auto; background: #F1EDE4; color: #0E2617; border-radius: 999px; padding: 15px; text-align: center; font-size: 15px; font-weight: 700;" style-hover="background: #0E2617; color: #FFFFFF;">Začať zadarmo</a>
+    </div>
+    <div style="background: #0E2617; color: #FFFFFF; border-radius: 30px; padding: 36px; box-shadow: 0 16px 44px rgba(14,38,23,.2); display: flex; flex-direction: column; gap: 20px; position: relative;">
+      <span style="position: absolute; top: 26px; right: 30px; background: #D9F27E; color: #0E2617; border-radius: 999px; padding: 6px 14px; font-size: 12px; font-weight: 800;">Najčastejšia voľba</span>
+      <div>
+        <h3 style="font-weight: 800; font-size: 24px; margin: 0; letter-spacing: -.025em;">MĽASK Pro</h3>
+        <p style="margin: 6px 0 0; font-size: 14.5px; color: #9FB0A4; font-weight: 600;">Recept → košík → kuriér.</p>
+      </div>
+      <div style="display: flex; align-items: baseline; gap: 10px;">
+        <span style="font-weight: 800; font-size: 46px; line-height: 1; letter-spacing: -.035em; color: #D9F27E;">{{ proPrice }}</span>
+        <span style="font-size: 14.5px; font-weight: 600; color: #9FB0A4;">{{ proPeriod }}</span>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 11px 20px; font-size: 15px;">
+        <span style="display: flex; gap: 10px;"><strong style="color: #D9F27E;">✓</strong> Neobmedzené swipy</span>
+        <span style="display: flex; gap: 10px;"><strong style="color: #D9F27E;">✓</strong> Náhrady alergénov</span>
+        <span style="display: flex; gap: 10px;"><strong style="color: #D9F27E;">✓</strong> Špajza a auto-odpočet</span>
+        <span style="display: flex; gap: 10px;"><strong style="color: #D9F27E;">✓</strong> Objednávka jedným klikom</span>
+        <span style="display: flex; gap: 10px;"><strong style="color: #D9F27E;">✓</strong> Profil domácnosti</span>
+        <span style="display: flex; gap: 10px;"><strong style="color: #D9F27E;">✓</strong> Porovnanie cien</span>
+      </div>
+      <a href="#waitlist" style="margin-top: auto; background: #D9F27E; color: #0E2617; border-radius: 999px; padding: 16px; text-align: center; font-size: 15.5px; font-weight: 800;" style-hover="background: #FF6B3D; color: #FFFFFF;">14 dní zadarmo</a>
+      <p style="margin: -8px 0 0; font-size: 12.5px; color: #7F8F84; text-align: center;">Bez karty. Zrušíš dvomi klikmi.</p>
+    </div>
+  </div>
+</section>
+</sc-if>
+
+<section id="faq" style="max-width: 860px; margin: 0 auto; padding: 0 28px 120px;">
+  <h2 style="font-weight: 800; font-size: clamp(30px, 3.2vw, 40px); line-height: 1.05; letter-spacing: -.035em; margin: 0 0 30px; text-align: center;">Časté otázky</h2>
+  <div style="display: flex; flex-direction: column; gap: 12px;">
+    <sc-for list="{{ faq }}" as="item" hint-placeholder-count="5">
+      <div style="background: #FFFFFF; border-radius: 22px; padding: 4px 26px; box-shadow: 0 4px 18px rgba(14,38,23,.05);">
+        <button type="button" onClick="{{ item.toggle }}" style="width: 100%; background: transparent; border: none; cursor: pointer; font-family: inherit; text-align: left; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; gap: 20px; color: #0E2617;">
+          <span style="font-weight: 700; font-size: 17.5px; letter-spacing: -.015em;">{{ item.q }}</span>
+          <span style="font-size: 20px; font-weight: 700; color: #1B8A4F; min-width: 22px; text-align: right;">{{ item.sign }}</span>
+        </button>
+        <sc-if value="{{ item.open }}" hint-placeholder-val="{{ false }}">
+          <p style="margin: -4px 0 22px; font-size: 16px; line-height: 1.6; color: #4A5A4F;">{{ item.a }}</p>
+        </sc-if>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<section id="waitlist" style="padding: 0 20px 30px;">
+  <div style="max-width: 1200px; margin: 0 auto; background: #1B8A4F; border-radius: 48px; overflow: hidden; position: relative;">
+    <div style="position: absolute; left: -140px; bottom: -180px; width: 460px; height: 460px; border-radius: 50%; background: rgba(217,242,126,.14);"></div>
+    <div style="position: absolute; right: 40px; top: -120px; width: 300px; height: 300px; border-radius: 50%; background: rgba(255,255,255,.1);"></div>
+    <div style="position: relative; padding: 86px 60px; display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center;">
+      <div style="color: #FFFFFF;">
+        <span style="display: inline-flex; align-items: center; gap: 9px; background: rgba(217,242,126,.16); color: #D9F27E; border-radius: 999px; padding: 8px 15px; font-size: 12.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;">Spustenie jeseň 2026 · SK &amp; CZ</span>
+        <h2 style="font-weight: 800; font-size: clamp(38px, 4.6vw, 60px); line-height: 1.02; letter-spacing: -.038em; margin: 22px 0 0;">Dnes večer už vieš,<br>čo varíš. A nemusíš<br><span style="color: #D9F27E;">nikam ísť.</span></h2>
+        <p style="font-size: 18.5px; line-height: 1.6; color: #DDF0E4; margin: 20px 0 0; max-width: 420px;">Zaregistruj sa a prvých 14 dní máš Pro zadarmo — bez karty.</p>
+        <div style="display: flex; align-items: center; gap: 8px; background: #FFFFFF; border-radius: 999px; padding: 8px 8px 8px 22px; margin-top: 30px; max-width: 480px;">
+          <input type="email" placeholder="tvoj@email.sk" style="flex: 1; min-width: 0; border: none; background: transparent; font-family: inherit; font-size: 15.5px; font-weight: 600; color: #0E2617; outline: none;">
+          <button type="button" style="border: none; cursor: pointer; font-family: inherit; background: #1B8A4F; color: #FFFFFF; border-radius: 999px; padding: 15px 26px; font-size: 15px; font-weight: 800; white-space: nowrap; transition: background .2s;" style-hover="background: #FF6B3D;">Chcem to skúsiť</button>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 18px; margin-top: 22px; font-size: 13.5px; font-weight: 600; color: #C8E4D4;">
+          <span>Bez karty</span><span>·</span><span>Zrušíš dvomi klikmi</span><span>·</span><span>4,8 ★ od 1 240 ľudí</span>
+        </div>
+      </div>
+
+      <div style="position: relative; height: 400px;">
+        <div style="position: absolute; left: 4%; top: 18px; width: 200px; height: 250px; border-radius: 26px; background-image: url(https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=600&amp;q=70); background-size: cover; background-position: center; transform: rotate(-8deg); box-shadow: 0 22px 50px rgba(0,0,0,.32);"></div>
+        <div style="position: absolute; left: 32%; top: 96px; width: 208px; height: 262px; border-radius: 26px; background-image: url(https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&amp;q=70); background-size: cover; background-position: center; transform: rotate(5deg); box-shadow: 0 22px 50px rgba(0,0,0,.32);"></div>
+        <div style="position: absolute; right: 2%; top: 8px; width: 190px; height: 238px; border-radius: 26px; background-image: url(https://images.unsplash.com/photo-1611270629569-8b357cb88da9?w=600&amp;q=70); background-size: cover; background-position: center; transform: rotate(11deg); box-shadow: 0 22px 50px rgba(0,0,0,.32);"></div>
+        <div style="position: absolute; left: 0; bottom: 26px; background: #FFFFFF; border-radius: 18px; padding: 13px 16px; box-shadow: 0 14px 34px rgba(0,0,0,.28); animation: mlask-float 6.5s ease-in-out infinite;">
+          <span style="font-size: 11.5px; font-weight: 600; color: #9AA69D;">Košík doručíme za</span>
+          <div style="font-size: 19px; font-weight: 800; color: #0E2617; margin-top: 2px;">25 minút</div>
+        </div>
+        <div style="position: absolute; right: 6%; bottom: 8px; background: #D9F27E; border-radius: 16px; padding: 11px 15px; font-size: 13px; font-weight: 800; color: #0E2617; box-shadow: 0 12px 28px rgba(0,0,0,.24); animation: mlask-float-slow 8s ease-in-out infinite;">3 recepty · 1 nákup</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer style="max-width: 1200px; margin: 0 auto; padding: 64px 28px 56px;">
+  <div style="display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px;">
+    <div>
+      <div style="display: flex; align-items: center; gap: 9px;">
+        <span style="width: 28px; height: 28px; border-radius: 50% 50% 50% 8px; background: #1B8A4F; display: block;"></span>
+        <span style="font-weight: 800; font-size: 20px; letter-spacing: -.02em;">mľask</span>
+      </div>
+      <p style="font-size: 14.5px; line-height: 1.6; margin: 14px 0 0; max-width: 280px; color: #6E7C71;">Pre ľudí, ktorí radi varia, ale nechcú každý deň vymýšľať čo — a chodiť pre to do obchodu.</p>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 10px; font-size: 14.5px;">
+      <span style="font-weight: 700;">Produkt</span>
+      <a href="#ako" style="color: #6E7C71;" style-hover="color: #1B8A4F;">Ako to funguje</a>
+      <a href="#donaska" style="color: #6E7C71;" style-hover="color: #1B8A4F;">Objednávka</a>
+      <a href="#alergie" style="color: #6E7C71;" style-hover="color: #1B8A4F;">Alergie</a>
+      <a href="#cennik" style="color: #6E7C71;" style-hover="color: #1B8A4F;">Cenník</a>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 10px; font-size: 14.5px;">
+      <span style="font-weight: 700;">Firma</span>
+      <a href="#top" style="color: #6E7C71;" style-hover="color: #1B8A4F;">O nás</a>
+      <a href="#recepty" style="color: #6E7C71;" style-hover="color: #1B8A4F;">Zdroje receptov</a>
+      <a href="#faq" style="color: #6E7C71;" style-hover="color: #1B8A4F;">Kontakt</a>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 10px; font-size: 14.5px;">
+      <span style="font-weight: 700;">Právne</span>
+      <a href="#faq" style="color: #6E7C71;" style-hover="color: #1B8A4F;">Ochrana údajov</a>
+      <a href="#faq" style="color: #6E7C71;" style-hover="color: #1B8A4F;">Podmienky</a>
+      <a href="#faq" style="color: #6E7C71;" style-hover="color: #1B8A4F;">Cookies</a>
+    </div>
+  </div>
+  <div style="margin-top: 44px; padding-top: 24px; border-top: 1.5px solid #EFEADF; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 13px; color: #9AA69D;">
+    <span>© 2026 MĽASK s.r.o. · Bratislava</span>
+    <span>Recepty patria ich autorom. Vždy odkazujeme na originál.</span>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showPricing&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Obsah&quot;},&quot;annualDefault&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Cenník&quot;},&quot;demoAutoplay&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Demo&quot;}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const base = [
+      { name: 'Kokosové kuracie curry', time: '32 min', diet: 'bez laktózy', cuisine: 'ázijská', pantry: '6 z 9 surovín máš doma', img: 'https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=800&q=70' },
+      { name: 'Cestoviny cacio e pepe', time: '18 min', diet: 'vegetariánske', cuisine: 'talianska', pantry: '4 z 5 surovín máš doma', img: 'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=800&q=70' },
+      { name: 'Šošovicový guláš', time: '45 min', diet: 'bez lepku', cuisine: 'domáca', pantry: '5 z 8 surovín máš doma', img: 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800&q=70' },
+      { name: 'Losos s fenklom', time: '28 min', diet: 'low carb', cuisine: 'severská', pantry: '3 z 7 surovín máš doma', img: 'https://images.unsplash.com/photo-1560717845-968823efbee1?w=800&q=70' },
+      { name: 'Chilli sin carne', time: '35 min', diet: 'vegán', cuisine: 'mexická', pantry: '6 z 8 surovín máš doma', img: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800&q=70' },
+      { name: 'Kuracie tikka masala', time: '40 min', diet: 'bez lepku', cuisine: 'indická', pantry: '5 z 10 surovín máš doma', img: 'https://images.unsplash.com/photo-1611270629569-8b357cb88da9?w=800&q=70' }
+    ];
+    this.dishes = [];
+    for (let r = 0; r < 3; r++) base.forEach(d => this.dishes.push(d));
+
+    const recipes = [
+      { name: 'Kuracia bowl misa', meta: '25 min · vysoký proteín', img: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=70' },
+      { name: 'Šalát s cícerom', meta: '15 min · vegán', img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&q=70' },
+      { name: 'Losos s fenklom', meta: '28 min · bez lepku', img: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=600&q=70' },
+      { name: 'Kuracie tikka masala', meta: '40 min · indická', img: 'https://images.unsplash.com/photo-1611270629569-8b357cb88da9?w=600&q=70' },
+      { name: 'Kokosové curry', meta: '32 min · bez laktózy', img: 'https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=600&q=70' },
+      { name: 'Cestoviny s pestom', meta: '20 min · vegetariánske', img: 'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=600&q=70' }
+    ];
+    this.recipeRail = recipes.concat(recipes);
+
+    this.stepData = [
+      { title: 'Povieš, kto si', body: 'Onboarding za 90 sekúnd: alergie, čas, koľko vás je pri stole.' },
+      { title: 'Vyberieš si recept swipom', body: 'Desať kariet, päť sekúnd. AI vyberie jedlá, na ktoré máš dnes chuť.' },
+      { title: 'Košík sa naplní sám', body: 'Odpočítame špajzu, spárujeme suroviny s produktami a porovnáme ceny.' },
+      { title: 'Klikneš zaplatiť', body: 'Kuriér je u teba do 40 minút. Do obchodu si nešiel.' }
+    ];
+
+    this.allergenList = [
+      { key: 'lepok', label: 'bez lepku' },
+      { key: 'laktoza', label: 'bez laktózy' },
+      { key: 'orechy', label: 'orechy' },
+      { key: 'soja', label: 'sója' }
+    ];
+    this.recipeIngredients = [
+      { name: 'Pšeničné penne', qty: '250 g', tag: 'lepok', alt: 'Kukuričné penne' },
+      { name: 'Smotana 33 %', qty: '200 ml', tag: 'laktoza', alt: 'Ovsená smotana' },
+      { name: 'Parmezán', qty: '60 g', tag: 'laktoza', alt: 'Kvasnicové vločky' },
+      { name: 'Piniové oriešky', qty: '30 g', tag: 'orechy', alt: 'Slnečnicové semienka' },
+      { name: 'Sójová omáčka', qty: '1 PL', tag: 'soja', alt: 'Kokosové aminá' },
+      { name: 'Kurací prsník', qty: '300 g', tag: null },
+      { name: 'Cesnak', qty: '2 strúčiky', tag: null }
+    ];
+
+    this.state = {
+      idx: 0, liked: 0, exiting: false, lastDir: 1,
+      hint: 'Vľavo nie, vpravo áno.',
+      annual: props.annualDefault !== false,
+      open: 0,
+      step: 0,
+      diet: { lepok: true, laktoza: false, orechy: false, soja: false }
+    };
+  }
+
+  componentDidMount() {
+    if (this.props.demoAutoplay !== false) {
+      this.timer = setInterval(() => this.swipe(Math.random() > 0.4), 3400);
+    }
+    this.startSteps();
+  }
+  componentWillUnmount() { clearInterval(this.timer); clearInterval(this.stepTimer); clearTimeout(this.exitTimer); }
+  stop() { if (this.timer) { clearInterval(this.timer); this.timer = null; } }
+  startSteps() {
+    clearInterval(this.stepTimer);
+    this.stepTimer = setInterval(() => this.setState(s => ({ step: (s.step + 1) % 4 })), 5000);
+  }
+
+  swipe(liked) {
+    if (this.state.exiting) return;
+    const dir = liked ? 1 : -1;
+    this.setState({ exiting: true, lastDir: dir, hint: liked ? 'Uložené do dnešného výberu.' : 'Rozumieme, dnes nie.' });
+    this.exitTimer = setTimeout(() => {
+      this.setState(s => {
+        const next = s.idx + 1;
+        return {
+          idx: next >= this.dishes.length - 3 ? 0 : next,
+          liked: liked ? s.liked + 1 : s.liked,
+          exiting: false
+        };
+      });
+    }, 560);
+  }
+
+  renderVals() {
+    const s = this.state;
+    const fling = 'translate(' + (s.lastDir * 480) + 'px, 40px) rotate(' + (s.lastDir * 15) + 'deg)';
+    const deck = this.dishes.map((d, i) => {
+      const rel = i - s.idx;
+      let transform = 'translateY(-18px)', opacity = 0, z = 1, transition = 'none', vis = 'hidden';
+      if (rel === -1) {
+        transform = fling; opacity = 0; z = 12; vis = 'visible';
+      } else if (rel === 0 && s.exiting) {
+        transform = fling; opacity = 0; z = 12; vis = 'visible';
+        transition = 'transform .56s cubic-bezier(.3,.7,.3,1), opacity .5s ease .1s';
+      } else if (rel >= 0 && rel <= 2) {
+        transform = 'translateY(' + (rel * -9) + 'px)';
+        opacity = rel === 2 ? 0.45 : 1;
+        z = 10 - rel; vis = 'visible';
+      }
+      return Object.assign({}, d, {
+        transform: transform, opacity: opacity, z: z, transition: transition, vis: vis,
+        stampText: s.lastDir === 1 ? 'MŇAM' : 'DNES NIE',
+        stampBg: s.lastDir === 1 ? '#1B8A4F' : '#FF6B3D',
+        stampOpacity: (rel === 0 && s.exiting) || rel === -1 ? 1 : 0
+      });
+    });
+
+    const steps = this.stepData.map((st, i) => {
+      const on = s.step === i;
+      return {
+        n: i + 1, title: st.title, body: st.body, active: on,
+        bg: on ? '#0E2617' : '#F7F4EC',
+        fg: on ? '#FFFFFF' : '#0E2617',
+        bodyFg: on ? '#B9C7BC' : '#6E7C71',
+        numBg: on ? '#D9F27E' : '#FFFFFF',
+        trackBg: on ? 'rgba(255,255,255,.16)' : '#E7E2D6',
+        select: () => { this.setState({ step: i }); this.startSteps(); }
+      };
+    });
+
+    const allergens = this.allergenList.map(a => {
+      const on = !!s.diet[a.key];
+      return {
+        label: a.label,
+        bg: on ? '#0E2617' : '#F7F4EC',
+        fg: on ? '#FFFFFF' : '#0E2617',
+        boxBg: on ? '#D9F27E' : '#FFFFFF',
+        boxFg: '#0E2617',
+        mark: on ? '✓' : '',
+        toggle: () => this.setState(st => {
+          const d = Object.assign({}, st.diet);
+          d[a.key] = !d[a.key];
+          return { diet: d };
+        })
+      };
+    });
+
+    let swaps = 0;
+    const ingredients = this.recipeIngredients.map(ing => {
+      const swapped = ing.tag && s.diet[ing.tag];
+      if (swapped) swaps++;
+      return {
+        name: swapped ? ing.name : ing.name,
+        right: swapped ? '→ ' + ing.alt : ing.qty,
+        bg: swapped ? '#D9F27E' : '#F7F4EC',
+        deco: swapped ? 'line-through' : 'none',
+        nameColor: swapped ? '#6C7A32' : '#0E2617',
+        rightColor: swapped ? '#0E2617' : '#9AA69D'
+      };
+    });
+
+    const faqData = [
+      { q: 'Odkiaľ berete recepty?', a: 'Z overených slovenských a českých kuchárskych webov. AI ich len číta a rozkladá na suroviny, gramáže a postup — nevymýšľa jedlá. Pri každom recepte je odkaz na originál a jeho autora.' },
+      { q: 'Ako funguje automatická objednávka?', a: 'Každú surovinu spárujeme s konkrétnym produktom v sortimente donáškovej služby, odpočítame špajzu a naplníme košík. Ty potvrdíš platbu, objednávku doručí kuriér Woltu, Bolt Food alebo Košíka.' },
+      { q: 'Ako viem, že náhrada pri alergii funguje?', a: 'Náhrady vyberáme podľa kuchárskej funkcie suroviny — či viaže, zahusťuje alebo dodáva tuk — a overujeme ich spätnou väzbou od ľudí, ktorí recept naozaj uvarili.' },
+      { q: 'Musím používať donáškovú službu?', a: 'Nie. V Základe dostaneš nákupný zoznam do obchodu. Automatický košík je pohodlie navyše, nie podmienka.' },
+      { q: 'Musím špajzu vypĺňať ručne?', a: 'Nie. Nákup cez MĽASK sa zapíše sám a suroviny sa odpočítajú, keď recept označíš ako uvarený.' },
+      { q: 'Čo ak mi appka nesadne?', a: '14 dní máš Pro zadarmo a bez karty. Skúšobná verzia jednoducho skončí a nič sa ti nestrhne.' }
+    ];
+    const faq = faqData.map((f, i) => ({
+      q: f.q, a: f.a, open: s.open === i, sign: s.open === i ? '−' : '+',
+      toggle: () => this.setState(st => ({ open: st.open === i ? -1 : i }))
+    }));
+
+    return {
+      deck,
+      recipeRail: this.recipeRail,
+      allergens: allergens,
+      ingredients: ingredients,
+      swapCount: swaps === 0 ? '0' : swaps + '×',
+      swapNote: swaps === 0
+        ? 'Recept je v pôvodnej podobe.'
+        : (swaps === 1 ? 'Vymenili sme jednu surovinu' : 'Vymenili sme ' + swaps + ' suroviny') + ', chuť aj textúra zostávajú.',
+      deckCounter: s.liked + ' jedál',
+      deckHint: s.hint,
+      onLike: () => { this.stop(); this.swipe(true); },
+      onSkip: () => { this.stop(); this.swipe(false); },
+      steps,
+      isStep1: s.step === 0, isStep2: s.step === 1, isStep3: s.step === 2, isStep4: s.step === 3,
+      faq,
+      showPricing: this.props.showPricing !== false,
+      proPrice: s.annual ? '5,90 €' : '7,40 €',
+      proPeriod: s.annual ? '/ mesiac, platené ročne' : '/ mesiac',
+      setMonthly: () => this.setState({ annual: false }),
+      setAnnual: () => this.setState({ annual: true }),
+      monthlyBg: s.annual ? 'transparent' : '#0E2617',
+      monthlyFg: s.annual ? '#3E5346' : '#FFFFFF',
+      annualBg: s.annual ? '#0E2617' : 'transparent',
+      annualFg: s.annual ? '#FFFFFF' : '#3E5346'
+    };
+  }
+}
+</script>
+</body>
+</html>
