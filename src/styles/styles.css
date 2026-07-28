@@ -210,16 +210,19 @@ a:hover { color: var(--orange); }
 /* Spiky stamp */
 .burst {
   position: absolute; z-index: 3;
-  width: 96px; height: 96px;
+  width: 142px; height: 142px;
   display: grid; place-items: center;
   pointer-events: none;
+  /* Lifts the stamp off the page behind it — at this size a flat lime shape
+     reads as part of the background. */
+  filter: drop-shadow(0 10px 22px rgba(14, 38, 23, .16));
 }
 .burst svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .burst svg path { fill: var(--lime); stroke: none; }
 .burst__t {
   position: relative;
-  font-size: 12.5px; font-weight: 800; text-transform: uppercase;
-  letter-spacing: .04em; color: var(--ink); text-align: center;
+  font-size: 17px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: .04em; line-height: 1.15; color: var(--ink); text-align: center;
   transform: rotate(-9deg);
 }
 
@@ -403,7 +406,7 @@ a:hover { color: var(--orange); }
   flex: none;
 }
 .phone--hero   { width: 318px; height: 614px; }
-.phone--steps  { width: 300px; height: 616px; border-radius: 46px; box-shadow: 0 24px 60px rgba(14,38,23,.2); }
+.phone--steps  { width: 328px; height: 664px; padding: 10px; box-shadow: 0 24px 60px rgba(14,38,23,.2); }
 .phone--recipe { width: 328px; height: 664px; padding: 10px; box-shadow: 0 26px 64px rgba(14,38,23,.2); }
 
 .phone__screen {
@@ -411,7 +414,7 @@ a:hover { color: var(--orange); }
   background: #fff; border-radius: 40px;
   overflow: hidden; display: flex; flex-direction: column;
 }
-.phone--steps  .phone__screen { border-radius: 38px; }
+.phone--steps  .phone__screen { border-radius: 39px; }
 .phone--recipe .phone__screen { border-radius: 39px; }
 .phone__screen--sand { background: var(--panel); }
 
@@ -552,7 +555,7 @@ a:hover { color: var(--orange); }
 .steps {
   background: #fff; border-radius: 40px; padding: 44px;
   box-shadow: 0 10px 40px rgba(14,38,23,.07);
-  display: grid; grid-template-columns: 1fr 320px; gap: 52px; align-items: center;
+  display: grid; grid-template-columns: 1fr 348px; gap: 52px; align-items: center;
 }
 .steps__list { display: flex; flex-direction: column; gap: 12px; }
 .steps__phone { display: flex; justify-content: center; }
@@ -592,8 +595,9 @@ a:hover { color: var(--orange); }
 /* step screens */
 .scr { display: none; height: 100%; }
 .scr.is-on { display: block; animation: fade-in .35s ease both; }
-.scr__pad { padding: 30px 20px; }
-#scr-0 .scr__pad { padding: 34px 22px; }
+/* Top padding clears the notch, which sits over the screen like on the other mockups. */
+.scr__pad { padding: 50px 20px 30px; }
+#scr-0 .scr__pad { padding: 52px 22px 34px; }
 
 .progress4 { display: flex; gap: 5px; margin-bottom: 22px; }
 .progress4 i { flex: 1; height: 5px; border-radius: var(--r-pill); background: var(--line-warm); }
@@ -858,8 +862,9 @@ a:hover { color: var(--orange); }
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
           mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
 }
+/* Hover slows the rail down instead of stopping it — see RecipeRail.tsx, which
+   retimes the running animation rather than swapping the duration here. */
 .rail__track { display: flex; width: max-content; animation: rail 52s linear infinite; }
-.rail:hover .rail__track { animation-play-state: paused; }
 
 .rcard {
   width: 292px; margin-right: 20px; background: #fff;
@@ -1092,7 +1097,7 @@ a:hover { color: var(--orange); }
   .float-card--likes { left: -28px; }
   .float-card--cart  { right: -8px; }
   .band__grid  { grid-template-columns: 1fr 360px; gap: 40px; }
-  .steps       { grid-template-columns: 1fr 300px; gap: 36px; padding: 36px; }
+  .steps       { grid-template-columns: 1fr 328px; gap: 36px; padding: 36px; }
   .section--split { grid-template-columns: 1fr 330px; gap: 44px; }
   .mosaic { grid-template-columns: repeat(2, 1fr); }
   .mosaic__col { height: auto; }
@@ -1197,6 +1202,8 @@ a:hover { color: var(--orange); }
 
 @media (max-width: 400px) {
   .phone--hero   { width: 288px; height: 578px; }
+  /* Taller than the recipe phone: its screens carry more rows under the notch. */
+  .phone--steps  { width: 292px; height: 636px; }
   .phone--recipe { width: 292px; height: 620px; }
   .deck { height: 344px; }
   .card__img { height: 210px; }

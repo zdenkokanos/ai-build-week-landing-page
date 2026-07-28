@@ -179,6 +179,14 @@ export function SwipeDeck() {
               const dragRight = rel === 0 && state.drag > 0
               const positive = rel === 0 && state.drag ? dragRight : likedDir
 
+              // The queued cards rest in the front card's exact spot, so their
+              // shadows would stack into one dark ring — and separate into a
+              // second shadow the moment the front card is dragged off it. Only
+              // the card actually at the front, plus the one being flung away,
+              // casts one.
+              const frontMoving = state.exiting || state.drag !== 0
+              if (!(rel <= 0 || (frontMoving && rel === 1))) style.boxShadow = 'none'
+
               return (
                 <div className="card" key={i} style={style} aria-hidden="true">
                   <div className="card__img" style={{ backgroundImage: `url(${d.img})` }}>
