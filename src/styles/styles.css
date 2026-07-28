@@ -503,25 +503,6 @@ a:hover { color: var(--orange); }
 
 .deck__hint { text-align: center; font-size: 11.5px; font-weight: 600; color: var(--ink-30); margin-top: 10px; }
 
-/* ── partners ────────────────────────────────────────────── */
-.section-partners { position: relative; padding-top: 40px; padding-bottom: 130px; }
-
-.partners {
-  background: #fff; border-radius: 30px;
-  padding: 28px 40px; box-shadow: 0 6px 26px rgba(14,38,23,.06);
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 24px 36px; flex-wrap: wrap;
-}
-.partners__label { font-size: 15px; font-weight: 700; color: var(--ink-45); }
-.partners__logos { display: flex; align-items: center; gap: 24px 44px; flex-wrap: wrap; }
-.partners__logo { display: flex; align-items: center; justify-content: center; width: 100px; height: 48px; overflow: hidden; }
-.partners__logo img { object-fit: contain; }
-.partners__logo--wolt  img { width: 88px; height: 88px; }
-.partners__logo--bolt  img { height: 28px; width: auto; }
-.partners__logo--kosik { border-radius: 7px; }
-.partners__logo--kosik img { height: 48px; width: auto; }
-.partners__more { font-size: 14px; font-weight: 600; color: var(--ink-30); }
-
 /* ── generic section furniture ───────────────────────────── */
 .section { position: relative; padding-bottom: 130px; }
 .section--split { padding-top: 130px; display: grid; grid-template-columns: 1fr 360px; gap: 72px; align-items: center; }
@@ -663,8 +644,7 @@ a:hover { color: var(--orange); }
 .basket__label { font-size: 12.5px; font-weight: 700; color: var(--ink-30); }
 .basket__row { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; }
 .basket__row--dim { opacity: .5; }
-.basket__logo { width: 62px; height: 20px; display: flex; align-items: center; }
-.basket__logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.basket__store { font-size: 13px; font-weight: 700; color: var(--ink-70); }
 .basket__price { font-size: 17px; font-weight: 800; }
 .basket__price--sm { font-size: 15px; font-weight: 700; }
 
@@ -731,18 +711,6 @@ a:hover { color: var(--orange); }
 .order-card__sum { font-size: 24px; font-weight: 800; letter-spacing: -.02em; }
 .order-card .scr__cta { margin-top: 14px; padding: 15px; font-size: 15px; }
 
-.couriers {
-  background: rgba(255,255,255,.14); border-radius: 24px;
-  padding: 20px 24px; display: flex; align-items: center; justify-content: space-between;
-  gap: 16px; flex-wrap: wrap;
-}
-.couriers__label { font-size: 13px; font-weight: 700; color: #fff; }
-.couriers__logos { display: flex; align-items: center; gap: 20px; }
-.couriers__logo { width: 70px; height: 42px; display: flex; align-items: center; }
-.couriers__logo img { width: 100%; height: auto; object-fit: contain; }
-.couriers__logo--wolt { width: 74px; overflow: hidden; justify-content: center; }
-.couriers__logo--wolt img { width: 74px; height: 74px; }
-.couriers__logo--kosik { border-radius: 6px; overflow: hidden; }
 
 /* ── allergens ───────────────────────────────────────────── */
 .allergen-card {
@@ -946,21 +914,10 @@ a:hover { color: var(--orange); }
 }
 .store__dl { color: var(--lime); }
 
-/* ── pricing ─────────────────────────────────────────────── */
-.switch {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: #fff; border-radius: var(--r-pill); padding: 6px;
-  margin-top: 24px; box-shadow: var(--shadow-xs);
-}
-.switch__btn {
-  border: none; border-radius: var(--r-pill); padding: 11px 20px;
-  font-size: 14px; font-weight: 700; cursor: pointer;
-  background: transparent; color: var(--ink-70);
-  transition: background .2s ease, color .2s ease;
-}
-.switch__btn.is-on { background: var(--ink); color: #fff; }
-
+/* ── free / sign-in ──────────────────────────────────────── */
 .plans { position: relative; display: grid; grid-template-columns: 1fr 1.12fr; gap: 24px; max-width: 920px; margin: 0 auto; }
+/* One card, held to a readable width rather than stretched across the shell. */
+.plans--single { grid-template-columns: minmax(0, 560px); justify-content: center; }
 
 .plan {
   background: #fff; border-radius: 30px; padding: 36px;
@@ -980,7 +937,6 @@ a:hover { color: var(--orange); }
 .plan__sub--on-ink { color: #9FB0A4; }
 .plan__price { font-weight: 800; font-size: 46px; line-height: 1; letter-spacing: -.035em; display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px; }
 .plan__price--lime { color: var(--lime); }
-.plan__period { font-size: 14.5px; font-weight: 600; color: #9FB0A4; letter-spacing: 0; }
 
 .plan__feats { display: flex; flex-direction: column; gap: 11px; font-size: 15px; color: var(--ink-70); }
 .plan__feats--two { display: grid; grid-template-columns: 1fr 1fr; gap: 11px 20px; color: #fff; }
@@ -1024,27 +980,7 @@ a:hover { color: var(--orange); }
 .waitlist__title { font-weight: 800; font-size: clamp(34px, 4.6vw, 60px); line-height: 1.02; letter-spacing: -.038em; margin-top: 22px; }
 .waitlist__lede { font-size: 18.5px; line-height: 1.6; color: #DDF0E4; margin-top: 20px; max-width: 420px; }
 
-.signup {
-  display: flex; align-items: center; gap: 8px;
-  background: #fff; border-radius: var(--r-pill);
-  padding: 8px 8px 8px 22px; margin-top: 30px; max-width: 480px;
-}
-.signup__input {
-  flex: 1; min-width: 0; border: none; background: transparent;
-  font: inherit; font-size: 15.5px; font-weight: 600; color: var(--ink); outline: none;
-}
-.signup__input::placeholder { color: var(--ink-30); }
-.signup__btn {
-  border: none; cursor: pointer; background: var(--green); color: #fff;
-  border-radius: var(--r-pill); padding: 15px 26px;
-  font-size: 15px; font-weight: 800; white-space: nowrap;
-  transition: background .2s ease;
-}
-.signup__btn:hover { background: var(--orange); }
-.signup:focus-within { box-shadow: 0 0 0 3px rgba(217,242,126,.65); }
-
-.signup__msg { min-height: 20px; margin-top: 10px; font-size: 13.5px; font-weight: 700; color: var(--lime); }
-.signup__msg.is-error { color: #FFD9CC; }
+.waitlist__cta { margin-top: 30px; }
 
 .waitlist__fine {
   display: flex; flex-wrap: wrap; gap: 18px; margin-top: 22px;
@@ -1139,7 +1075,6 @@ a:hover { color: var(--orange); }
   .section, .section--split, .section--pricing { padding-bottom: 90px; }
   .section--split { padding-top: 90px; grid-template-columns: 1fr; gap: 56px; }
   .section--pricing { padding-top: 90px; }
-  .section-partners { padding-bottom: 90px; }
   .section__title--left, .section__lede--left { text-align: left; }
 
   /* Stacked: the steps lead and the phone follows them, as in the DOM. */
@@ -1165,8 +1100,6 @@ a:hover { color: var(--orange); }
 @media (max-width: 640px) {
   :root { --gutter: 18px; }
 
-  .partners { padding: 22px; justify-content: center; text-align: center; }
-  .partners__logos { justify-content: center; gap: 20px 28px; }
 
   .steps { padding: 24px; border-radius: 30px; }
   .step { padding: 18px; gap: 14px; }
@@ -1188,9 +1121,7 @@ a:hover { color: var(--orange); }
   .waitlist__grid { padding: 52px 24px; }
   .waitlist__art { height: 300px; transform: scale(.8); transform-origin: center; }
 
-  .signup { flex-direction: column; align-items: stretch; gap: 10px; border-radius: 26px; padding: 14px; }
-  .signup__input { padding: 8px 10px; text-align: center; }
-  .signup__btn { width: 100%; }
+  .waitlist__cta { display: block; text-align: center; }
 
   .site-footer__grid { grid-template-columns: 1fr; }
   .site-footer__bar { flex-direction: column; }

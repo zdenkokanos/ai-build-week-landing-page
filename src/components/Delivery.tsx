@@ -97,21 +97,6 @@ export function Delivery() {
             </div>
             <div className="scr__cta scr__cta--green">Zaplatiť a doručiť</div>
           </div>
-
-          <div className="couriers">
-            <span className="couriers__label">Doručí ti</span>
-            <span className="couriers__logos">
-              <span className="couriers__logo couriers__logo--wolt">
-                <img src="/assets/wolt.png" alt="Wolt" loading="lazy" />
-              </span>
-              <span className="couriers__logo">
-                <img src="/assets/bolt.png" alt="Bolt Food" loading="lazy" />
-              </span>
-              <span className="couriers__logo couriers__logo--kosik">
-                <img src="/assets/kosik.png" alt="Košík" loading="lazy" />
-              </span>
-            </span>
-          </div>
         </div>
       </div>
     </section>

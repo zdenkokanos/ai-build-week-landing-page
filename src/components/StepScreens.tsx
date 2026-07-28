@@ -109,17 +109,13 @@ export function StepScreens({ current }: { current: number }) {
             </div>
           </div>
           <div className="basket">
-            <p className="basket__label">Najlacnejší košík</p>
+            <p className="basket__label">Porovnanie košíkov</p>
             <div className="basket__row">
-              <span className="basket__logo">
-                <img src="/assets/wolt.png" alt="Wolt" loading="lazy" />
-              </span>
+              <span className="basket__store">Najlacnejší</span>
               <span className="basket__price">8,98 €</span>
             </div>
             <div className="basket__row basket__row--dim">
-              <span className="basket__logo">
-                <img src="/assets/bolt.png" alt="Bolt Food" loading="lazy" />
-              </span>
+              <span className="basket__store">Ďalšia možnosť</span>
               <span className="basket__price basket__price--sm">9,60 €</span>
             </div>
           </div>
