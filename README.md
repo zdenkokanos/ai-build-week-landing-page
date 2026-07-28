@@ -59,6 +59,37 @@ legacy/                 the pre-React static page, kept for reference
 | `Footer.tsx` | footer |
 | `Decor.tsx` | hand-drawn doodle/scribble layer |
 
+### Type
+
+| role | family |
+| --- | --- |
+| headings, display numbers | `Roc Grotesk` → falls back to **Archivo** |
+| body copy, UI | **Inter** |
+| handwritten annotations | **Caveat** |
+
+Roc Grotesk is a licensed Fontfabric family, so it is not in the repo. The
+heading stack (`--font-head` in `src/styles/styles.css`) already lists it first,
+so it takes over as soon as it is available — either through an Adobe Fonts kit
+`<link>` in `index.html`, or by dropping the licensed `.woff2` files into
+`public/fonts/` and adding:
+
+```css
+@font-face {
+  font-family: 'Roc Grotesk';
+  src: url('/fonts/RocGrotesk-Medium.woff2') format('woff2');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Roc Grotesk';
+  src: url('/fonts/RocGrotesk-Bold.woff2') format('woff2');
+  font-weight: 700 800; font-style: normal; font-display: swap;
+}
+```
+
+Until then the page renders in Archivo, which shares Roc Grotesk's grotesque
+proportions and x-height, so the layout does not shift when the real family
+lands.
+
 ### Behaviour notes
 
 - **Autoplays** (swipe deck, step list) only tick while their section is on

@@ -9,19 +9,14 @@ export function Hero() {
 
       <div className="shell hero__grid">
         <div className="hero__copy">
+          {/* Sits in the open pocket between the lede and the phone, curling up
+              towards the app rather than hanging out in the page margin. */}
           <Doodle
             shape="loops"
             width={124}
             height={62}
-            className="doodle--deep doodle--margin"
-            style={{ left: '-104px', top: '88px' }}
-          />
-          <Doodle
-            shape="lines"
-            width={44}
-            height={40}
-            className="doodle--ink doodle--wide"
-            style={{ left: '534px', top: '44px' }}
+            className="doodle--deep doodle--wide"
+            style={{ right: '10px', top: '292px', transform: 'rotate(-7deg)' }}
           />
 
           <p className="pill-note">
@@ -31,6 +26,14 @@ export function Hero() {
 
           <h1 className="hero__title">
             Vyber si recept.
+            {/* Rotated to fan back into the headline it points at. */}
+            <Doodle
+              shape="lines"
+              width={44}
+              height={40}
+              className="doodle--inline doodle--wide"
+              style={{ transform: 'rotate(168deg)' }}
+            />
             <br />
             <span className="t-green">Nákup dorazí</span>
             <br />

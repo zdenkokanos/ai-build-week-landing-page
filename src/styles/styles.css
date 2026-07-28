@@ -43,6 +43,14 @@
   --r-pill: 999px;
   --shell:  1200px;
   --gutter: 28px;
+
+  /* Type. Roc Grotesk is a licensed family, so it is not shipped with the repo —
+     it is listed first and takes over wherever it is installed or self-hosted
+     (drop the @font-face block from the README into this file). Archivo is the
+     loaded fallback: same grotesque proportions and a comparable x-height, so
+     the headings keep their weight and rhythm either way. */
+  --font-head: 'Roc Grotesk', 'Archivo', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 /* ── reset ───────────────────────────────────────────────── */
@@ -54,14 +62,21 @@ body {
   margin: 0;
   background: var(--cream);
   color: var(--ink);
-  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  font-optical-sizing: auto;
 }
 
 h1, h2, h3, h4, p, figure, blockquote, ol, ul { margin: 0; }
+
+/* Headings and the display numbers that read as headings. */
+h1, h2, h3,
+.logo__word, .plan__price, .stats__n, .rating__n {
+  font-family: var(--font-head);
+}
 ol, ul { padding: 0; list-style: none; }
 img { max-width: 100%; display: block; }
 button { font: inherit; color: inherit; }
@@ -121,6 +136,14 @@ a:hover { color: var(--orange); }
   stroke-linecap: round; stroke-linejoin: round;
 }
 .doodle path.fill { fill: currentColor; stroke: none; }
+
+/* Flows with the text it annotates instead of being pinned to the section, so
+   it stays glued to the end of its line at every headline size. */
+.doodle--inline {
+  position: static; display: inline-block;
+  vertical-align: middle;
+  margin: 0 0 .16em .38em;
+}
 
 .doodle--deep  { color: var(--green-deep); }
 .doodle--green { color: var(--green); }
