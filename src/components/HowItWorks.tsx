@@ -108,6 +108,7 @@ export function HowItWorks() {
         <div className="steps__phone">
           <div className="phone phone--steps">
             <div className="phone__screen phone__screen--sand">
+              <span className="phone__notch" aria-hidden="true" />
               <StepScreens current={current} />
             </div>
           </div>

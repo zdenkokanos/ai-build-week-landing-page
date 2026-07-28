@@ -9,16 +9,6 @@ export function Hero() {
 
       <div className="shell hero__grid">
         <div className="hero__copy">
-          {/* Sits in the open pocket between the lede and the phone, curling up
-              towards the app rather than hanging out in the page margin. */}
-          <Doodle
-            shape="loops"
-            width={124}
-            height={62}
-            className="doodle--deep doodle--wide"
-            style={{ right: '10px', top: '292px', transform: 'rotate(-7deg)' }}
-          />
-
           <p className="pill-note">
             <span className="pill-note__tag">Novinka</span>
             Recepty z reálnych kuchárskych webov
