@@ -19,14 +19,14 @@ export function RecipeRail() {
 
   return (
     <section className="section-rail" id="recepty">
-      <span className="burst" style={{ right: '96px', top: '96px', transform: 'rotate(-12deg)' }} aria-hidden="true">
+      <span className="burst" style={{ right: '96px', top: '96px', transform: 'rotate(12deg)' }} aria-hidden="true">
         <svg viewBox="0 0 100 100">
           <path d="M50 0 59.8 13.3 75 6.7 76.9 23.1 93.3 25 86.7 40.2 100 50 86.7 59.8 93.3 75 76.9 76.9 75 93.3 59.8 86.7 50 100 40.2 86.7 25 93.3 23.1 76.9 6.7 75 13.3 59.8 0 50 13.3 40.2 6.7 25 23.1 23.1 25 6.7 40.2 13.3Z" />
         </svg>
         <span className="burst__t">
-          stále
+          70 000+
           <br />
-          nové
+          receptov
         </span>
       </span>
 
