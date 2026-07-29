@@ -28,6 +28,36 @@ commit. To bring a single piece of it back:
 git checkout landing-v1-full -- src/components/Pricing.tsx
 ```
 
+## Two languages
+
+The page ships in Slovak and English from one codebase. Every string lives in
+`src/i18n/sk.ts` and `src/i18n/en.ts`, both typed as the same `Copy` shape, so a
+section added to one language does not compile until the other has it too.
+Components read the current language through `useCopy()` and hold no copy of
+their own.
+
+The SK/EN switch sits in the navbar at every width. The language is picked once,
+in this order:
+
+1. `?lang=sk` / `?lang=en` in the URL
+2. the visitor's earlier choice (`mlask-lang` in `localStorage`)
+3. the browser language — Slovak or Czech opens in Slovak, anything else in
+   English
+4. Slovak
+
+To make Slovak the default for everyone regardless of browser, drop step 3 from
+`detectLang()` in `src/i18n/index.tsx`.
+
+Switching updates `<html lang>`, the `<title>` and the meta description, and
+rewrites `?lang=` so a shared link keeps the language. The English copy is a
+rewrite, not a translation: same claims and the same restraint (no partner
+brands, no pricing, Slovakia-only availability), with prices and numbers in
+English convention — `€8.98`, `4.8`, `1,240`.
+
+Anchor targets (`#ako`, `#donaska`, `#spajza`…) and the allergen keys stay
+Slovak in both languages — they are identifiers, not copy. Photography lives in
+`src/i18n/media.ts` so the two languages cannot drift to different food.
+
 ## Run locally
 
 ```bash
@@ -54,9 +84,13 @@ index.html              Vite entry — fonts, meta, #root
 src/main.tsx            React root
 src/App.tsx             section order of the page
 src/components/         one component per section
-src/data/content.ts     all copy and demo data (dishes, steps, FAQ, quotes…)
+src/i18n/types.ts       the `Copy` shape both languages must fill
+src/i18n/sk.ts          Slovak copy and demo data (dishes, steps, FAQ, quotes…)
+src/i18n/en.ts          the same, in English
+src/i18n/media.ts       image URLs and anchor hrefs shared by both languages
+src/i18n/index.tsx      LanguageProvider, useCopy(), language detection
 src/hooks/              useVisibleInterval, usePrefersReducedMotion
-src/styles/styles.css   the original stylesheet
+src/styles/app.css      the language switch; everything else is @mlask/ui
 legacy/                 the pre-React static page, kept for reference
 ```
 
@@ -65,6 +99,7 @@ legacy/                 the pre-React static page, kept for reference
 | file | section |
 | --- | --- |
 | `Header.tsx` | sticky navbar + mobile menu |
+| `LanguageSwitch.tsx` | the SK/EN pill in the navbar |
 | `Hero.tsx` / `SwipeDeck.tsx` | hero copy and the interactive swipe deck |
 | `HowItWorks.tsx` / `StepScreens.tsx` | auto-advancing 4-step tab list and its phone screens |
 | `Delivery.tsx` | green band — automatic order |
@@ -118,3 +153,6 @@ lands.
   the autoplays never start and the exit animation collapses to 60 ms.
 - The sign-in buttons in the free section and the closing CTA point at `#`: there
   is no auth yet, and nothing should look like it works when it does not.
+- The swipe deck's hint is held as a state (`idle` / `liked` / `skipped`), not as
+  a sentence, so a language switch mid-swipe redraws it instead of leaving the
+  previous language on screen.

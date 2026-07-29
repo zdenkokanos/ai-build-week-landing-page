@@ -1,5 +1,6 @@
-import { CLIPS, QUOTES, type Clip as ClipData, type Quote as QuoteData } from '../data/content'
 import { Doodle } from '@mlask/ui'
+import { useCopy } from '../i18n'
+import type { Clip as ClipData, Quote as QuoteData } from '../i18n/types'
 
 function Quote({ q }: { q: QuoteData }) {
   return (
@@ -37,14 +38,17 @@ function Clip({ c }: { c: ClipData }) {
 }
 
 export function Testimonials() {
+  const c = useCopy().testimonials
+  const { quotes, clips } = c
+
   return (
     <section className="band band--mint" id="ludia">
       <div className="shell">
         <h2 className="section__title section__title--center">
-          Ľudia, ktorí prestali stáť pred{' '}
+          {c.titleLead}{' '}
           <span className="mark mark--tight">
             <span className="mark__bg" aria-hidden="true" />
-            <span className="mark__t">chladničkou</span>
+            <span className="mark__t">{c.titleMark}</span>
           </span>
         </h2>
 
@@ -68,30 +72,30 @@ export function Testimonials() {
           />
 
           <div className="mosaic__col">
-            <Quote q={QUOTES.zuzana} />
-            <Clip c={CLIPS.lenka} />
-            <Quote q={QUOTES.ivana} />
+            <Quote q={quotes.zuzana} />
+            <Clip c={clips.lenka} />
+            <Quote q={quotes.ivana} />
           </div>
 
           <div className="mosaic__col">
-            <Clip c={CLIPS.martin} />
-            <Quote q={QUOTES.martin} />
-            <Quote q={QUOTES.peter} />
+            <Clip c={clips.martin} />
+            <Quote q={quotes.martin} />
+            <Quote q={quotes.peter} />
           </div>
 
           <div className="mosaic__col">
-            <Quote q={QUOTES.rodina} />
-            <Clip c={CLIPS.tomas} />
-            <Quote q={QUOTES.katka} />
+            <Quote q={quotes.rodina} />
+            <Clip c={clips.tomas} />
+            <Quote q={quotes.katka} />
           </div>
 
           <div className="mosaic__col">
             <div className="rating">
               <div className="rating__head">
-                <span className="rating__n">4,8</span>
+                <span className="rating__n">{c.rating.score}</span>
                 <span>
                   <span className="stars">★★★★★</span>
-                  <span className="rating__count">1 240 recenzií</span>
+                  <span className="rating__count">{c.rating.count}</span>
                 </span>
               </div>
               <div className="rating__stores">
@@ -104,8 +108,8 @@ export function Testimonials() {
               </div>
             </div>
 
-            <Clip c={CLIPS.zuzana} />
-            <Quote q={QUOTES.tomas} />
+            <Clip c={clips.zuzana} />
+            <Quote q={quotes.tomas} />
           </div>
         </div>
       </div>

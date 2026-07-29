@@ -1,31 +1,23 @@
 import { Doodle, Scribble } from '@mlask/ui'
-
-const FEATURES = [
-  'Neobmedzené swipy',
-  'Náhrady alergénov',
-  'Špajza a auto-odpočet',
-  'Objednávka jedným klikom',
-  'Profil domácnosti',
-  'Porovnanie cien',
-]
+import { useCopy } from '../i18n'
 
 /* No plans and no prices while the product is still being finished — the whole
    app is open, and the only action is signing in. */
 export function Pricing() {
+  const c = useCopy().pricing
+
   return (
     <section className="shell section section--pricing" id="zadarmo">
       <header className="section__head section__head--tight">
-        <span className="eyebrow">Zadarmo</span>
-        <h2 className="section__title">Vyskúšaj to zadarmo.</h2>
-        <p className="section__lede">
-          MĽASK je zatiaľ zadarmo — celá appka, bez karty a bez záväzku.
-        </p>
+        <span className="eyebrow">{c.eyebrow}</span>
+        <h2 className="section__title">{c.title}</h2>
+        <p className="section__lede">{c.lede}</p>
 
         <Scribble
           className="scribble--deep doodle--wide"
           style={{ right: '-118px', bottom: '10px', transform: 'rotate(7deg)' }}
         >
-          zatiaľ zadarmo
+          {c.scribble}
         </Scribble>
         <Doodle
           shape="arrow-left"
@@ -38,23 +30,23 @@ export function Pricing() {
 
       <div className="plans plans--single">
         <div className="plan plan--pro">
-          <span className="plan__flag">Celá appka</span>
+          <span className="plan__flag">{c.flag}</span>
           <div>
-            <h3 className="plan__name">MĽASK</h3>
-            <p className="plan__sub plan__sub--on-ink">Recept → košík → kuriér.</p>
+            <h3 className="plan__name">{c.planName}</h3>
+            <p className="plan__sub plan__sub--on-ink">{c.planSub}</p>
           </div>
-          <p className="plan__price plan__price--lime">Zadarmo</p>
+          <p className="plan__price plan__price--lime">{c.price}</p>
           <div className="plan__feats plan__feats--two">
-            {FEATURES.map((f) => (
+            {c.features.map((f) => (
               <span key={f}>
                 <b className="t-lime">✓</b> {f}
               </span>
             ))}
           </div>
           <a className="btn btn--lime plan__cta" href="#">
-            Prihlásiť sa
+            {c.cta}
           </a>
-          <p className="plan__fine">Bez karty. Odhlásiš sa dvomi klikmi.</p>
+          <p className="plan__fine">{c.fine}</p>
         </div>
       </div>
     </section>

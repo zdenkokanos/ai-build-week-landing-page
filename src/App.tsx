@@ -10,12 +10,15 @@ import { Pricing } from './components/Pricing'
 import { RecipeRail } from './components/RecipeRail'
 import { Testimonials } from './components/Testimonials'
 import { Waitlist } from './components/Waitlist'
+import { useCopy } from './i18n'
 
 export default function App() {
+  const c = useCopy()
+
   return (
     <>
       <a className="skip-link" href="#top">
-        Preskočiť na obsah
+        {c.skipLink}
       </a>
 
       <div className="page">

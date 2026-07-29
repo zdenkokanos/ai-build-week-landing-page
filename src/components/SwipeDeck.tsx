@@ -1,11 +1,7 @@
-import { useEffect, useRef, useState, type CSSProperties, type PointerEvent } from 'react'
-import { BASE_DISHES } from '../data/content'
+import { useEffect, useMemo, useRef, useState, type CSSProperties, type PointerEvent } from 'react'
+import { useCopy } from '../i18n'
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion'
 import { useVisibleInterval } from '../hooks/useVisibleInterval'
-
-/* The deck is built once from three passes over the dish list, so the queue
-   never runs dry while the visitor keeps swiping. */
-const DISHES = [...BASE_DISHES, ...BASE_DISHES, ...BASE_DISHES]
 
 const EXIT_MS = 560
 const EXIT_MS_REDUCED = 60
@@ -19,16 +15,26 @@ type State = {
   drag: number
 }
 
+/* The hint is kept as a state, not a string, so it follows a language switch
+   instead of freezing in whichever language it was written in. */
+type Hint = 'idle' | 'liked' | 'skipped'
+
 const INITIAL: State = { idx: 0, liked: 0, exiting: false, lastDir: 1, drag: 0 }
 
 export function SwipeDeck() {
+  const c = useCopy().deck
+
   const deckRef = useRef<HTMLDivElement>(null)
   const exitTimer = useRef<number | null>(null)
   const drag = useRef({ active: false, startX: 0, pointerId: -1 })
 
   const reduceMotion = usePrefersReducedMotion()
   const [state, setState] = useState<State>(INITIAL)
-  const [hint, setHint] = useState('Vľavo nie, vpravo áno.')
+  const [hint, setHint] = useState<Hint>('idle')
+
+  /* The deck is built from three passes over the dish list, so the queue never
+     runs dry while the visitor keeps swiping. */
+  const dishes = useMemo(() => [...c.dishes, ...c.dishes, ...c.dishes], [c.dishes])
 
   const auto = useVisibleInterval(
     deckRef,
@@ -48,7 +54,7 @@ export function SwipeDeck() {
     if (state.exiting) return
 
     setState((s) => ({ ...s, exiting: true, lastDir: liked ? 1 : -1, drag: 0 }))
-    setHint(liked ? 'Uložené do dnešného výberu.' : 'Rozumieme, dnes nie.')
+    setHint(liked ? 'liked' : 'skipped')
 
     exitTimer.current = window.setTimeout(
       () => {
@@ -56,7 +62,7 @@ export function SwipeDeck() {
           const next = s.idx + 1
           return {
             ...s,
-            idx: next >= DISHES.length - 3 ? 0 : next,
+            idx: next >= dishes.length - 3 ? 0 : next,
             liked: liked ? s.liked + 1 : s.liked,
             exiting: false,
           }
@@ -93,6 +99,7 @@ export function SwipeDeck() {
 
   const fling = `translate(${state.lastDir * 480}px, 40px) rotate(${state.lastDir * 15}deg)`
   const likedDir = state.lastDir === 1
+  const hintText = hint === 'idle' ? c.hintIdle : hint === 'liked' ? c.hintLiked : c.hintSkipped
 
   return (
     <>
@@ -101,18 +108,18 @@ export function SwipeDeck() {
           ♥
         </span>
         <span className="float-card__text">
-          <strong id="deck-counter">{state.liked} jedál</strong>
-          <span className="muted">v dnešnom výbere</span>
+          <strong id="deck-counter">{c.likes(state.liked)}</strong>
+          <span className="muted">{c.likesSub}</span>
         </span>
       </div>
 
       <div className="float-card float-card--cart">
-        <span className="float-card__label">Košík je pripravený</span>
-        <span className="float-card__price">8,98 €</span>
-        <span className="float-card__meta">Donáška · 25 min</span>
+        <span className="float-card__label">{c.cartLabel}</span>
+        <span className="float-card__price">{c.cartPrice}</span>
+        <span className="float-card__meta">{c.cartMeta}</span>
       </div>
 
-      <div className="float-card float-card--pantry">Špajza ušetrila 4,80 €</div>
+      <div className="float-card float-card--pantry">{c.pantrySaved}</div>
 
       <div className="phone phone--hero">
         <div className="phone__screen">
@@ -124,7 +131,7 @@ export function SwipeDeck() {
           </div>
 
           <div className="deck__head">
-            <span className="deck__title">Na čo máš chuť?</span>
+            <span className="deck__title">{c.title}</span>
             <span className="deck__avatar" aria-hidden="true" />
           </div>
 
@@ -133,7 +140,7 @@ export function SwipeDeck() {
             id="deck"
             ref={deckRef}
             role="group"
-            aria-label="Ukážka výberu receptov"
+            aria-label={c.ariaLabel}
             onPointerDown={onPointerDown}
             onPointerMove={onPointerMove}
             onPointerUp={onPointerEnd}
@@ -144,7 +151,7 @@ export function SwipeDeck() {
             <span className="deck__edge deck__edge--2" aria-hidden="true" />
             <span className="deck__edge deck__edge--1" aria-hidden="true" />
 
-            {DISHES.map((d, i) => {
+            {dishes.map((d, i) => {
               const rel = i - state.idx
               const style: CSSProperties = {
                 transform: 'none',
@@ -199,12 +206,12 @@ export function SwipeDeck() {
                       className={`stamp ${positive ? 'stamp--green' : 'stamp--orange'}`}
                       style={{ opacity: stampOpacity }}
                     >
-                      {positive ? 'MŇAM' : 'DNES NIE'}
+                      {positive ? c.stampYes : c.stampNo}
                     </span>
                   </div>
                   <div className="card__body">
                     <span className="card__name">{d.name}</span>
-                    <div className="card__cta">Objednať ingrediencie</div>
+                    <div className="card__cta">{c.cardCta}</div>
                     <div className="card__pantry">{d.pantry}</div>
                   </div>
                 </div>
@@ -216,7 +223,7 @@ export function SwipeDeck() {
             <button
               className="swipe-btn swipe-btn--skip"
               type="button"
-              aria-label="Dnes nie"
+              aria-label={c.skipAria}
               onClick={() => pick(false)}
             >
               ✕
@@ -224,14 +231,14 @@ export function SwipeDeck() {
             <button
               className="swipe-btn swipe-btn--like"
               type="button"
-              aria-label="Mňam"
+              aria-label={c.likeAria}
               onClick={() => pick(true)}
             >
               ♥
             </button>
           </div>
 
-          <p className="deck__hint">{hint}</p>
+          <p className="deck__hint">{hintText}</p>
         </div>
       </div>
     </>

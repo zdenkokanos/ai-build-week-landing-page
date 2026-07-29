@@ -1,14 +1,15 @@
 import { useState } from 'react'
-import { FAQ } from '../data/content'
+import { useCopy } from '../i18n'
 
 export function Faq() {
+  const c = useCopy().faq
   const [open, setOpen] = useState(0)
 
   return (
     <section className="shell shell--narrow section-faq" id="faq">
-      <h2 className="section__title section__title--center section__title--sm">Časté otázky</h2>
+      <h2 className="section__title section__title--center section__title--sm">{c.title}</h2>
       <div className="faq">
-        {FAQ.map((f, i) => {
+        {c.items.map((f, i) => {
           const on = open === i
           return (
             <div className="faq__item" key={f.q}>
