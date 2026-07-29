@@ -1,8 +1,5 @@
-import { useRef } from 'react'
-import { RECIPES } from '../data/content'
-
-/* Duplicated once so the -50% keyframe loops seamlessly. */
-const TRACK = [...RECIPES, ...RECIPES]
+import { useMemo, useRef } from 'react'
+import { useCopy } from '../i18n'
 
 /* Hovering eases the rail down rather than freezing it, so a card the visitor
    is reaching for stays reachable without the strip looking broken.
@@ -11,7 +8,11 @@ const TRACK = [...RECIPES, ...RECIPES]
 const SLOW_RATE = 0.5
 
 export function RecipeRail() {
+  const c = useCopy().rail
   const trackRef = useRef<HTMLDivElement>(null)
+
+  /* Duplicated once so the -50% keyframe loops seamlessly. */
+  const track = useMemo(() => [...c.recipes, ...c.recipes], [c.recipes])
 
   const setRate = (rate: number) => {
     trackRef.current?.getAnimations().forEach((a) => a.updatePlaybackRate(rate))
@@ -24,32 +25,27 @@ export function RecipeRail() {
           <path d="M50 0 59.8 13.3 75 6.7 76.9 23.1 93.3 25 86.7 40.2 100 50 86.7 59.8 93.3 75 76.9 76.9 75 93.3 59.8 86.7 50 100 40.2 86.7 25 93.3 23.1 76.9 6.7 75 13.3 59.8 0 50 13.3 40.2 6.7 25 23.1 23.1 25 6.7 40.2 13.3Z" />
         </svg>
         <span className="burst__t">
-          70 000+
+          {c.burstTop}
           <br />
-          receptov
+          {c.burstBottom}
         </span>
       </span>
 
       <div className="shell">
-        <span className="eyebrow eyebrow--orange">Reálne recepty</span>
-        <h2 className="section__title section__title--left section__title--wide">
-          Recepty nevymýšľame. Berieme tie, ktoré niekto naozaj uvaril.
-        </h2>
-        <p className="section__lede section__lede--left section__lede--wide">
-          AI číta overené SK a CZ kuchárske weby, recept rozloží na suroviny a gramáže a odkáže na
-          originál. Z každého vieš rovno objednať nákup.
-        </p>
+        <span className="eyebrow eyebrow--orange">{c.eyebrow}</span>
+        <h2 className="section__title section__title--left section__title--wide">{c.title}</h2>
+        <p className="section__lede section__lede--left section__lede--wide">{c.lede}</p>
       </div>
 
       <div
         className="rail"
-        aria-label="Ukážky receptov"
+        aria-label={c.ariaLabel}
         onMouseEnter={() => setRate(SLOW_RATE)}
         onMouseLeave={() => setRate(1)}
       >
         <div className="rail__track" ref={trackRef}>
-          {TRACK.map((r, i) => (
-            <div className="rcard" key={i} aria-hidden={i >= RECIPES.length ? true : undefined}>
+          {track.map((r, i) => (
+            <div className="rcard" key={i} aria-hidden={i >= c.recipes.length ? true : undefined}>
               <div className="rcard__img" style={{ backgroundImage: `url(${r.img})` }} />
               <div className="rcard__body">
                 <div>
@@ -58,10 +54,10 @@ export function RecipeRail() {
                 </div>
                 <div className="rcard__actions">
                   <a className="rcard__primary" href="#waitlist">
-                    Objednať ingrediencie
+                    {c.cardCta}
                   </a>
                   <a className="rcard__ghost" href="#waitlist">
-                    Zobraziť recept
+                    {c.cardGhost}
                   </a>
                 </div>
               </div>
@@ -72,7 +68,7 @@ export function RecipeRail() {
 
       <div className="rail__cta">
         <a className="btn btn--white" href="#waitlist">
-          Zobraziť všetky recepty
+          {c.ctaAll}
         </a>
       </div>
     </section>

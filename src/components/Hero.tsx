@@ -1,7 +1,10 @@
 import { Button, Doodle, Mark, Scribble, Tick } from '@mlask/ui'
+import { useCopy } from '../i18n'
 import { SwipeDeck } from './SwipeDeck'
 
 export function Hero() {
+  const c = useCopy().hero
+
   return (
     <section className="hero" id="top">
       <span className="hero__blob hero__blob--mint" aria-hidden="true" />
@@ -10,7 +13,7 @@ export function Hero() {
       <div className="shell hero__grid">
         <div className="hero__copy">
           <h1 className="hero__title">
-            Vyber si recept.
+            {c.titleLead}
             {/* Rotated to fan back into the headline it points at. */}
             <Doodle
               shape="lines"
@@ -20,29 +23,26 @@ export function Hero() {
               style={{ transform: 'rotate(168deg)' }}
             />
             <br />
-            <span className="t-green">Nákup dorazí</span>
+            <span className="t-green">{c.titleGreen}</span>
             <br />
-            <Mark>sám domov.</Mark>
+            <Mark>{c.titleMark}</Mark>
           </h1>
 
-          <p className="hero__lede">
-            Odswipuješ, na čo máš dnes chuť. MĽASK poskladá nákup, odpočíta čo už máš doma a zvyšok
-            objedná z donášky.
-          </p>
+          <p className="hero__lede">{c.lede}</p>
 
           <div className="hero__actions">
             <Button variant="green" size="lg" href="#waitlist">
-              Vyskúšať zadarmo
+              {c.ctaPrimary}
             </Button>
             <Button variant="white" size="lg" href="#ako">
-              Ako to funguje
+              {c.ctaSecondary}
             </Button>
 
             <Scribble
               className="scribble--deep scribble--margin"
               style={{ left: '-100px', bottom: '-4px', transform: 'rotate(-9deg)' }}
             >
-              začni tu
+              {c.scribble}
             </Scribble>
             <Doodle
               shape="arrow-right"
@@ -54,15 +54,11 @@ export function Hero() {
           </div>
 
           <ul className="hero__proof">
-            <li>
-              <Tick /> Bez karty
-            </li>
-            <li>
-              <Tick /> Suroviny do 40 minút
-            </li>
-            <li>
-              <Tick /> Dostupné na Slovensku
-            </li>
+            {c.proof.map((p) => (
+              <li key={p}>
+                <Tick /> {p}
+              </li>
+            ))}
           </ul>
         </div>
 

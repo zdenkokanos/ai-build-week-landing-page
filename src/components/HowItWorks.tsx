@@ -1,11 +1,14 @@
 import { useRef, useState, type KeyboardEvent } from 'react'
-import { STEPS } from '../data/content'
+import { useCopy } from '../i18n'
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion'
 import { useVisibleInterval } from '../hooks/useVisibleInterval'
 import { Doodle } from '@mlask/ui'
 import { StepScreens } from './StepScreens'
 
 export function HowItWorks() {
+  const c = useCopy().how
+  const steps = c.steps
+
   const listRef = useRef<HTMLDivElement>(null)
   const buttons = useRef<(HTMLButtonElement | null)[]>([])
   const reduceMotion = usePrefersReducedMotion()
@@ -15,7 +18,7 @@ export function HowItWorks() {
   const auto = useVisibleInterval(
     listRef,
     5000,
-    () => setCurrent((c) => (c + 1) % STEPS.length),
+    () => setCurrent((i) => (i + 1) % steps.length),
     { enabled: !reduceMotion },
   )
 
@@ -33,7 +36,7 @@ export function HowItWorks() {
           : 0
     if (!d) return
     e.preventDefault()
-    const next = (current + d + STEPS.length) % STEPS.length
+    const next = (current + d + steps.length) % steps.length
     select(next)
     buttons.current[next]?.focus()
   }
@@ -41,15 +44,15 @@ export function HowItWorks() {
   return (
     <section className="shell section" id="ako">
       <header className="section__head">
-        <span className="eyebrow">Ako to funguje</span>
+        <span className="eyebrow">{c.eyebrow}</span>
         <h2 className="section__title">
-          Štyri kroky,{' '}
+          {c.titleLead}{' '}
           <span className="mark mark--tight">
             <span className="mark__bg" aria-hidden="true" />
-            <span className="mark__t">dve minúty</span>
+            <span className="mark__t">{c.titleMark}</span>
           </span>
         </h2>
-        <p className="section__lede">Kroky sa prepínajú samé — alebo klikni na ktorýkoľvek.</p>
+        <p className="section__lede">{c.lede}</p>
 
         <Doodle
           shape="arrow-left"
@@ -71,10 +74,10 @@ export function HowItWorks() {
           className={`steps__list${auto.running || reduceMotion ? '' : ' is-idle'}`}
           ref={listRef}
           role="tablist"
-          aria-label="Kroky"
+          aria-label={c.tablistAria}
           onKeyDown={onKeyDown}
         >
-          {STEPS.map((st, i) => {
+          {steps.map((st, i) => {
             const on = i === current
             return (
               <button

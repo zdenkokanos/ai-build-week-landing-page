@@ -1,0 +1,50 @@
+/* App-level styles — everything else comes from @mlask/ui/styles.css.
+   The language switch belongs to this page, not to the design system, so it
+   is styled here on the design system's tokens. */
+
+/* The right-hand end of the navbar. The bar itself is space-between, so
+   grouping these keeps the switch tight against the CTA instead of drifting
+   into the gap the nav links leave behind. */
+.navbar__end {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  background: var(--panel);
+  border-radius: var(--r-pill);
+  flex: none;
+}
+
+.lang-switch__opt {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 7px 11px;
+  border-radius: var(--r-pill);
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: .04em;
+  color: var(--ink-45);
+  transition: background .18s ease, color .18s ease;
+}
+
+.lang-switch__opt:hover { color: var(--ink); }
+
+.lang-switch__opt.is-on {
+  background: #fff;
+  color: var(--ink);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Once the nav collapses the CTA leaves the bar, so the switch pairs with the
+   burger instead — the same group, one notch tighter. */
+@media (max-width: 960px) {
+  .lang-switch__opt { padding: 7px 9px; }
+}

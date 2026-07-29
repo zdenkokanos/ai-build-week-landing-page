@@ -1,6 +1,11 @@
+import { Fragment } from 'react'
 import { Doodle } from '@mlask/ui'
+import { useCopy } from '../i18n'
+import { IMG_SCENE } from '../i18n/media'
 
 export function Waitlist() {
+  const c = useCopy().waitlist
+
   return (
     <section className="waitlist" id="waitlist">
       <div className="waitlist__panel">
@@ -17,59 +22,53 @@ export function Waitlist() {
 
         <div className="waitlist__grid">
           <div className="waitlist__copy">
-            <span className="badge badge--glass">Spustenie jeseň 2026 · Slovensko</span>
+            <span className="badge badge--glass">{c.badge}</span>
             <h2 className="waitlist__title">
-              Dnes večer už vieš,
+              {c.titleLine1}
               <br />
-              čo varíš. A nemusíš
+              {c.titleLine2}
               <br />
               <span className="mark">
                 <span className="mark__bg" aria-hidden="true" />
-                <span className="mark__t">nikam ísť.</span>
+                <span className="mark__t">{c.titleMark}</span>
               </span>
             </h2>
-            <p className="waitlist__lede">Prihlás sa a začni používať MĽASK — zatiaľ zadarmo.</p>
+            <p className="waitlist__lede">{c.lede}</p>
 
             <a className="btn btn--lime btn--lg waitlist__cta" href="#">
-              Prihlásiť sa
+              {c.cta}
             </a>
 
+            {/* The separators are their own flex children, so the row keeps its
+                even 18px rhythm and wraps cleanly. */}
             <p className="waitlist__fine">
-              <span>Bez karty</span>
-              <span>·</span>
-              <span>Odhlásiš sa dvomi klikmi</span>
-              <span>·</span>
-              <span>4,8 ★ od 1 240 ľudí</span>
+              {c.fine.map((f, i) => (
+                <Fragment key={f}>
+                  {i > 0 && <span aria-hidden="true">·</span>}
+                  <span>{f}</span>
+                </Fragment>
+              ))}
             </p>
           </div>
 
           <div className="waitlist__art" aria-hidden="true">
             <span
               className="art-card art-card--1"
-              style={{
-                backgroundImage:
-                  'url(https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=600&q=70)',
-              }}
+              style={{ backgroundImage: `url(${IMG_SCENE.artCurry})` }}
             />
             <span
               className="art-card art-card--2"
-              style={{
-                backgroundImage:
-                  'url(https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=70)',
-              }}
+              style={{ backgroundImage: `url(${IMG_SCENE.artBowl})` }}
             />
             <span
               className="art-card art-card--3"
-              style={{
-                backgroundImage:
-                  'url(https://images.unsplash.com/photo-1611270629569-8b357cb88da9?w=600&q=70)',
-              }}
+              style={{ backgroundImage: `url(${IMG_SCENE.artTikka})` }}
             />
             <span className="art-chip art-chip--white">
-              <span className="muted small">Košík doručíme za</span>
-              <strong>25 minút</strong>
+              <span className="muted small">{c.artChipLabel}</span>
+              <strong>{c.artChipValue}</strong>
             </span>
-            <span className="art-chip art-chip--lime">3 recepty · 1 nákup</span>
+            <span className="art-chip art-chip--lime">{c.artChipLime}</span>
           </div>
         </div>
       </div>

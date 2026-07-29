@@ -1,7 +1,10 @@
 import { CourierBike } from './CourierBike'
 import { Doodle } from '@mlask/ui'
+import { useCopy } from '../i18n'
 
 export function Delivery() {
+  const c = useCopy().delivery
+
   return (
     <section className="band band--green" id="donaska">
       <span className="band__blob" aria-hidden="true" />
@@ -31,73 +34,54 @@ export function Delivery() {
 
       <div className="shell band__grid">
         <div className="band__copy">
-          <span className="badge badge--lime">Automatická objednávka</span>
+          <span className="badge badge--lime">{c.badge}</span>
           <h2 className="band__title">
-            Nákup vybavíme za teba.
+            {c.titleLead}
             <br />
-            Ty len otvoríš dvere.
+            {c.titleTail}
           </h2>
-          <p className="band__lede">
-            Toto je celý rozdiel oproti receptovým appkám: z receptu vieme spraviť hotovú objednávku
-            potravín.
-          </p>
+          <p className="band__lede">{c.lede}</p>
           <ul className="band__list">
-            <li>
-              <span className="tick tick--lime" aria-hidden="true">
-                ✓
-              </span>{' '}
-              Suroviny spárujeme s produktami v obchode
-            </li>
-            <li>
-              <span className="tick tick--lime" aria-hidden="true">
-                ✓
-              </span>{' '}
-              Porovnáme ceny vrátane doručenia
-            </li>
-            <li>
-              <span className="tick tick--lime" aria-hidden="true">
-                ✓
-              </span>{' '}
-              Košík vidíš a upravíš pred platbou
-            </li>
+            {c.list.map((item) => (
+              <li key={item}>
+                <span className="tick tick--lime" aria-hidden="true">
+                  ✓
+                </span>{' '}
+                {item}
+              </li>
+            ))}
           </ul>
           <a className="btn btn--lime" href="#waitlist">
-            Objednať prvý nákup
+            {c.cta}
           </a>
         </div>
 
         <div className="band__side">
           <div className="order-card">
             <div className="order-card__head">
-              <span className="order-card__title">Objednávka na dnes</span>
-              <span className="tag tag--mint">v príprave</span>
+              <span className="order-card__title">{c.card.title}</span>
+              <span className="tag tag--mint">{c.card.tag}</span>
             </div>
             <div className="order-card__steps">
-              <div className="ostep">
-                <span className="ostep__dot ostep__dot--done">✓</span>
-                <span className="ostep__label">Recept vybraný</span>
-                <span className="ostep__meta">Kokosové curry</span>
-              </div>
-              <div className="ostep">
-                <span className="ostep__dot ostep__dot--done">✓</span>
-                <span className="ostep__label">Špajza odpočítaná</span>
-                <span className="ostep__meta">−4,80 €</span>
-              </div>
-              <div className="ostep">
-                <span className="ostep__dot ostep__dot--done">✓</span>
-                <span className="ostep__label">Košík naplnený</span>
-                <span className="ostep__meta">3 položky</span>
-              </div>
-              <div className="ostep ostep--todo">
-                <span className="ostep__dot">4</span>
-                <span className="ostep__label">Platba a doručenie</span>
-              </div>
+              {c.card.steps.map((st, i) => {
+                /* Everything but the last step is already done. */
+                const todo = i === c.card.steps.length - 1
+                return (
+                  <div className={`ostep${todo ? ' ostep--todo' : ''}`} key={st.label}>
+                    <span className={`ostep__dot${todo ? '' : ' ostep__dot--done'}`}>
+                      {todo ? i + 1 : '✓'}
+                    </span>
+                    <span className="ostep__label">{st.label}</span>
+                    {st.meta && <span className="ostep__meta">{st.meta}</span>}
+                  </div>
+                )
+              })}
             </div>
             <div className="order-card__total">
-              <span className="t-green bold small">Doručenie 25 minút</span>
-              <span className="order-card__sum">8,98 €</span>
+              <span className="t-green bold small">{c.card.deliveryNote}</span>
+              <span className="order-card__sum">{c.card.sum}</span>
             </div>
-            <div className="scr__cta scr__cta--green">Zaplatiť a doručiť</div>
+            <div className="scr__cta scr__cta--green">{c.card.cta}</div>
           </div>
 
           <CourierBike />
