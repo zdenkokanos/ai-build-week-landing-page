@@ -48,3 +48,103 @@
 @media (max-width: 960px) {
   .lang-switch__opt { padding: 7px 9px; }
 }
+
+/* ── Legal pages ────────────────────────────────────────────────────────────
+   The privacy policy and the terms. Long-form prose, so the measure is
+   narrower than the site's and the rhythm is vertical — no cards, no colour
+   beyond the links. They reuse the design system's tokens and nothing else. */
+
+.legal { background: var(--cream); min-height: 100dvh; }
+
+.legal__bar {
+  border-bottom: 1px solid var(--line);
+  background: #fff;
+}
+
+.legal__bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-block: 18px;
+}
+
+.legal__doc { padding-block: 64px 88px; }
+
+.legal__title {
+  font-size: clamp(30px, 5vw, 42px);
+  line-height: 1.12;
+  letter-spacing: -.02em;
+  margin: 0;
+}
+
+.legal__updated {
+  margin: 10px 0 0;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .01em;
+  color: var(--ink-45);
+}
+
+.legal__lede {
+  margin: 20px 0 0;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink-70);
+}
+
+.legal__section { margin-top: 44px; }
+
+.legal__heading {
+  font-size: 20px;
+  line-height: 1.3;
+  letter-spacing: -.01em;
+  margin: 0 0 12px;
+}
+
+.legal__section p {
+  margin: 0 0 12px;
+  line-height: 1.65;
+  color: var(--ink-60);
+}
+
+.legal__list {
+  margin: 0;
+  padding-left: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.legal__list li {
+  line-height: 1.65;
+  color: var(--ink-60);
+}
+
+.legal__cross {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.legal__cross a {
+  font-weight: 700;
+  color: var(--green-deep);
+  text-decoration: underline;
+}
+
+.legal__cross a:hover { color: var(--ink); }
+
+.legal__foot {
+  padding-block: 24px 40px;
+  font-size: 13px;
+  color: var(--ink-45);
+}
+
+@media (max-width: 720px) {
+  .legal__doc { padding-block: 40px 64px; }
+  .legal__section { margin-top: 36px; }
+}
