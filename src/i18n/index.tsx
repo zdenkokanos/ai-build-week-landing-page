@@ -71,13 +71,13 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   const copy = DICTIONARIES[lang]
 
-  /* The head is outside React's tree, so it is synced by hand. */
+  /* The head is outside React's tree, so it is synced by hand. Only `lang`
+     belongs to the provider: the title and description differ per page now
+     that the legal documents have their own URLs, and effects run child-first,
+     so anything set here would overwrite what the page just set. Pages call
+     `useHead` instead. */
   useEffect(() => {
     document.documentElement.lang = copy.meta.htmlLang
-    document.title = copy.meta.title
-    document
-      .querySelector('meta[name="description"]')
-      ?.setAttribute('content', copy.meta.description)
   }, [copy])
 
   const setLang = useCallback((next: Lang) => {
@@ -104,4 +104,12 @@ export function useLanguage(): LanguageValue {
 /** The copy for the current language — what most components need. */
 export function useCopy(): Copy {
   return useLanguage().copy
+}
+
+/** Sets the page's title and description. One caller per rendered page. */
+export function useHead(title: string, description: string) {
+  useEffect(() => {
+    document.title = title
+    document.querySelector('meta[name="description"]')?.setAttribute('content', description)
+  }, [title, description])
 }

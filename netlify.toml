@@ -7,3 +7,19 @@
 [build.environment]
   # Vite 7 needs Node 20.19+/22.12+; Netlify's default is older on some sites.
   NODE_VERSION = "22"
+
+# The legal documents have their own URLs but no files of their own — the app
+# reads the path and renders the right one. Without this, Netlify looks for
+# /ochrana-osobnych-udajov on disk, finds nothing and serves its 404.
+#
+# Listed one by one rather than as a catch-all `/*`: a catch-all would answer
+# every mistyped URL with the landing page and the site would never 404 again.
+[[redirects]]
+  from = "/ochrana-osobnych-udajov"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/podmienky-pouzivania"
+  to = "/index.html"
+  status = 200

@@ -2,6 +2,8 @@
    both dictionaries point at them. Keeps a copy edit from silently changing a
    picture — and the two languages from drifting to different food. */
 
+import { LEGAL_PATHS } from './legal'
+
 export const IMG = {
   curry:      'https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=800&q=70',
   cacio:      'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=800&q=70',
@@ -39,11 +41,7 @@ export const IMG_SCENE = {
   artTikka:   'https://images.unsplash.com/photo-1611270629569-8b357cb88da9?w=600&q=70',
 } as const
 
-/**
- * The deployed app. The legal documents live there rather than here: they are
- * the ones Google's OAuth consent screen points at, and that check wants them
- * on the same origin as the app itself.
- */
+/** The deployed app — where every "try it" and "sign in" button leads. */
 const APP_URL = 'https://ai-recipe-shopping-app-1.onrender.com/'
 
 /** Anchor targets stay identical in both languages — only the labels change. */
@@ -57,10 +55,10 @@ export const HREF = {
   free:     '#zadarmo',
   faq:      '#faq',
   waitlist: '#waitlist',
-  /* The links off the page: the live app, and the two legal documents it
-     serves. Every "try it" and "sign in" button lands on the app, in both
-     languages; the footer's legal column points at the documents. */
+  /* The only link off the site: the live app, behind every "try it" and
+     "sign in" button in both languages. */
   app:      APP_URL,
-  privacy:  `${APP_URL}ochrana-osobnych-udajov`,
-  terms:    `${APP_URL}podmienky-pouzivania`,
+  /* The legal documents are pages of this site — see `i18n/legal.ts`. */
+  privacy:  LEGAL_PATHS.privacy,
+  terms:    LEGAL_PATHS.terms,
 } as const
