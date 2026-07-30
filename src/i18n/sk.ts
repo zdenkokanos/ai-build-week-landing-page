@@ -341,13 +341,14 @@ export const sk: Copy = {
       {
         title: 'Právne',
         links: [
-          { href: HREF.faq, label: 'Ochrana údajov' },
-          { href: HREF.faq, label: 'Podmienky' },
-          { href: HREF.faq, label: 'Cookies' },
+          { href: HREF.privacy, label: 'Ochrana údajov' },
+          { href: HREF.terms,   label: 'Podmienky' },
+          /* Cookies are a section of the privacy policy, not a document of their own. */
+          { href: HREF.privacy, label: 'Cookies' },
         ],
       },
     ],
-    copyright: '© 2026 MĽASK s.r.o. · Bratislava',
+    copyright: '© 2026 MĽASK · Bratislava',
     note: 'Recepty patria ich autorom. Vždy odkazujeme na originál.',
   },
 }

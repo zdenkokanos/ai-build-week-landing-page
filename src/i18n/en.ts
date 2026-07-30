@@ -345,13 +345,14 @@ export const en: Copy = {
       {
         title: 'Legal',
         links: [
-          { href: HREF.faq, label: 'Privacy' },
-          { href: HREF.faq, label: 'Terms' },
-          { href: HREF.faq, label: 'Cookies' },
+          { href: HREF.privacy, label: 'Privacy' },
+          { href: HREF.terms,   label: 'Terms' },
+          /* Cookies are a section of the privacy policy, not a document of their own. */
+          { href: HREF.privacy, label: 'Cookies' },
         ],
       },
     ],
-    copyright: '© 2026 MĽASK s.r.o. · Bratislava',
+    copyright: '© 2026 MĽASK · Bratislava',
     note: 'Recipes belong to their authors. We always link to the original.',
   },
 }

@@ -1,5 +1,6 @@
 import { Button, Doodle, Mark, Scribble, Tick } from '@mlask/ui'
 import { useCopy } from '../i18n'
+import { HREF } from '../i18n/media'
 import { SwipeDeck } from './SwipeDeck'
 
 export function Hero() {
@@ -31,7 +32,7 @@ export function Hero() {
           <p className="hero__lede">{c.lede}</p>
 
           <div className="hero__actions">
-            <Button variant="green" size="lg" href="#waitlist">
+            <Button variant="green" size="lg" href={HREF.app}>
               {c.ctaPrimary}
             </Button>
             <Button variant="white" size="lg" href="#ako">
