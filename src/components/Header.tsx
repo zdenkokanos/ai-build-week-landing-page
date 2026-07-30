@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useCopy } from '../i18n'
+import { HREF } from '../i18n/media'
 import { LanguageSwitch } from './LanguageSwitch'
 
 export function Header() {
@@ -37,7 +38,7 @@ export function Header() {
                 {l.label}
               </a>
             ))}
-            <a className="btn btn--green navbar__nav-cta" href="#waitlist">
+            <a className="btn btn--green navbar__nav-cta" href={HREF.app}>
               {c.nav.cta}
             </a>
           </nav>
@@ -47,7 +48,7 @@ export function Header() {
           <div className="navbar__end">
             <LanguageSwitch />
 
-            <a className="btn btn--green navbar__cta" href="#waitlist">
+            <a className="btn btn--green navbar__cta" href={HREF.app}>
               {c.nav.cta}
             </a>
 

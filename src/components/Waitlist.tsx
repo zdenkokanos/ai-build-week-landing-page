@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import { Doodle } from '@mlask/ui'
 import { useCopy } from '../i18n'
-import { IMG_SCENE } from '../i18n/media'
+import { HREF, IMG_SCENE } from '../i18n/media'
 
 export function Waitlist() {
   const c = useCopy().waitlist
@@ -35,7 +35,7 @@ export function Waitlist() {
             </h2>
             <p className="waitlist__lede">{c.lede}</p>
 
-            <a className="btn btn--lime btn--lg waitlist__cta" href="#">
+            <a className="btn btn--lime btn--lg waitlist__cta" href={HREF.app}>
               {c.cta}
             </a>
 

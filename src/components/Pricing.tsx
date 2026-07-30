@@ -1,5 +1,6 @@
 import { Doodle, Scribble } from '@mlask/ui'
 import { useCopy } from '../i18n'
+import { HREF } from '../i18n/media'
 
 /* No plans and no prices while the product is still being finished — the whole
    app is open, and the only action is signing in. */
@@ -43,7 +44,7 @@ export function Pricing() {
               </span>
             ))}
           </div>
-          <a className="btn btn--lime plan__cta" href="#">
+          <a className="btn btn--lime plan__cta" href={HREF.app}>
             {c.cta}
           </a>
           <p className="plan__fine">{c.fine}</p>
